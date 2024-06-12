@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'League Spartan Bold';
+    src: url(LeagueSpartan-Bold.ttf);
+  }
+@font-face {
+    font-family: 'League Spartan Regular';
+    src: url(LeagueSpartan-Regular.ttf);
+  }
+
+  @font-face {
+    font-family: 'Quicksand';
+    src: url(Quicksand-Regular.ttf);
+  }
+
 body{
     overflow-y: hidden;
     overflow-x: hidden;
@@ -34,15 +48,125 @@ body{
     background: none;
     font-size: 30px;
     border: none;
-    font-family: "css/Quicksand-Regular.ttf";
+    font-family: 'Quicksand';
 }
 #b1:hover{
     text-decoration: underline;
 }
 
+#head{
+    border-bottom: 2px solid rgb(206, 206, 206);
+    margin: auto;
+    width: 96%;
+}
 #header{
     text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    font-family: "css/LeagueSpartan-Bold.ttf";
+    font-size: 35px;
+    font-family: 'League Spartan Bold';
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+#navigate{
+    overflow: hidden;
+    padding: 5px 30px 5px 30px;
+}
+
+#event{
+    background: none;
+    font-size: 20px;
+    border: none;
+    font-family: 'Quicksand';
+}
+#event:hover{
+    text-decoration: underline;
+}
+#search{
+    font-size: 20px;
+    font-family: 'Quicksand';
+    border-radius: 10px;
+    border: 2px solid black;
+    float: right;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#entries{
+    overflow-y: auto;
+    height: 350px;
+}
+#entry{
+    background-color: #F1EFE7;
+    border-radius: 10px;
+    width:94%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    padding: 10px 20px 10px 20px;
+    overflow: hidden;
+    position: relative;
+}
+#name{
+    font-size: 25px;
+    margin:0;
+    font-family: 'Quicksand';
+}
+#role{
+    font-size: 15px;
+    margin:0;
+    color: #BEB1B1;
+    font-family: 'Quicksand';
+}
+#editbutton{
+    margin-top:0;
+    padding-top: 12px;
+    background: none;
+    border: none;
+    position:absolute;
+    right:10px;
+}    
+#editicon{
+    width:25px;
+}
+
+#addbutton{
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: #F1EFE7;
+    font-size: 20px;
+    
+    padding: 5px 15px 5px 15px;
+    margin: 10px 30px 10px 20px;
+    float: right;
+}
+
+#footer{
+    position:fixed;
+    bottom: 0;
+    background-color: #F3F2EF;
+    height:90px;
+    width:100%;
+    padding-left: 250px;
+}
+
+.footerbutton{
+    border: none;
+    background: none;
+    padding: 15px 20px 15px 20px;
+    width: 120px;
+    margin-right: 100px;
+}
+.footerbutton:hover{
+    background-color: #eae8e1;
+}
+.btnicon{
+    width:30px;
+    height: 30px;
+    object-fit: cover;
+    margin-bottom: 0;
+}
+.btnlabel{
+    font-family: 'Quicksand';
+    text-align: center;
+    font-size: 15px;
 }
