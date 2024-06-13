@@ -13,7 +13,7 @@
 
 #container {
     width: 100%; 
-    max-width: 1400px; 
+    max-width: 1600px; 
     margin: 0 auto; /* Center align container */
     box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
@@ -154,7 +154,7 @@ html {
     position: fixed;
     bottom: 0;
     width: 100%;
-    max-width: 1400px; 
+    max-width: 1600px; 
     left: 50%;
     transform: translateX(-50%); /* Center the footer */
     background-color: #F3F2EF;
