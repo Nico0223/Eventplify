@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>Events</title>
+        <link rel="stylesheet" href="css/events.css">
+    </head>
+    <body style="margin:0">
+
+        <div id="top">
+            <div id="homelogo">
+                <img src="css/logocropped.png" id="logo">
+                <div id ="button2">
+                    <button type="button" id="b1">Profile</button>
+                </div>
+                <div id ="button1">
+                    <button type="button" id="b1">Events</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="middle">
+            <div id="head">
+                <p id="header">EVENTS</p>
+            </div>
+            <div id="navigate">
+                <input type="search" id="search"placeholder="Search...">
+                <button type="button" id="sortbutton">Sort</button>
+                <button type="button" id="filterbutton">Filter</button>
+            </div>
+            <div id="entries">
+                <div id="entry">
+                    <button type="button" id="editbutton">
+                        <img src="css/edit_icon.png" id="editicon">
+                        <img src="css/trash_icon.png" id="trashicon">
+                    </button> <!-- edit button to appear if collaborator=true-->
+                    <button type="button" id="eventname"><p id="name">Name of Event</p></button>
+                    <p id="role">Owner OR Collaborator</p>
+                    <p id="date">Date</p>
+                    <p id="location">Location</p>
+                </div>
+            <!--extra entries to fill the space-->
+                <!--entries are scrollable-->
+            <!--end of extra entries-->
+            </div>
+            <button type="button" id="addbutton">
+                <img src="css/plus_icon.png" class="btnicon">
+                <span class="btnlabel">Add New Event</span>
+            </button>
+            <button type="button" id="joinbutton">
+                <img src="css/plus_icon.png" class="btnicon">
+                <span class="btnlabel">Join Existing Event</span>
+            </button>
+        </div>
+    </body>
+</html>
