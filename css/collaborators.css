@@ -12,9 +12,21 @@
     src: url(Quicksand-Regular.ttf);
   }
 
+  #container {
+    width: 100%; 
+    max-width: 1400px; 
+    margin: 0 auto; /* Center align container */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+
+}
+
 body{
     overflow-y: hidden;
     overflow-x: hidden;
+    margin: 0;
+}
+html{
+    margin:0;
 }
 
 #top{
@@ -147,7 +159,7 @@ body{
     background-color: #F3F2EF;
     height:90px;
     width:100%;
-    padding-left: 250px;
+    padding-left: 8%;
 }
 
 .footerbutton{
