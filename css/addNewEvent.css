@@ -72,94 +72,6 @@ body{
     padding: 5px 30px 5px 30px;
 }
 
-#event{
-    background: none;
-    font-size: 20px;
-    border: none;
-    font-family: 'Quicksand';
-}
-#event:hover{
-    text-decoration: underline;
-}
-#search{
-    font-size: 20px;
-    font-family: 'Quicksand';
-    border-radius: 10px;
-    border: 2px solid black;
-    float: right;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-#entries{
-    overflow-y: auto;
-    height: 350px;
-}
-#entry{
-    background-color: #F1EFE7;
-    border-radius: 10px;
-    width:94%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 15px;
-    padding: 10px 20px 10px 20px;
-    overflow: hidden;
-    position: relative;
-}
-#name{
-    font-size: 25px;
-    margin:0;
-    font-family: 'Quicksand';
-}
-#role{
-    font-size: 15px;
-    margin:0;
-    color: #BEB1B1;
-    font-family: 'Quicksand';
-}
-#editbutton{
-    margin-top:0;
-    padding-top: 12px;
-    background: none;
-    border: none;
-    position:absolute;
-    right:10px;
-}    
-#editicon{
-    width:25px;
-}
-
-#addbutton{
-    border: none;
-    border-radius: 10px;
-    color: black;
-    background-color: #F1EFE7;
-    font-size: 20px;
-    font-family: 'Quicksand';
-    padding: 10px;
-    width:20%;
-    margin: -15px 30px 10px 10px;
-    float: right;
-}
-
-#footer{
-    position:fixed;
-    bottom: 0;
-    background-color: #F3F2EF;
-    height:90px;
-    width:100%;
-    padding-left: 250px;
-}
-
-.footerbutton{
-    border: none;
-    background: none;
-    padding: 15px 20px 15px 20px;
-    width: 120px;
-    margin-right: 100px;
-}
-.footerbutton:hover{
-    background-color: #eae8e1;
-}
 .btnicon{
     width:30px;
     height: 30px;
@@ -170,4 +82,56 @@ body{
     font-family: 'Quicksand';
     text-align: center;
     font-size: 15px;
+}
+
+
+#back{
+    background: none;
+    font-size: 20px;
+    border: none;
+    font-family: 'Quicksand';
+}
+#back:hover{
+    text-decoration: underline;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 180px;
+}
+
+.form-group label {
+    width: 200px;
+    font-family: 'League Spartan Regular';
+    font-size: 20px;
+    text-align: right;
+    margin-right: 20px;
+}
+
+.form-group input {
+    font-family: 'League Spartan Regular';
+    padding: 10px;
+    width: 50%;
+    border-color: #CFCFCF;
+    font-size: 20px;
+}
+
+
+input[type=time]{
+    width: 20%;
+}
+
+#confirmbutton{
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: #F1EFE7;
+    font-size: 20px;
+    font-family: 'Quicksand';
+    padding: 10px;
+    width:20%;
+    margin: -15px 30px 10px 10px;
+    float: right;
 }
