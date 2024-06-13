@@ -154,23 +154,14 @@ body{
     margin-left: 10px;
 }
 
-#addbutton{
-    border: none;
-    border-radius: 10px;
-    color: black;
-    background-color: #F1EFE7;
-    font-size: 20px;
-    font-family: 'Quicksand';
-    padding: 5px;
-    width:15%;
-    margin-top: 20px;
-    margin-right: 20px;
-    float: right;
-    display: flex; /* Use flexbox for aligning items */
-    align-items: center; 
+#fixed-buttons {
+    position: fixed;
+    bottom: 20px;  /* Adjust this value to place it higher or lower on the screen */
+    width: 100%;
+    text-align: center;
 }
 
-#joinbutton{
+#addbutton, #joinbutton {
     border: none;
     border-radius: 10px;
     color: black;
@@ -178,23 +169,21 @@ body{
     font-size: 20px;
     font-family: 'Quicksand';
     padding: 5px;
-    width:15%;
-    margin-top: 20px;
-    margin-left: 20px;
-    float: left;
-    display: flex; /* Use flexbox for aligning items */
-    align-items: center; 
+    width: 15%;
+    margin: 0 10px;  /* Margin for spacing between buttons */
+    display: inline-flex;  /* Use inline-flex for placing buttons in line */
+    align-items: center;
 }
 .btnicon {
     width: 30px;
     height: 30px;
     object-fit: cover;
-    margin-right: 10px; /* Adjust margin between icon and text */
+    margin-right: 10px; 
 }
 
 .btnlabel {
     font-family: 'Quicksand';
-    font-size: 20px; /* Adjust font size for text */
+    font-size: 20px; 
 }
 #footer{
     position:fixed;
@@ -205,16 +194,7 @@ body{
     padding-left: 250px;
 }
 
-.footerbutton{
-    border: none;
-    background: none;
-    padding: 15px 20px 15px 20px;
-    width: 120px;
-    margin-right: 100px;
-}
-.footerbutton:hover{
-    background-color: #eae8e1;
-}
+
 .btnicon{
     width:30px;
     height: 30px;
