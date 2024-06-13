@@ -12,6 +12,7 @@
     src: url(Quicksand-Regular.ttf);
   }
 
+
 body{
     overflow-y: hidden;
     overflow-x: hidden;
@@ -32,10 +33,11 @@ body{
 
 
 #bottom{
-    margin-left: 50px;
+    display: flex;
+    margin-left: 30px;
     margin-right: 50px;
     padding-top: 30px;
-    padding-left: 90px;
+    padding-left: 230px;
     padding-right: 100px;
     overflow:hidden;
 }
@@ -101,13 +103,11 @@ body{
     padding:0;
     background:none;
     border: none;
-    margin-left:120px;
+    margin-left:20px;
     width: 150px;
     height:120px;
 }
-#navigate:hover{
-    background:rgb(247, 247, 247)
-}
+
 #plan{
     width: 50px;
 }
