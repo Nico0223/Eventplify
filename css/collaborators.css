@@ -72,13 +72,15 @@ html {
     text-align: center;
     font-size: 35px;
     font-family: 'League Spartan Bold';
-    margin-bottom: 0;
+    margin-bottom: 10px;
     margin-top: 10px;
 }
 
 #navigate {
     overflow: hidden;
     padding: 5px 30px 5px 30px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 #event {
