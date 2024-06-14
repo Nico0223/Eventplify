@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Edit Event</title>
-        <link rel="stylesheet" href="css/editEvent.css">
+        <title>Edit Guest</title>
+        <link rel="stylesheet" href="css/editGuest.css">
     </head>
     <body style="margin:0">
 
@@ -20,41 +20,39 @@
 
         <div id="middle">
             <div id="head">
-                <p id="header">EDIT EVENT</p>
+                <p id="header">EDIT GUEST</p>
             </div>
             <div id="navigate">
-                <a href="events.html"><button type="button" id="back">🡨 Back</button></a>
+                <a href="guests.html"><button type="button" id="back">🡨 Guests</button></a>
             </div>
 
             <form>
                 <div class="form-group">
-                    <label for="eventname" id="eventnamelabel">Event Name:</label>
-                    <input type="text" id="eventname" name="eventname" placeholder="Event Name"required>
+                    <label for="guestname" id="guestnamelabel">Name:</label>
+                    <input type="text" id="guestname" name="guestname" placeholder="Guest Name"required>
                 </div>
                 <div class="form-group">
-                    <label for="eventdescription" id="eventdescriptionlabel">Event Description:</label>
-                    <input type="text" id="eventdescription" name="eventdescription" placeholder="Description">
+                    <label for="guestcategory" id="guestcategorylabel">Category:</label>
+                    <input type="text" id="guestcategory" name="guestcategory" placeholder="Category">
                 </div>
                 <div class="form-group">
-                    <label for="date" id="datelabel">Date:</label>
-                    <input type="date" id="eventdate" name="eventdate"required>
+                    <label for="gueststatus" id="gueststatuslabel">Status:</label>
+                    <select id="gueststatus" name="gueststatus">
+                        <option value="Pending">Pending</option>
+                        <option value="Not Going">Not Going</option>
+                        <option value="Going">Going</option>
+                      </select>
                 </div>
                 <div class="form-group">
-                    <label for="starttime" id="starttimelabel">Start Time:</label>
-                    <input type="time" id="starttime" name="starttime" placeholder="Start"required>                 
+                    <!--If user doesn't select means that guest has no table.-->
+                    <label for="guesttable" id="guesttablelabel">Table:</label> 
+                    <select id="guesttable" name="guesttable">
+                        <option value="Sample Table 1">Sample Table 1</option>
+                        <option value="Sample Table 2">Sample Table 2</option>
+                        <option value="Sample Table 3">Sample Table 3</option>
+                      </select>
                 </div>
-                <div class="form-group">
-                <label for="endtime" id="endtimelabel">End Time:</label>
-                <input type="time" id="endtime" name="endtime" placeholder="End"required>
-             </div>
-                    
-                <div class="form-group">
-                    <label for="eventlocation" id="eventlocationlabel">Location:</label>
-                    <input type="text" id="eventlocation" name="eventlocation" placeholder="Location"required>
-                </div>
-                <!-- google maps go here-->
                 <input type="submit" id="confirmbutton" value="Confirm">
-                
             </form>
         </div>
         <div id="footer">

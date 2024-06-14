@@ -12,6 +12,9 @@
     src: url(Quicksand-Regular.ttf);
   }
 
+a{
+    text-decoration: none;
+}
 body{
     overflow-y: hidden;
     overflow-x: hidden;
@@ -21,6 +24,11 @@ body{
     margin: 0;
     overflow:hidden;
     background-color: #F1EFE7;
+}
+
+#middle {
+    overflow-y: auto; 
+    height: 430px;
 }
 
 #homelogo{
@@ -128,6 +136,8 @@ body{
     border-width: 2px;
 }
 
+
+
 input[type=time]{
     width: 20%;
 }
@@ -143,4 +153,27 @@ input[type=time]{
     width:20%;
     margin: 35px 30px 10px 10px;
     float: right;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%); /* Center the footer */
+    background-color: #F3F2EF;
+    height: 90px;
+    padding-left: 8%;
+    box-sizing: border-box;
+}
+
+.footerbutton {
+    border: none;
+    background: none;
+    padding: 15px 20px;
+    width: 120px;
+    margin-right: 100px;
+}
+.footerbutton:hover {
+    background-color: #eae8e1;
 }

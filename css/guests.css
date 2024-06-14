@@ -11,7 +11,9 @@
     font-family: 'Quicksand';
     src: url(Quicksand-Regular.ttf);
   }
-
+a{
+    text-decoration: none;
+}
 body{
     overflow-y: hidden;
     overflow-x: hidden;
@@ -163,41 +165,56 @@ body{
 
 #fixed-buttons {
     position: fixed;
-    bottom: 20px;  /* Adjust this value to place it higher or lower on the screen */
+    bottom: 80px;  /* Adjust this value to place it higher or lower on the screen */
     width: 100%;
-    text-align: center;
+    text-align: right;
+    z-index: 1000;  
+    background-color: #F5F5F5;  
+    padding: 10px 20px;  
+    margin-right: 20px;
+
+    
 }
 
-#addbutton, #joinbutton {
+#addguestbutton,#tablesbutton {
     border: none;
     border-radius: 10px;
     color: black;
     background-color: #F1EFE7;
     font-size: 20px;
     font-family: 'Quicksand';
-    padding: 5px;
+    padding: 6px;
     width: 15%;
     margin: 0 10px;  /* Margin for spacing between buttons */
     display: inline-flex;  /* Use inline-flex for placing buttons in line */
     align-items: center;
     justify-content: center;
-}
-.btnicon {
-    width: 30px;
-    height: 30px;
-    object-fit: cover;
-    margin-right: 10px; 
+    margin-right: 40px;
 }
 
-#footer{
-    position:fixed;
+
+#footer {
+    position: fixed;
     bottom: 0;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%); /* Center the footer */
     background-color: #F3F2EF;
-    height:90px;
-    width:100%;
-    padding-left: 250px;
+    height: 90px;
+    padding-left: 8%;
+    box-sizing: border-box;
 }
 
+.footerbutton {
+    border: none;
+    background: none;
+    padding: 15px 20px;
+    width: 120px;
+    margin-right: 100px;
+}
+.footerbutton:hover {
+    background-color: #eae8e1;
+}
 
 .btnicon{
     width:30px;

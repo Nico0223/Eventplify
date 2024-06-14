@@ -1,98 +1,87 @@
 @font-face {
     font-family: 'League Spartan Bold';
     src: url(LeagueSpartan-Bold.ttf);
-}
+  }
 @font-face {
     font-family: 'League Spartan Regular';
     src: url(LeagueSpartan-Regular.ttf);
-}
-@font-face {
+  }
+
+  @font-face {
     font-family: 'Quicksand';
     src: url(Quicksand-Regular.ttf);
-}
+  }
 
-#container {
-    width: 100%; 
-    max-width: 1600px; 
-    margin: 0 auto; /* Center align container */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
-}
-
-body {
+body{
     overflow-y: hidden;
     overflow-x: hidden;
-    margin: 0;
-}
-html {
-    margin: 0;
 }
 
-#top {
+#top{
     margin: 0;
-    overflow: hidden;
+    overflow:hidden;
     background-color: #F1EFE7;
 }
 
-#homelogo {
+#homelogo{
     margin-top: 30px;
     margin-left: 50px;
     margin-bottom: 30px; 
+    
 }
 
-#button1 {
+#button1{
     float: right;
     margin-top: 20px;
     margin-right: 50px;
     margin-left: 30px;
 }
 
-#button2 {
+#button2{
     float: right;
     margin-top: 20px;
     margin-right: 70px;
 }
 
-#b1 {
+#b1{
     padding: 0%;
     background: none;
     font-size: 30px;
     border: none;
     font-family: 'Quicksand';
 }
-#b1:hover {
+#b1:hover{
     text-decoration: underline;
 }
 
-#head {
+#head{
     border-bottom: 2px solid rgb(206, 206, 206);
     margin: auto;
     width: 96%;
 }
-#header {
+#header{
     text-align: center;
     font-size: 35px;
     font-family: 'League Spartan Bold';
-    margin-bottom: 10px;
-    margin-top: 20px;
-}
-
-#navigate {
-    overflow: hidden;
-    padding: 5px 30px 5px 30px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     margin-top: 10px;
 }
 
-#event {
+#navigate{
+    overflow: hidden;
+    padding: 5px 30px 5px 30px;
+}
+
+#event{
     background: none;
     font-size: 20px;
     border: none;
     font-family: 'Quicksand';
 }
-#event:hover {
+#event:hover{
     text-decoration: underline;
 }
-#search {
+#search{
     font-size: 20px;
     font-family: 'Quicksand';
     border-radius: 10px;
@@ -101,87 +90,82 @@ html {
     padding-left: 5px;
     padding-right: 5px;
 }
-#entries {
+#entries{
     overflow-y: auto;
     height: 350px;
 }
-#entry {
+#entry{
     background-color: #F1EFE7;
     border-radius: 10px;
-    width: 94%;
+    width:94%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 15px;
-    padding: 10px 20px;
+    padding: 10px 20px 10px 20px;
     overflow: hidden;
     position: relative;
 }
-#name {
+#name{
     font-size: 25px;
-    margin: 0;
+    margin:0;
     font-family: 'Quicksand';
 }
-#role {
+#role{
     font-size: 15px;
-    margin: 0;
+    margin:0;
     color: #BEB1B1;
     font-family: 'Quicksand';
 }
-#editbutton {
-    margin-top: 0;
+#editbutton{
+    margin-top:0;
     padding-top: 12px;
     background: none;
     border: none;
-    position: absolute;
-    right: 10px;
+    position:absolute;
+    right:10px;
 }    
-#editicon {
-    width: 25px;
+#editicon{
+    width:25px;
 }
 
-#addbutton {
+#addbutton{
     border: none;
     border-radius: 10px;
     color: black;
     background-color: #F1EFE7;
     font-size: 20px;
-    font-family: 'Quicksand';
-    padding: 10px;
-    width: 20%;
-    margin: -15px 30px 10px 10px;
+    
+    padding: 5px 15px 5px 15px;
+    margin: 10px 30px 10px 20px;
     float: right;
 }
 
-#footer {
-    position: fixed;
+#footer{
+    position:fixed;
     bottom: 0;
-    width: 100%;
-    max-width: 1600px; 
-    left: 50%;
-    transform: translateX(-50%); /* Center the footer */
     background-color: #F3F2EF;
-    height: 90px;
-    padding-left: 8%;
-    box-sizing: border-box;
+    height:90px;
+    width:100%;
+    padding-left: 250px;
 }
 
-.footerbutton {
+.footerbutton{
     border: none;
     background: none;
-    padding: 15px 20px;
+    padding: 15px 20px 15px 20px;
     width: 120px;
     margin-right: 100px;
 }
-.footerbutton:hover {
+.footerbutton:hover{
     background-color: #eae8e1;
 }
-.btnicon {
-    width: 30px;
+.btnicon{
+    width:30px;
     height: 30px;
     object-fit: cover;
     margin-bottom: 0;
 }
-.btnlabel {
+.btnlabel{
     font-family: 'Quicksand';
     text-align: center;
     font-size: 15px;
