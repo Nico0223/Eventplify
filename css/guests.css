@@ -14,6 +14,7 @@
 a{
     text-decoration: none;
 }
+
 body{
     overflow-y: hidden;
     overflow-x: hidden;
@@ -24,6 +25,8 @@ body{
     overflow:hidden;
     background-color: #F1EFE7;
 }
+
+
 
 #homelogo{
     margin-top: 30px;
@@ -119,7 +122,7 @@ body{
 
 #entries{
     overflow-y: auto;
-    height: 350px;
+    height: 270px;
 }
 #entry{
     background-color: #F1EFE7;
@@ -165,15 +168,13 @@ body{
 
 #fixed-buttons {
     position: fixed;
-    bottom: 80px;  /* Adjust this value to place it higher or lower on the screen */
+    bottom: 80px;
     width: 100%;
     text-align: right;
     z-index: 1000;  
     background-color: #F5F5F5;  
     padding: 10px 20px;  
     margin-right: 20px;
-
-    
 }
 
 #addguestbutton,#tablesbutton {
@@ -186,7 +187,7 @@ body{
     padding: 6px;
     width: 15%;
     margin: 0 10px;  /* Margin for spacing between buttons */
-    display: inline-flex;  /* Use inline-flex for placing buttons in line */
+    display: inline-flex;  /* for placing buttons in line */
     align-items: center;
     justify-content: center;
     margin-right: 40px;
@@ -227,12 +228,9 @@ body{
     text-align: center;
     font-size: 15px;
 }
-#eventname {
+#guestname {
     background: none;
     font-size: 20px;
     border: none;
     font-family: 'Quicksand';
-}
-#eventname:hover {
-    text-decoration: underline;
 }
