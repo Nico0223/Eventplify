@@ -20,7 +20,6 @@ body{
 }
 
 
-
 #top{
     margin: 0;
     overflow:hidden;
@@ -88,6 +87,11 @@ body{
     font-size: 15px;
 }
 
+.guestdeleteicon{
+    width:15px;
+    height: 15px;
+    margin-left: 10px;
+}
 
 #back{
     background: none;
@@ -106,12 +110,22 @@ body{
     margin-left: 180px;
 }
 
-.form-group label {
+#tablenamelabel {
     width: 200px;
     font-family: 'League Spartan Regular';
     font-size: 20px;
     text-align: right;
     margin-right: 20px;
+}
+
+
+#guestslabel {
+    width: 200px;
+    font-family: 'League Spartan Regular';
+    font-size: 20px;
+    text-align: right;
+    margin-right: 20px;
+    margin-left: 318px;
 }
 
 .form-group input {
@@ -122,20 +136,12 @@ body{
     font-size: 20px;
 }
 
-.form-group select {
-    font-family: 'League Spartan Regular';
-    padding: 10px;
-    width: 52.5%;
-    border-color: #CFCFCF;
-    font-size: 20px;
-    border-width: 2px;
-}
 
 input[type=time]{
     width: 20%;
 }
 
-#confirmbutton{
+#editTableconfirmbutton{
     border: none;
     border-radius: 10px;
     color: black;
@@ -144,9 +150,24 @@ input[type=time]{
     font-family: 'Quicksand';
     padding: 10px;
     width:20%;
-    margin: 35px 30px 10px 10px;
+    margin: 15px 30px 10px 10px;
     float: right;
 }
+
+#addGuestbutton{
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: #F1EFE7;
+    font-size: 20px;
+    font-family: 'Quicksand';
+    padding: 10px;
+    width:20%;
+    margin: 15px 30px 10px 10px;
+    float: left;
+}
+
+
 
 #footer {
     position: fixed;
@@ -169,4 +190,18 @@ input[type=time]{
 }
 .footerbutton:hover {
     background-color: #eae8e1;
+}
+
+ul{
+    font-size: 20px;
+    font-family: 'Quicksand';
+    margin-left: 228px;
+    margin-top: -20px;
+}
+
+
+
+#content-container {
+    overflow-y: auto;
+    height: 350px;
 }

@@ -20,7 +20,6 @@ body{
 }
 
 
-
 #top{
     margin: 0;
     overflow:hidden;
@@ -88,6 +87,11 @@ body{
     font-size: 15px;
 }
 
+.guestdeleteicon{
+    width:15px;
+    height: 15px;
+    margin-left: 10px;
+}
 
 #back{
     background: none;
@@ -135,7 +139,7 @@ input[type=time]{
     width: 20%;
 }
 
-#confirmbutton{
+#editTableconfirmbutton{
     border: none;
     border-radius: 10px;
     color: black;
@@ -144,16 +148,32 @@ input[type=time]{
     font-family: 'Quicksand';
     padding: 10px;
     width:20%;
-    margin: 35px 30px 10px 10px;
+    margin: 65px 30px 10px 10px;
     float: right;
 }
+
+#addGuestEntrybutton{
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: #F1EFE7;
+    font-size: 20px;
+    font-family: 'Quicksand';
+    padding: 10px;
+    width:50%;
+    margin: 15px 30px 20px 350px;
+    align-items: center;
+   
+}
+
+
 
 #footer {
     position: fixed;
     bottom: 0;
     width: 100%;
     left: 50%;
-    transform: translateX(-50%); /* Center the footer */
+    transform: translateX(-50%);
     background-color: #F3F2EF;
     height: 90px;
     padding-left: 8%;
@@ -170,3 +190,19 @@ input[type=time]{
 .footerbutton:hover {
     background-color: #eae8e1;
 }
+
+ul{
+    font-size: 20px;
+    font-family: 'Quicksand';
+    margin-left: 228px;
+    margin-top: -20px;
+}
+
+
+
+#content-container {
+    overflow-y: auto;
+    height: 350px;
+}
+
+
