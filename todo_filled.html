@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Page - Detailed</title>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            color: black;
+            background-color: #FFFFFF;
+        }
+
+        nav {
+            background-color: #F1EFE7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+        }
+
+        nav .logo {
+            max-height: 250px;
+            max-width: 400px; 
+        }
+
+        .nav-links {
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: black;
+            font-family: 'Quicksand', sans-serif;
+            margin-left: 10px; 
+        }
+
+        main {
+            text-align: center;
+            padding: 120px 20px 320px; 
+            overflow-y: scroll; 
+        }
+
+        main h1 {
+            font-family: 'League Spartan', sans-serif;
+            font-weight: bold;
+            font-size: 50px;
+            color: black;
+            text-transform: uppercase; 
+            margin-bottom: -30px;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid black;
+            margin: 0px 50px 10px;
+        }
+
+        .manage-events-button {
+            display: block;
+            margin: 20px 30px 0;
+            padding: 10px 20px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 17px;
+            color: black;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .bottom-bar {
+            background-color: #F1EFE7;
+            height: 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .bottom-bar a {
+            text-decoration: none;
+            color: black;
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bottom-bar div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottom-bar div img {
+            margin-right: 5px;
+        }
+
+        .left-align {
+            text-align: left;
+            margin-left: 50px; 
+            font-size: 24px;
+        }
+        .tasks {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            margin-left: 70px;
+        }
+
+        .tasks img {
+            width: 20px; 
+            margin-left: 10px;
+        }
+
+        .tasks label {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px; 
+        }
+        .add-task-button {
+            background-color: #F1EFE7;
+            color: black;
+            font-family: 'Quicksand', sans-serif;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            position: absolute;
+            right: 150px; 
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="home.html"><img src="css/logo.png" alt="Logo" class="logo"></a>
+        <div class="nav-links">
+            <a href="events.html">Events</a>
+            <a href="profile.html">Profile</a>
+        </div>
+    </nav>
+    <main>
+        <h1>TO-DO</h1>
+        <button class="manage-events-button"> <- My 17th Birthday Party</button>
+        <hr>
+        <p class="left-align" style="font-family: 'Quicksand', sans-serif; font-weight: bold;">December 2, 2024</p>
+        <div class="tasks">
+            <input type="checkbox" id="send-invitations">
+            <label for="send-invitations">Send Invitations to Guests</label>
+            <a href="#" class="delete-task">
+                <img src="css/trash_icon.png" alt="Trash Icon">
+            </a>
+        </div>
+        <div class="tasks">
+            <input type="checkbox" id="buy-dress">
+            <label for="buy-dress">Buy my dress for the party</label>
+            <a href="#" class="delete-task">
+                <img src="css/trash_icon.png" alt="Trash Icon">
+            </a>
+        </div>
+        
+        
+        <p class="left-align" style="font-family: 'Quicksand', sans-serif; font-weight: bold;">December 7, 2024</p>
+        <div class="tasks">
+            <input type="checkbox" id="buy-cake">
+            <label for="buy-cake">Buy Birthday Cake</label>
+            <a href="#" class="delete-task">
+                <img src="css/trash_icon.png" alt="Trash Icon">
+            </a>
+        </div>
+
+
+        <button class="add-task-button">Add Task</button>
+
+
+    </main>
+    <div class="bottom-bar">
+        <div>
+            <img src="css/collaborators_icon_black.png" alt="Collaborators" width="24" height="24">
+            <a href="#">Collaborators</a>
+        </div>
+        <div>
+            <img src="css/guest_icon_black.png" alt="Guest List" width="24" height="24">
+            <a href="#">Guest List</a>
+        </div>
+        <div>
+            <img src="css/todo_icon_black.png" alt="To-Do" width="50" height="20">
+            <a href="todo_filled.html">To-Do</a>
+        </div>
+        <div>
+            <img src="css/budget_icon_black.png" alt="Budget" width="20" height="40">
+            <a href="budget_filled.html">Budget</a>
+        </div>
+        <div>
+            <img src="css/chat_icon_black.png" alt="Chat" width="27" height="24">
+            <a href="#">Chat</a>
+        </div>
+    </div>
+</body>
+</html>
