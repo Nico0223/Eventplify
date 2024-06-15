@@ -174,12 +174,6 @@ body{
     margin-left: 10px;
 }
 
-#fixed-buttons {
-    position: fixed;
-    bottom: 20px;  /* Adjust this value to place it higher or lower on the screen */
-    width: 100%;
-    text-align: center;
-}
 
 #containeradd{
     height: 7vh;
@@ -200,19 +194,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-/* #addbutton, #joinbutton {
-    border: none;
-    border-radius: 10px;
-    color: black;
-    background-color: #F1EFE7;
-    font-size: 20px;
-    font-family: 'Quicksand';
-    padding: 5px;
-    width: 15%;
-    margin: 0 10px;  /* Margin for spacing between buttons 
-    display: inline-flex;  
-    align-items: center;
-} */
+
 .btnicon {
     width: 30px;
     height: 30px;
