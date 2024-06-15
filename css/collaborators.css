@@ -142,7 +142,7 @@ body{
     position:absolute;
     right:10px;
 }    
-#editicon{
+#editicon,#trashicon{
     width:25px;
 }
 
