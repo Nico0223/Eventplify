@@ -11,10 +11,10 @@
     font-family: 'Quicksand';
     src: url(Quicksand-Regular.ttf);
   }
-   a{
+
+a{
     text-decoration: none;
 } 
-
 body{
     overflow-y: hidden;
     overflow-x: hidden;
@@ -24,19 +24,19 @@ body{
     left: 0;
     right: 0;
 }
+
 #top{
     margin: 0;
     overflow:hidden;
     background-color: #F1EFE7;
     max-height: 17%;
 }
+
 #middle{
-    height: 67%;
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    height: 71%;
+    overflow-y: auto;
 }
+
 #homelogo{
     margin-top: 30px;
     margin-left: 50px;
@@ -47,25 +47,6 @@ body{
     width: 200px;
     max-width: 100%;
     height: auto;
-}
-
-
-#header-container {
-    padding: 10px 0;
-    flex-shrink: 0;
-}
-
-#form-container {
-    flex: 1;
-    overflow-y: auto;
-}
-
-
-#homelogo{
-    margin-top: 30px;
-    margin-left: 50px;
-    margin-bottom: 30px; 
-    
 }
 
 #button1{
@@ -112,7 +93,6 @@ body{
     padding: 5px 30px 5px 30px;
 }
 
-
 #back{
     background: none;
     font-size: 20px;
@@ -122,6 +102,31 @@ body{
 #back:hover{
     text-decoration: underline;
 }
+#search{
+    font-size: 20px;
+    font-family: 'Quicksand';
+    border-radius: 10px;
+    border: 2px solid black;
+    float: right;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+/* #entries{
+    overflow-y: auto;
+    height: 50vh;
+}
+#entry{
+    background-color: #F1EFE7;
+    border-radius: 10px;
+    width:94%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    padding: 10px 20px 10px 20px;
+    overflow: hidden;
+    position: relative;
+} */
+
 
 .form-group {
     display: flex;
@@ -146,9 +151,13 @@ body{
     font-size: 20px;
 }
 
-
-input[type=time]{
-    width: 20%;
+.form-group select {
+    font-family: 'League Spartan Regular';
+    padding: 10px;
+    width: 50%;
+    border-color: #CFCFCF;
+    font-size: 20px;
+    border-width: 2px;
 }
 
 #confirmbutton{
@@ -164,6 +173,21 @@ input[type=time]{
     float: right;
 }
 
+#containeradd{
+    height: 7vh;
+    margin: 0;
+}
+#addbutton{
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: #F1EFE7;
+    font-size: 20px;
+    
+    padding: 5px 15px 5px 15px;
+    margin: 10px 30px 10px 20px;
+    float: right;
+}
 
 #footer{
     position:absolute;
@@ -174,7 +198,6 @@ input[type=time]{
     padding-left: auto;
     padding-right: auto;
     margin:0;
-
 }
 
 .footerbutton{
@@ -208,24 +231,13 @@ input[type=time]{
 }
 .btnlabel{
     font-family: 'Quicksand';
-    font-size: 15px;
     text-align: center;
+    font-size: 15px;
     align-items: center;
-    
 }
 
 #container{
     width:70%;
     margin-left: auto;
     margin-right:auto;
-
-}
-
-.form-group select {
-    font-family: 'League Spartan Regular';
-    padding: 10px;
-    width: 52.5%;
-    border-color: #CFCFCF;
-    font-size: 20px;
-    border-width: 2px;
 }
