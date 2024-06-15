@@ -11,20 +11,30 @@
     font-family: 'Quicksand';
     src: url(Quicksand-Regular.ttf);
   }
-  a{
+
+a{
     text-decoration: none;
-}
+} 
 body{
-    overflow-x: hidden;
     overflow-y: hidden;
+    overflow-x: hidden;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-
-
 
 #top{
     margin: 0;
     overflow:hidden;
     background-color: #F1EFE7;
+    max-height: 17%;
+}
+
+#middle{
+    height: 71%;
+    overflow-y: auto;
 }
 
 #homelogo{
@@ -33,17 +43,24 @@ body{
     margin-bottom: 30px; 
     
 }
+#logo{
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+}
 
 #button1{
     float: right;
-    margin-top: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
     margin-right: 50px;
     margin-left: 30px;
 }
 
 #button2{
     float: right;
-    margin-top: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
     margin-right: 70px;
 }
 
@@ -76,19 +93,6 @@ body{
     padding: 5px 30px 5px 30px;
 }
 
-.btnicon{
-    width:30px;
-    height: 30px;
-    object-fit: cover;
-    margin-bottom: 0;
-}
-.btnlabel{
-    font-family: 'Quicksand';
-    text-align: center;
-    font-size: 15px;
-}
-
-
 #back{
     background: none;
     font-size: 20px;
@@ -98,6 +102,31 @@ body{
 #back:hover{
     text-decoration: underline;
 }
+#search{
+    font-size: 20px;
+    font-family: 'Quicksand';
+    border-radius: 10px;
+    border: 2px solid black;
+    float: right;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+/* #entries{
+    overflow-y: auto;
+    height: 50vh;
+}
+#entry{
+    background-color: #F1EFE7;
+    border-radius: 10px;
+    width:94%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    padding: 10px 20px 10px 20px;
+    overflow: hidden;
+    position: relative;
+} */
+
 
 .form-group {
     display: flex;
@@ -125,14 +154,10 @@ body{
 .form-group select {
     font-family: 'League Spartan Regular';
     padding: 10px;
-    width: 52.5%;
+    width: 50%;
     border-color: #CFCFCF;
     font-size: 20px;
     border-width: 2px;
-}
-
-input[type=time]{
-    width: 20%;
 }
 
 #confirmbutton{
@@ -148,25 +173,71 @@ input[type=time]{
     float: right;
 }
 
-#footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    left: 50%;
-    transform: translateX(-50%); /* Center the footer */
-    background-color: #F3F2EF;
-    height: 90px;
-    padding-left: 8%;
-    box-sizing: border-box;
+#containeradd{
+    height: 7vh;
+    margin: 0;
+}
+#addbutton{
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: #F1EFE7;
+    font-size: 20px;
+    
+    padding: 5px 15px 5px 15px;
+    margin: 10px 30px 10px 20px;
+    float: right;
 }
 
-.footerbutton {
+#footer{
+    position:absolute;
+    bottom: 0;
+    background-color: #F3F2EF;
+    height:12%;
+    width:100%;
+    padding-left: auto;
+    padding-right: auto;
+    margin:0;
+}
+
+.footerbutton{
     border: none;
     background: none;
-    padding: 15px 20px;
-    width: 120px;
-    margin-right: 100px;
+    padding: 15px 20px 15px 20px;
+    width: 11%;
+    margin-right: 10%;
+    margin-left:0px;
+    flex-direction: column;
 }
-.footerbutton:hover {
-    background-color: #eae8e1;
+.footerbutton:hover, .footerbutton2:hover{
+    /*background-color: #eae8e1;*/
+    .btnlabel{
+        text-decoration: underline;
+    }
+}
+.footerbutton2{
+    border: none;
+    background: none;
+    padding: 15px 20px 15px 20px;
+    width: 11%;
+    margin-right: 0px;
+}
+
+.btnicon{
+    width:30px;
+    height: 30px;
+    object-fit: cover;
+    margin-bottom: 0;
+}
+.btnlabel{
+    font-family: 'Quicksand';
+    text-align: center;
+    font-size: 15px;
+    align-items: center;
+}
+
+#container{
+    width:70%;
+    margin-left: auto;
+    margin-right:auto;
 }

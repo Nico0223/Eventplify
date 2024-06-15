@@ -1,8 +1,9 @@
-<!DOCTYPE html>
 <html>
     <head>
-        <title>Edit Guest</title>
-        <link rel="stylesheet" href="css/editGuest.css">
+        <title>Edit Guest</title>    
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="css/addGuest.css">
     </head>
     <body style="margin:0">
 
@@ -24,9 +25,9 @@
             </div>
             <div id="navigate">
                 <a href="guests.html"><button type="button" id="back">🡨 Guests</button></a>
+                
             </div>
-
-            <form>
+            <form><!--SHOULD HAVE PLACEHOLDERS OF PREVIOUS VALUES BEFORE EDIT-->
                 <div class="form-group">
                     <label for="guestname" id="guestnamelabel">Name:</label>
                     <input type="text" id="guestname" name="guestname" placeholder="Guest Name"required>
@@ -46,7 +47,7 @@
                 <div class="form-group">
                     <!--If user doesn't select means that guest has no table.-->
                     <label for="guesttable" id="guesttablelabel">Table:</label> 
-                    <select id="guesttabledropdown" name="guesttabledropdown">
+                    <select id="guesttable" name="guesttable">
                         <option value="Sample Table 1">Sample Table 1</option>
                         <option value="Sample Table 2">Sample Table 2</option>
                         <option value="Sample Table 3">Sample Table 3</option>
@@ -54,28 +55,42 @@
                 </div>
                 <input type="submit" id="confirmbutton" value="Confirm">
             </form>
+            
+            </div>
         </div>
         <div id="footer">
-            <a href="collaborators.html"><button type="button" class="footerbutton" id="collaborators">
-                <img src="css/collaborators_icon_black.png" class="btnicon">
-                <p class="btnlabel">Collaborators</p>
-            </button> </a>
-            <a href="guests.html"><button type="button" class="footerbutton" id="guestlist">
-                <img src="css/guest_icon_black.png" class="btnicon">
-                <p class="btnlabel">Guest List</p>
-            </button> </a>
-            <a href="todo.html"><button type="button" class="footerbutton" id="todo">
-                <img src="css/todo_icon_black.png" class="btnicon">
-                <p class="btnlabel">To-Do</p>
-            </button> </a>
-            <a href="budget.html"><button type="button" class="footerbutton" id="budget">
-                <img src="css/budget_icon_black.png" class="btnicon">
-                <p class="btnlabel">Budget</p>
-            </button> </a>
-            <a href="chat.html"><button type="button" class="footerbutton" id="chat">
-                <img src="css/chat_icon_black.png" class="btnicon">
-                <p class="btnlabel">Chat</p>
-            </button> </a>
+            <div id="container">
+                <a href="collaborators.html">
+                    <button type="button" class="footerbutton" id="collaborators">
+                        <img src="css/collaborators_icon_black.png" class="btnicon">
+                        <p class="btnlabel">Collaborators</p>
+                    </button>
+                </a>
+                <a href="guests.html">
+                    <button type="button" class="footerbutton" id="guest">
+                        <img src="css/guest_icon_black.png" class="btnicon">
+                        <p class="btnlabel">Guest</p>
+                    </button>
+                </a>
+                <a href="todo.html">
+                    <button type="button" class="footerbutton" id="todo">
+                        <img src="css/todo_icon_black.png" class="btnicon">
+                        <p class="btnlabel">To-Do</p>
+                    </button>
+                </a>
+                <a href="budget.html">
+                    <button type="button" class="footerbutton" id="budget">
+                        <img src="css/budget_icon_black.png" class="btnicon">
+                        <p class="btnlabel">Budget</p>
+                    </button>
+                </a>
+                <a href="chat.html">
+                    <button type="button" class="footerbutton2" id="chat">
+                        <img src="css/chat_icon_black.png" class="btnicon">
+                        <p class="btnlabel">Chat</p>
+                    </button>
+                </a>
+            </div>
         </div>
     </body>
 </html>
