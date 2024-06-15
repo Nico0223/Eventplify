@@ -33,7 +33,7 @@ body{
 }
 
 #middle{
-    height: 71%;
+    height: 100%;
     overflow-y: auto;
 }
 
@@ -50,14 +50,16 @@ body{
 }
 #button1{
     float: right;
-    margin-top: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
     margin-right: 50px;
     margin-left: 30px;
 }
 
 #button2{
     float: right;
-    margin-top: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
     margin-right: 70px;
 }
 
@@ -81,8 +83,8 @@ body{
     text-align: center;
     font-size: 35px;
     font-family: 'League Spartan Bold';
-    margin-bottom: 10px;
-    margin-top: 20px;
+    margin-bottom: 0;
+    margin-top: 10px;
 }
 
 #navigate{
@@ -179,7 +181,26 @@ body{
     text-align: center;
 }
 
-#addbutton, #joinbutton {
+#containeradd{
+    height: 7vh;
+    margin: 0;
+    text-align: center;
+}
+#addbutton,#joinbutton{
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: #F1EFE7;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+    padding: 5px 15px 5px 15px;
+    margin: 10px 30px 10px 20px;
+    float: right;
+    display: inline-flex; 
+    justify-content: center;
+    align-items: center;
+}
+/* #addbutton, #joinbutton {
     border: none;
     border-radius: 10px;
     color: black;
@@ -188,42 +209,24 @@ body{
     font-family: 'Quicksand';
     padding: 5px;
     width: 15%;
-    margin: 0 10px;  /* Margin for spacing between buttons */
-    display: inline-flex;  /* Use inline-flex for placing buttons in line */
+    margin: 0 10px;  /* Margin for spacing between buttons 
+    display: inline-flex;  
     align-items: center;
-}
+} */
 .btnicon {
     width: 30px;
     height: 30px;
     object-fit: cover;
     margin-right: 10px; 
 }
-
-.btnlabel {
-    font-family: 'Quicksand';
-    font-size: 20px; 
-}
-#footer{
-    position:fixed;
-    bottom: 0;
-    background-color: #F3F2EF;
-    height:90px;
-    width:100%;
-    padding-left: 250px;
-}
-
-
-.btnicon{
-    width:30px;
-    height: 30px;
-    object-fit: cover;
-    margin-bottom: 0;
-}
 .btnlabel{
     font-family: 'Quicksand';
     text-align: center;
     font-size: 15px;
+    align-items: center;
+    margin:0;
 }
+
 #eventname {
     background: none;
     font-size: 20px;
