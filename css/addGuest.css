@@ -11,25 +11,55 @@
     font-family: 'Quicksand';
     src: url(Quicksand-Regular.ttf);
   }
-
-a{
+   a{
     text-decoration: none;
-}
+} 
+
 body{
     overflow-y: hidden;
     overflow-x: hidden;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-
 #top{
     margin: 0;
     overflow:hidden;
     background-color: #F1EFE7;
+    max-height: 17%;
+}
+#middle{
+    height: 67%;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+#homelogo{
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-bottom: 30px; 
+    
+}
+#logo{
+    width: 200px;
+    max-width: 100%;
+    height: auto;
 }
 
-#middle {
-    overflow-y: auto; 
-    height: 430px;
+
+#header-container {
+    padding: 10px 0;
+    flex-shrink: 0;
 }
+
+#form-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
 
 #homelogo{
     margin-top: 30px;
@@ -40,14 +70,16 @@ body{
 
 #button1{
     float: right;
-    margin-top: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
     margin-right: 50px;
     margin-left: 30px;
 }
 
 #button2{
     float: right;
-    margin-top: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
     margin-right: 70px;
 }
 
@@ -78,18 +110,6 @@ body{
 #navigate{
     overflow: hidden;
     padding: 5px 30px 5px 30px;
-}
-
-.btnicon{
-    width:30px;
-    height: 30px;
-    object-fit: cover;
-    margin-bottom: 0;
-}
-.btnlabel{
-    font-family: 'Quicksand';
-    text-align: center;
-    font-size: 15px;
 }
 
 
@@ -127,17 +147,6 @@ body{
 }
 
 
-.form-group select {
-    font-family: 'League Spartan Regular';
-    padding: 10px;
-    width: 52.5%;
-    border-color: #CFCFCF;
-    font-size: 20px;
-    border-width: 2px;
-}
-
-
-
 input[type=time]{
     width: 20%;
 }
@@ -155,25 +164,68 @@ input[type=time]{
     float: right;
 }
 
-#footer {
-    position: fixed;
+
+#footer{
+    position:absolute;
     bottom: 0;
-    width: 100%;
-    left: 50%;
-    transform: translateX(-50%); /* Center the footer */
     background-color: #F3F2EF;
-    height: 90px;
-    padding-left: 8%;
-    box-sizing: border-box;
+    height:12%;
+    width:100%;
+    padding-left: auto;
+    padding-right: auto;
+    margin:0;
+
 }
 
-.footerbutton {
+.footerbutton{
     border: none;
     background: none;
-    padding: 15px 20px;
-    width: 120px;
-    margin-right: 100px;
+    padding: 15px 20px 15px 20px;
+    width: 11%;
+    margin-right: 10%;
+    margin-left:0px;
+    flex-direction: column;
 }
-.footerbutton:hover {
-    background-color: #eae8e1;
+.footerbutton:hover, .footerbutton2:hover{
+    /*background-color: #eae8e1;*/
+    .btnlabel{
+        text-decoration: underline;
+    }
+}
+.footerbutton2{
+    border: none;
+    background: none;
+    padding: 15px 20px 15px 20px;
+    width: 11%;
+    margin-right: 0px;
+}
+
+.btnicon{
+    width:30px;
+    height: 30px;
+    object-fit: cover;
+    margin-bottom: 0;
+}
+.btnlabel{
+    font-family: 'Quicksand';
+    font-size: 15px;
+    text-align: center;
+    align-items: center;
+    
+}
+
+#container{
+    width:70%;
+    margin-left: auto;
+    margin-right:auto;
+
+}
+
+.form-group select {
+    font-family: 'League Spartan Regular';
+    padding: 10px;
+    width: 52.5%;
+    border-color: #CFCFCF;
+    font-size: 20px;
+    border-width: 2px;
 }
