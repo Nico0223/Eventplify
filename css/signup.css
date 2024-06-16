@@ -57,7 +57,7 @@ input[type=email],input[type=password],input[type=username],input[type=confirmpa
 #signup{
     position:relative;
     left: 180px;
-    top: 30px;
+    top: 20px;
     width:50%;
     padding: 15px;
     font-family: 'League Spartan Regular';
@@ -70,8 +70,8 @@ input[type=email],input[type=password],input[type=username],input[type=confirmpa
 #facebooklogin{
     width:30%;
     position:relative;
-    left: 300px;
-    top: 40px; 
+    left: 25%;
+    margin-top: 5%; 
 }
 
 p{
@@ -80,6 +80,6 @@ p{
     position:relative;
     align-items: center;
     left: 32%;
-    top: -10px; 
+    margin-top: 1%;  
     bottom:0;
 }
