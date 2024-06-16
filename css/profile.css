@@ -228,16 +228,17 @@ body{
 
 .info-section p {
     margin: 10px 0;
+    font-family: 'Quicksand';
 }
 
 .info-section .bold {
-    font-family: 'League Spartan', sans-serif;
+    font-family: 'Quicksand';
     font-weight: bold;
     font-size: 30px;
 }
 
 .info-section .regular {
-    font-family: 'League Spartan', sans-serif;
+    font-family: 'Quicksand';
     font-weight: normal;
     font-size: 20px;
 }
