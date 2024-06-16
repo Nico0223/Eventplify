@@ -11,7 +11,9 @@
     font-family: 'Quicksand';
     src: url(Quicksand-Regular.ttf);
   }
-
+  a{
+    text-decoration: none;
+} 
 body{
     overflow-y: hidden;
     overflow-x: hidden;
@@ -156,10 +158,13 @@ body{
     color: black;
     background-color: #F1EFE7;
     font-size: 20px;
-    
+    font-family: 'Quicksand', sans-serif;
     padding: 5px 15px 5px 15px;
     margin: 10px 30px 10px 20px;
     float: right;
+    display: inline-flex; 
+    justify-content: center;
+    align-items: center;
 }
 
 #footer{
