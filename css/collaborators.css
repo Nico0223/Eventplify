@@ -142,8 +142,16 @@ body{
     background: none;
     border: none;
     position:absolute;
+    right:40px;
+}   
+#trashbutton{
+    margin-top:0;
+    padding-top: 12px;
+    background: none;
+    border: none;
+    position:absolute;
     right:10px;
-}    
+} 
 #editicon,#trashicon{
     width:25px;
 }
