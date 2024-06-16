@@ -107,9 +107,9 @@ body{
     font-family: 'Quicksand';
     border-radius: 10px;
     border: 2px solid black;
-    float: left;
     padding-left: 5px;
     padding-right: 5px;
+    margin-left: 310px;
 }
 #entries{
     overflow-y: auto;
