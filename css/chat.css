@@ -126,14 +126,14 @@ body{
     position: relative;
 }
 #name{
-    font-size: 25px;
+    font-size: 22px;
     margin:0;
     font-family: 'Quicksand';
 }
-#role{
-    font-size: 15px;
+#message{
+    font-size: 17px;
     margin:0;
-    color: #BEB1B1;
+    color: #988a8a;
     font-family: 'Quicksand';
 }
 #editbutton{
@@ -142,11 +142,20 @@ body{
     background: none;
     border: none;
     position:absolute;
+    right:40px;
+}   
+#trashbutton{
+    margin-top:0;
+    padding-top: 12px;
+    background: none;
+    border: none;
+    position:absolute;
     right:10px;
-}    
+} 
 #editicon,#trashicon{
     width:25px;
 }
+
 
 #containeradd{
     height: 7vh;
