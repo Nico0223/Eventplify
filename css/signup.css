@@ -7,10 +7,16 @@
     src: url(LeagueSpartan-Regular.ttf);
   }
  
-body{
+  body{
     overflow-y: hidden;
     overflow-x: hidden;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
+
 #left_sidebar{
     width:300px;
     height: 100vh;
@@ -21,7 +27,7 @@ body{
 #logo{
     position:absolute;
     left: -50px;
-    bottom: 110px;
+    bottom: 15%;
     width: 400px;
     height:400px;
 }
@@ -74,4 +80,5 @@ p{
     position:relative;
     left: 390px;
     top: -10px; 
+    bottom:0;
 }
