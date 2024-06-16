@@ -1,223 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Edit</title>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Quicksand', sans-serif;
-            color: black;
-            background-color: #FFFFFF;
-        }
+<html>
+    <head>
+        <title>Profile - Change Password</title>    
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="css/editEvent.css">
+    </head>
+    <body style="margin:0">
 
-        nav {
-            background-color: #F1EFE7;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100px;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 999;
-        }
-
-        nav .logo {
-            max-height: 250px;
-            max-width: 400px; 
-        }
-
-        .nav-links {
-            margin-right: 20px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: black;
-            font-family: 'Quicksand', sans-serif;
-            margin-left: 10px; 
-        }
-
-        main {
-            text-align: center;
-            padding: 120px 20px 320px; 
-            overflow-y: scroll; 
-        }
-
-        main h1 {
-            font-family: 'League Spartan', sans-serif;
-            font-weight: 700; /* Changed from bold to 700 */
-            font-size: 50px;
-            color: black;
-            text-transform: uppercase; 
-            margin-bottom: -30px;
-        }
-
-        .back-button {
-            display: block;
-            margin: 20px 30px 0;
-            padding: 10px 20px;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 17px;
-            color: black;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            text-align: left;
-            text-decoration: none;
-        }
-
-        hr {
-            border: 0;
-            border-top: 1px solid black;
-            margin: 0px 50px 10px;
-        }
-
-        .bottom-bar {
-            background-color: #F1EFE7;
-            height: 50px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-        }
-
-        .bottom-bar a {
-            text-decoration: none;
-            color: black;
-            font-family: 'Quicksand', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .bottom-bar div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .bottom-bar div img {
-            margin-right: 5px;
-        }
-
-        .task-info {
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
-            margin-bottom: 10px;
-        }
-
-        .task-info label {
-            font-family: 'League Spartan', sans-serif; 
-            font-size: 18px;
-            margin-right: 10px; 
-            font-weight: normal; 
-        }
-
-        .input-field {
-            width: 30%; 
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            font-family: 'League Spartan', sans-serif; 
-            font-size: 16px;
-            font-weight: normal; 
-        }
-
-        .input-field2 {
-            width: 29%; 
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            font-family: 'League Spartan', sans-serif; 
-            font-size: 16px;
-            font-weight: normal; 
-        }
-
-        .date-label {
-            padding-left: 46px; 
-        }
-
-        .status-label {
-            padding-left: 15px; 
-        }
-        .update-button {
-            background-color: #F1EFE7;
-            padding: 5px 30px;
-            margin: 10px;
-            cursor: pointer;
-            position: fixed;
-            bottom: 70px; 
-            right: 200px; 
-            z-index: 999;
-            font-family: 'Quicksand', sans-serif; 
-            border: none; 
-            font-size: 15px;
-        }
-
-        .move-left {
-            margin-left: -65px;
-        }
-
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="home.html"><img src="css/logo.png" alt="Logo" class="logo"></a>
-        <div class="nav-links">
-            <a href="events.html">Events</a>
-            <a href="profile.html">Profile</a>
+        <div id="top">
+            <div id="homelogo">
+                <img src="css/logocropped.png" id="logo">
+                <div id ="button2">
+                    <a href="profile.html"><button type="button" id="b1">Profile</button></a>
+                </div>
+                <div id ="button1">
+                    <a href="events.html"><button type="button" id="b1">Events</button></a>
+                </div>
+            </div>
         </div>
-    </nav>
-    <main>
-        <h1>CHANGE PASSWORD</h1>
-        <a href="profile.html" class="back-button"> <- Profile</a>
-        <hr>
-        <div class="task-info">
-            <label for="task-name">Old Password:</label>
-            <input type="text" id="task-name" class="input-field" required>
-        </div>
-        <div class="task-info">
-            <label for="task-name">New Password:</label>
-            <input type="text" id="task-name" class="input-field" required>
-        </div>
-        <div class="task-info move-left">
-            <label for="task-name">Re-enter New Password:</label>
-            <input type="text" id="task-name" class="input-field2" required>
-        </div>
+
+            <div id="head">
+                <p id="header">CHANGE PASSWORD</p>
+            </div>
+            <div id="navigate">
+                <a href="profile.html"><button type="button" id="back">🡨 Back</button></a>             
+            </div>
+
+            <div id="middle">
+            <form><!--Old values should be placeholder. Make sure old and new value shouldn't be the same-->
+                <div class="form-group">
+                    <label for="oldpassword" id="oldpasswordlabel">Old Password:</label>
+                    <input type="password" id="oldpassword" name="oldpassword" placeholder="Old Password" required>
+                </div>
+                <div class="form-group">
+                    <label for="newpassword" id="newpasswordlabel">New Password:</label>
+                    <input type="password" id="newpassword" name="newpassword" placeholder="New Password" required>
+                </div>
+                <div class="form-group">
+                    <label for="reenternewpassword" id="reenternewpasswordlabel">New Password:</label>
+                    <input type="password" id="reenternewpassword" name="reenternewpassword" placeholder="Re-Enter New Password" required>
+                </div>
         
-        <button class="update-button">Update</button>
-    </main>
-    <div class="bottom-bar">
-        <div>
-            <img src="css/collaborators_icon_black.png" alt="Collaborators" width="24" height="24">
-            <a href="#">Collaborators</a>
+                <input type="submit" id="confirmbutton" value="Confirm">
+            </form>
+            
+            </div>
         </div>
-        <div>
-            <img src="css/guest_icon_black.png" alt="Guest List" width="24" height="24">
-            <a href="#">Guest List</a>
+        <div id="footer">
+            <div id="container">
+                <a href="collaborators.html">
+                    <button type="button" class="footerbutton" id="collaborators">
+                        <img src="css/collaborators_icon_black.png" class="btnicon">
+                        <p class="btnlabel">Collaborators</p>
+                    </button>
+                </a>
+                <a href="guests.html">
+                    <button type="button" class="footerbutton" id="guest">
+                        <img src="css/guest_icon_black.png" class="btnicon">
+                        <p class="btnlabel">Guest</p>
+                    </button>
+                </a>
+                <a href="todo.html">
+                    <button type="button" class="footerbutton" id="todo">
+                        <img src="css/todo_icon_black.png" class="btnicon">
+                        <p class="btnlabel">To-Do</p>
+                    </button>
+                </a>
+                <a href="budget.html">
+                    <button type="button" class="footerbutton" id="budget">
+                        <img src="css/budget_icon_black.png" class="btnicon">
+                        <p class="btnlabel">Budget</p>
+                    </button>
+                </a>
+                <a href="chat.html">
+                    <button type="button" class="footerbutton2" id="chat">
+                        <img src="css/chat_icon_black.png" class="btnicon">
+                        <p class="btnlabel">Chat</p>
+                    </button>
+                </a>
+            </div>
         </div>
-        <div>
-            <img src="css/todo_icon_black.png" alt="To-Do" width="50" height="20">
-            <a href="todo_filled.html">To-Do</a>
-        </div>
-        <div>
-            <img src="css/budget_icon_black.png" alt="Budget" width="20" height="40">
-            <a href="budget_filled.html">Budget</a>
-        </div>
-        <div>
-            <img src="css/chat_icon_black.png" alt="Chat" width="27" height="24">
-            <a href="#">Chat</a>
-        </div>
-    </div>    
-</body>
+    </body>
 </html>
