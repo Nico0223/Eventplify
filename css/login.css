@@ -95,7 +95,7 @@ input[type=password]{
 #facebooklogin{
     width:30%;
     position:relative;
-    left: 300px;
+    left: 25%;
     top: 70px; 
 }
 
@@ -106,6 +106,6 @@ p{
     position:relative;
     align-items: center;
     left: 27%;
-    top: 20px; 
+    margin-top: 3%;  
     bottom:0;
 }
