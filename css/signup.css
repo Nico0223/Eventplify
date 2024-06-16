@@ -27,7 +27,7 @@
 #logo{
     position:absolute;
     left: -50px;
-    bottom: 15%;
+    bottom: 25%;
     width: 400px;
     height:400px;
 }
@@ -46,7 +46,7 @@ input[type=email],input[type=password],input[type=username],input[type=confirmpa
     top: 30px;
     margin-bottom: 20px;
     font-family: 'League Spartan Regular';
-    padding: 20px 20px;
+    padding: 10px 10px;
     width: 50%;
     border-color: #CFCFCF;
     font-size: 20px;
@@ -57,9 +57,9 @@ input[type=email],input[type=password],input[type=username],input[type=confirmpa
 #signup{
     position:relative;
     left: 180px;
-    top: -70px;
+    top: 30px;
     width:50%;
-    padding: 25px;
+    padding: 15px;
     font-family: 'League Spartan Regular';
     color:#8C756A;
     background-color: #F1EFE7;
@@ -71,14 +71,15 @@ input[type=email],input[type=password],input[type=username],input[type=confirmpa
     width:30%;
     position:relative;
     left: 300px;
-    top: 110px; 
+    top: 40px; 
 }
 
 p{
     font-family: 'League Spartan Regular';
     font-size: 20px;
     position:relative;
-    left: 390px;
+    align-items: center;
+    left: 32%;
     top: -10px; 
     bottom:0;
 }

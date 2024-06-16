@@ -38,8 +38,9 @@ input[type=email]{
     position:relative;
     left: 180px;
     top: 60px;
+    margin-bottom: 20px;
     font-family: 'League Spartan Regular';
-    padding: 20px 20px;
+    padding: 10px 10px;
     width: 50%;
     border-color: #CFCFCF;
     font-size: 20px;
@@ -49,19 +50,19 @@ input[type=email]{
 input[type=password]{
     position:relative;
     left: 180px;
-    top: 80px;
+    top: 60px;
+    margin-bottom: 20px;
     font-family: 'League Spartan Regular';
-    padding: 20px 20px;
+    padding: 10px 10px;
     width: 50%;
     border-color: #CFCFCF;
     font-size: 20px;
-
 }
 
 #forgot_password {
     position: relative;
     left: 180px; 
-    top: 90px; 
+    top: 50px; 
     font-family: 'League Spartan Regular';
     font-size: 14px;
     color: #8C756A;
@@ -75,9 +76,9 @@ input[type=password]{
 #login{
     position:relative;
     left: 180px;
-    top: 40px;
+    top: 70px;
     width:50%;
-    padding: 25px;
+    padding: 15px;
     font-family: 'League Spartan Regular';
     color:#8C756A;
     background-color: #F1EFE7;
@@ -89,13 +90,16 @@ input[type=password]{
     width:30%;
     position:relative;
     left: 300px;
-    top: 230px; 
+    top: 70px; 
 }
+
 
 p{
     font-family: 'League Spartan Regular';
     font-size: 20px;
     position:relative;
-    left: 350px;
-    top: 150px; 
+    align-items: center;
+    left: 27%;
+    top: 20px; 
+    bottom:0;
 }
