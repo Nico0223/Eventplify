@@ -15,15 +15,25 @@
     text-decoration: none;
 }
 body{
-    overflow-x: hidden;
     overflow-y: hidden;
+    overflow-x: hidden;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-
 
 #top{
     margin: 0;
     overflow:hidden;
     background-color: #F1EFE7;
+    max-height: 17%;
+}
+
+#middle{
+    height: 71%;
+    overflow-y: auto;
 }
 
 #homelogo{
@@ -32,17 +42,24 @@ body{
     margin-bottom: 30px; 
     
 }
+#logo{
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+}
 
 #button1{
     float: right;
-    margin-top: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
     margin-right: 50px;
     margin-left: 30px;
 }
 
 #button2{
     float: right;
-    margin-top: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
     margin-right: 70px;
 }
 
@@ -85,6 +102,7 @@ body{
     font-family: 'Quicksand';
     text-align: center;
     font-size: 15px;
+    align-items: center;
 }
 
 .guestdeleteicon{
@@ -169,28 +187,47 @@ input[type=time]{
 
 
 
-#footer {
-    position: fixed;
+#footer{
+    position:absolute;
     bottom: 0;
-    width: 100%;
-    left: 50%;
-    transform: translateX(-50%); /* Center the footer */
     background-color: #F3F2EF;
-    height: 90px;
-    padding-left: 8%;
-    box-sizing: border-box;
+    height:12%;
+    width:100%;
+    padding-left: auto;
+    padding-right: auto;
+    margin:0;
 }
 
-.footerbutton {
+.footerbutton{
     border: none;
     background: none;
-    padding: 15px 20px;
-    width: 120px;
-    margin-right: 100px;
+    padding: 15px 20px 15px 20px;
+    width: 11%;
+    margin-right: 10%;
+    margin-left:0px;
+    flex-direction: column;
 }
-.footerbutton:hover {
-    background-color: #eae8e1;
+.footerbutton:hover, .footerbutton2:hover{
+    /*background-color: #eae8e1;*/
+    .btnlabel{
+        text-decoration: underline;
+    }
 }
+.footerbutton2{
+    border: none;
+    background: none;
+    padding: 15px 20px 15px 20px;
+    width: 11%;
+    margin-right: 0px;
+}
+
+
+#container{
+    width:70%;
+    margin-left: auto;
+    margin-right:auto;
+}
+
 
 ul{
     font-size: 20px;
