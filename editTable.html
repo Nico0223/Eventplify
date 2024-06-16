@@ -1,10 +1,9 @@
-<!DOCTYPE html>
 <html>
     <head>
-        <title>Edit Table</title>
-        <meta charset="UTF-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <link rel="stylesheet" href="css/editTable.css">
+        <title>Edit Table</title>    
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="css/editTable.css">
     </head>
     <body style="margin:0">
 
@@ -26,36 +25,38 @@
             </div>
             <div id="navigate">
                 <a href="tables.html"><button type="button" id="back">🡨 Tables</button></a>
+                
             </div>
             <div id="content-container">
-            <form>
-                <div class="form-group">
-                    <label for="tablename" id="tablenamelabel">Table Name:</label>
-                    <input type="text" id="tablename" name="tablename" placeholder="Table Name"required>
-                </div>
-                <label for="guests" id="guestslabel">Guests:</label>
-                <div class="form-group">
+                <form>
+                    <div class="form-group">
+                        <label for="tablename" id="tablenamelabel">Table Name:</label>
+                        <input type="text" id="tablename" name="tablename" placeholder="Table Name"required>
+                    </div>
+                    <label for="guests" id="guestslabel">Guests:</label>
+                    <div class="form-group">
+                        
+                        <ul id="guestlist">
+                            <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                            <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                            <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                            <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                            <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                            <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                            <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                            <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                            <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                            <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                            <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                            <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
+                          </ul>
+                    </div>
+                    <a href="addGuesttoTable.html"><button type="button" id="addGuestbutton">Add Guest</button></a>
+                    <input type="submit" id="editTableconfirmbutton" value="Confirm">
                     
-                    <ul id="guestlist">
-                        <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                        <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                        <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                        <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                        <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                        <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                        <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                        <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                        <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                        <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                        <li>John<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                        <li>Sarah<img src="css/trash_icon.png" class="guestdeleteicon"></li>
-                      </ul>
-                </div>
-                <a href="addGuesttoTable.html"><button type="button" id="addGuestbutton">Add Guest</button></a>
-                <input type="submit" id="editTableconfirmbutton" value="Confirm">
-                
-            </form>
-</div>
+                </form>
+    </div>
+    
         </div>
         <div id="footer">
             <div id="container">
