@@ -56,19 +56,28 @@ router.get("/tables", async (req, res) => {
           as: "guests", // the name of the new array field to add to the output documents
         },
       },
-      { $unwind: "$guests" }, // Deconstructs the guests array
       {
-        $group: {
-          _id: "$_id", // Group by the table's _id
-          event: { $first: "$event" },
-          name: { $first: "$name" }, // Take the table's name
+        $addFields: {
           guests: {
-            $push: {
-              // Push each guest into an array
-              _id: "$guests._id",
-              name: "$guests.name",
-              category: "$guests.category",
-              status: "$guests.status",
+            $ifNull: ["$guests", []], // If guests is null, set it to an empty array
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          event: 1,
+          name: 1,
+          guests: {
+            $map: {
+              input: "$guests",
+              as: "guest",
+              in: {
+                _id: "$$guest._id",
+                name: "$$guest.name",
+                category: "$$guest.category",
+                status: "$$guest.status",
+              },
             },
           },
         },
