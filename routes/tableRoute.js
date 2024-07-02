@@ -11,7 +11,7 @@ const { format, parse } = require("date-fns");
 
 router.get("/tables", async (req, res) => {
   //var eventID = "6670eaea9dc29d82305a6761"; // Can be modified if the base events module is created
-  var eventID = req.body.id || "6670eaea9dc29d82305a6761"; // Can be modified if the base events module is created
+  var eventID = req.query.event; // Can be modified if the base events module is created
 
   var tables = await Table.find({ isSaved: true });
 
@@ -75,7 +75,7 @@ router.get("/tables", async (req, res) => {
       },
     ]);
 
-    res.render("table", { tables, eventID: eventID });
+    res.render("table", { tables, eventID: eventID, id: eventID });
 
     console.log(JSON.stringify(tables, null, 2));
   } catch (err) {
@@ -105,7 +105,7 @@ router.get("/addTable", async (req, res) => {
     //const table = await Table.findById(tableID);
     tableID = table._id.toString();
     const guests = await Guest.find({ table: tableID });
-    res.render("table_add", { table, guests, event: eventID });
+    res.render("table_add", { table, guests, event: eventID, id: eventID });
   }
 });
 
@@ -120,7 +120,7 @@ router.get("/editTable", async (req, res) => {
 
   console.log(tableID);
   console.log(event);
-  res.render("table_edit", { table, guests, event });
+  res.render("table_edit", { table, guests, event, id: event });
 });
 
 router.get("/addGuestTable", async (req, res) => {
@@ -134,7 +134,7 @@ router.get("/addGuestTable", async (req, res) => {
   console.log(guests);
 
   console.log(tableID);
-  res.render("table_add_guest", { table, guests, flag, event });
+  res.render("table_add_guest", { table, guests, flag, event, id: event });
 });
 
 router.post("/deleteGuestTable", tableController.deleteGuest);

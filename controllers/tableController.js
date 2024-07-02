@@ -1,6 +1,7 @@
 const Event = require("../models/Event");
 const Table = require("../models/Table");
 const Guest = require("../models/Guest");
+const User = require("../models/User"); // Ensure this line is at the top of the file
 
 exports.deleteGuest = async (req, res) => {
   const guestID = req.query.id;
@@ -43,7 +44,7 @@ exports.addGuest = async (req, res) => {
       if (flag == "edit") {
         res.redirect("/editTable?id=" + tableID + "&event=" + event);
       } else {
-        res.redirect("/addTable?id=" + tableID + "event=" + event);
+        res.redirect("/addTable?id=" + tableID + "&event=" + event);
       }
     } else {
       res.status(404).json({ message: "Guest not found" });

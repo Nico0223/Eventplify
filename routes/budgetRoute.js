@@ -9,7 +9,7 @@ const { format, parse } = require("date-fns");
 
 router.get("/budget", async (req, res) => {
   //var eventID = req.query.id;
-  var eventID = "667bd17dbf98e4a49621ddef"; // Can be modified if the base events module is created
+  var eventID = req.query.id || "667bd17dbf98e4a49621ddef"; // Can be modified if the base events module is created
   var budget = await Budget.find({ event: eventID });
   var event = await Event.findById(eventID);
   var budgetLimit = event.budget;
@@ -43,7 +43,14 @@ router.get("/budget", async (req, res) => {
 
   budgetLimit = formattedNumber;
 
-  res.render("budget", { budget, totalAmount, event, amountLeft, budgetLimit });
+  res.render("budget", {
+    budget,
+    totalAmount,
+    event,
+    amountLeft,
+    budgetLimit,
+    id: eventID,
+  });
 });
 
 router.get("/budgetAdd", async (req, res) => {
@@ -63,7 +70,7 @@ router.get("/setBudgetLimit", async (req, res) => {
 
   var event = await Event.findById(id);
   console.log(event);
-  res.render("budget_setLimit", { event });
+  res.render("budget_setLimit", { event, id });
 });
 
 router.post("/submitBudgetAdd", budgetController.addBudget);

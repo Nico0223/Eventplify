@@ -12,13 +12,13 @@
                 <p class="btnlabel">Guest</p>
             </button>
         </a>
-        <a href="todo.html">
+        <a href="/todo?id={{id}}">
             <button type="button" class="footerbutton" id="todo">
                 <img src="css/todo_icon_black.png" class="btnicon">
                 <p class="btnlabel">To-Do</p>
             </button>
         </a>
-        <a href="budget.html">
+        <a href="/budget?id={{id}}">
             <button type="button" class="footerbutton" id="budget">
                 <img src="css/budget_icon_black.png" class="btnicon">
                 <p class="btnlabel">Budget</p>
@@ -32,3 +32,9 @@
         </a>
     </div>
 </div>
+<div id="{{id}}" class="eventID"></div>
+<script>
+    var event = document.querySelector(".eventID");
+    var id = event.id;
+    console.log(id)
+</script>
