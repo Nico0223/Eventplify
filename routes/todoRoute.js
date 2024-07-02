@@ -34,12 +34,13 @@ router.get("/todo", async (req, res) => {
   res.render("todo", {
     todosArray,
     event,
+    id: event,
   });
 });
 
 router.get("/addtodo", async (req, res) => {
   var event = req.query.id;
-  res.render("todo_add", { event });
+  res.render("todo_add", { event, id: event });
 });
 
 function groupTodosByDate(todos) {

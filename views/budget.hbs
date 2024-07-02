@@ -23,6 +23,7 @@
             <button type="button" id="editbudgetbutton" class="{{event._id}}" onclick="sendToEditBudget()">Edit</button>
         </div>
         <script>
+            console.log(document.getElementById("editbudgetbutton").className);
             function sendToEditBudget() {
                 var btn = document.getElementById("editbudgetbutton");
                 window.location.href = '/setBudgetLimit?id=' + btn.className;
