@@ -17,20 +17,25 @@
 body {
     font-family: 'Quicksand', sans-serif;
     overflow-x: hidden;
-    margin: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 /* Top Navigation */
 #top {
+    margin: 0;
+    overflow:hidden;
     background-color: #F1EFE7;
-    padding: 10px 0;
+    max-height: 17%;
 }
 
 #homelogo {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 50px;
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-bottom: 30px; 
 }
 
 #logo {
