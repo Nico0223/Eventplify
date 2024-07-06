@@ -1,44 +1,27 @@
-// guestController.js
-const Guest = require('../models/Guest');
-const Table = require('../models/Table');
+const Guest = require("../models/Guest");
+const Event = require("../models/Event");
 
-// guestController.js
-async function addGuest(req, res) {
-    try {
-      const { tableId, name, category, status } = req.body;
-  
-      // Validate data
-      if (!name || !status) {
-        return res.status(400).json({ error: 'Name and Status are required fields' });
-      }
-  
-      // Check if tableId is provided and valid
-      let table = null;
-      if (tableId) {
-        table = await Table.findById(tableId);
-        if (!table) {
-          return res.status(404).json({ error: 'Table not found' });
-        }
-      }
-  
-      // Create a new guest
-      const newGuest = new Guest({
-        table: tableId, // Assign tableId directly if available
-        name,
-        category,
-        status,
-      });
-  
-      // Save the guest to the database
-      await newGuest.save();
-  
-      res.status(201).json(newGuest);
-    } catch (err) {
-      console.error('Error adding guest:', err);
-      res.status(500).json({ error: 'Failed to add guest' });
-    }
+exports.addGuest = async (req, res) => {
+  const event = req.body.event;
+  const name = req.body.name;
+  const category = req.body.category;
+  const status = req.body.status;
+  const table = req.body.table; // Assuming table ID is passed from the form, can be null
+
+  const newGuest = new Guest({
+    event: event,
+    name: name,
+    category: category,
+    status: status,
+    table: table || null, // Allow table to be null if not provided
+  });
+
+  try {
+    await newGuest.save();
+    res.redirect("/guests?id=" + event);
+  } catch (error) {
+    console.error("Error saving guest:", error);
+    res.status(500).send("Internal Server Error");
   }
-  
-module.exports = {
-  addGuest,
+  console.log(req.body);
 };
