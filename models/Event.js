@@ -13,7 +13,7 @@ const EventSchema = new mongoose.Schema({
   location: String,
   budget: Number,
   code: {
-    type: String, // Define as String if it should store alphanumeric codes
+    type: String, 
     required: true
   },
   participants: [{ name: String }],
