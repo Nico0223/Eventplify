@@ -11,10 +11,10 @@
 <div id="top">
     <div id="homelogo">
         <img src="css/logocropped.png" id="logo">
-        <div id ="button2">
+        <div id="button2">
             <a href="profile.html"><button type="button" id="b1">Profile</button></a>
         </div>
-        <div id ="button1">
+        <div id="button1">
             <a href="events.html"><button type="button" id="b1">Events</button></a>
         </div>
     </div>
@@ -29,6 +29,7 @@
     </div>
 
     <form id="addGuestForm">
+        <input type="hidden" id="event" name="event"> <!-- Hidden input for event ID -->
         <div class="form-group">
             <label for="guestname" id="guestnamelabel">Name:</label>
             <input type="text" id="guestname" name="name" placeholder="Guest Name" required>
@@ -85,43 +86,58 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const addGuestForm = document.getElementById('addGuestForm');
+    document.addEventListener('DOMContentLoaded', () => {
+        // Function to get query parameter value
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
 
-    addGuestForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+        // Retrieve the eventId from the URL
+        const eventId = getQueryParam('eventId');
+        if (!eventId) {
+            console.error('Event ID not found in URL');
+        } else {
+            console.log(`Event ID: ${eventId}`);
+            // Set the eventId to the hidden input field
+            document.getElementById('event').value = eventId;
+        }
 
-        const formData = new FormData(addGuestForm);
-        const formDataObj = {};
-        formData.forEach((value, key) => {
-            formDataObj[key] = value;
-        });
+        // Add event listener to the form submission
+        document.getElementById('addGuestForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-        try {
-            const response = await fetch('/guests/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formDataObj)
+            const formData = new FormData(document.getElementById('addGuestForm'));
+            const formDataObj = {};
+            formData.forEach((value, key) => {
+                formDataObj[key] = value;
             });
 
-            if (!response.ok) {
-                throw new Error('Failed to add guest');
+            try {
+                const response = await fetch('/guests/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formDataObj)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to add guest');
+                }
+
+                const newGuest = await response.json();
+                console.log('New guest added:', newGuest);
+
+                // Redirect to guests.html after successful submission (optional)
+                window.location.href = 'guests.html';
+
+            } catch (error) {
+                console.error('Error adding guest:', error);
+                // Handle error in UI if needed
             }
-
-            const newGuest = await response.json();
-            console.log('New guest added:', newGuest);
-
-            // Redirect to guests.html after successful submission (optional)
-            window.location.href = 'guests.html';
-
-        } catch (error) {
-            console.error('Error adding guest:', error);
-            // Handle error in UI if needed
-        }
+        });
     });
-});
 </script>
 
 </body>
