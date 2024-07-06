@@ -6,5 +6,6 @@ const guestController = require('../controllers/guestController');
 // Route: POST /guests/add
 // Description: Add a new guest
 router.post('/add', guestController.addGuest);
+router.get('/events/:eventId/guests', guestController.getGuestsByEventId);
 
 module.exports = router;

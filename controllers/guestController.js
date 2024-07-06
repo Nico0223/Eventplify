@@ -25,3 +25,17 @@ exports.addGuest = async (req, res) => {
   }
   console.log(req.body);
 };
+// guestController.js
+
+
+exports.getGuestsByEventId = async (req, res) => {
+  const eventId = req.params.eventId;
+
+  try {
+    const guests = await Guest.find({ event: eventId });
+    res.json(guests);
+  } catch (error) {
+    console.error('Error fetching guests:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
