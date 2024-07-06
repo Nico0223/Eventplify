@@ -137,6 +137,18 @@ input, label{
     float: right;
 }
 
+#deletebutton{
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: red;
+    font-size: 20px;
+    font-family: 'Quicksand';
+    padding: 5px 15px 5px 15px;
+    margin: 10px 30px 10px 20px;
+    float: left;
+}
+
 #footer{
     position:absolute;
     bottom: 0;
