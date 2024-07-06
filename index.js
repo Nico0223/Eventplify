@@ -35,6 +35,7 @@ const addEventsRoute = require("./routes/addEventsRoute.js");
 const budgetRouter = require("./routes/budgetRoute.js");
 const profileRouter = require("./routes/profileRoute.js");
 const tableRouter = require("./routes/tableRoute.js");
+const guestRoutes = require('./routes/guestRoutes.js');
 
 app.use(
   session({
@@ -125,6 +126,7 @@ app.use("/api/events", addEventsRoute);
 app.use("/", budgetRouter);
 app.use("/", profileRouter);
 app.use("/", tableRouter);
+app.use('/guests', guestRoutes); 
 
 /* For file uploads */
 const fileUpload = require("express-fileupload");
