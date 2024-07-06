@@ -84,62 +84,45 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const addGuestLink = document.getElementById('add-guest-link');
-        const eventId = getQueryParam('eventId'); // Implement this function to get eventId from URL
-  
-        if (eventId) {
-          addGuestLink.href = `addGuest.html?eventId=${eventId}`;
-        } else {
-          console.error('Event ID not found in URL');
-        }
-      });
-  
-      function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-      }
     document.addEventListener('DOMContentLoaded', async () => {
-        // Function to get query parameter value
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
-        // Retrieve the eventId from the URL
         const eventId = getQueryParam('eventId');
         if (!eventId) {
             console.error('Event ID not found in URL');
             return;
         }
-
-        // Fetch guests for the event
+    
         try {
-            const response = await fetch(`/api/events/${eventId}/guests`);
+            const response = await fetch(`/guests/events/${eventId}/guests`);
             if (!response.ok) {
                 throw new Error('Failed to fetch guests');
             }
             const guests = await response.json();
             console.log('Guests:', guests);
-
+    
             // Display guests in the entries div
             const entriesDiv = document.getElementById('entries');
             guests.forEach(guest => {
                 const guestElement = document.createElement('div');
                 guestElement.classList.add('guest-entry');
                 guestElement.innerHTML = `
-                    <h3>${guest.name}</h3>
-                    <p>Category: ${guest.category}</p>
-                    <p>Status: ${guest.status}</p>
+                    <h3 id="guestname">${guest.name}</h3>
+                    <p id="guestcategory">Category: ${guest.category}</p>
+                    <p id="gueststatus">Status: ${guest.status}</p>
                 `;
                 entriesDiv.appendChild(guestElement);
             });
-
+    
         } catch (error) {
             console.error('Error fetching guests:', error);
             // Handle error in UI if needed
         }
     });
+    
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+    
 </script>
 
 </body>
