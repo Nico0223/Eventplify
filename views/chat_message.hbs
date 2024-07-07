@@ -33,16 +33,46 @@
 
                 <!-- Add more messages here -->
             </div>
-            <div id="chat-input">
-                <form method="post" action="/postMessage">
-                    <input type="text" id="message-input" name="message-input" placeholder="Type a message...">
+            <form id="chat-form">
+                <!-- <form method="post" action="/postMessage"> -->
+                <div id="chat-input">
+                    <input type="text" id="message_input" name="message_input" placeholder="Type a message...">
                     <input type="hidden" id="chatID" name="chatID" value="{{chat._id}}">
                     <button type="submit" id="send-button" value="Confirm">Send</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
     {{> navbar}}
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('chat-form').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const messageInput = document.getElementById('message_input').value;
+            const chatID = document.getElementById('chatID').value;
+
+            const response = await fetch('/postMessage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message_input: messageInput,
+                    id: chatID
+                }),
+            });
+
+            if (response.ok) {
+                // Message was added successfully, reload the page
+                window.location.reload();
+            } else {
+                // Handle error
+                console.error('Failed to add message');
+            }
+        });
+    });
+</script>
 
 </html>
