@@ -35,6 +35,7 @@ const addEventsRoute = require("./routes/addEventsRoute.js");
 const budgetRouter = require("./routes/budgetRoute.js");
 const profileRouter = require("./routes/profileRoute.js");
 const tableRouter = require("./routes/tableRoute.js");
+const chatRouter = require("./routes/chatRoute.js");
 
 app.use(
   session({
@@ -62,16 +63,15 @@ app.get("/events", async (req, res) => {
       return res.status(401).json({ error: "Unauthorized" });
     }
 
-    const user = await User.findById(req.session.userId).populate('joinedEvents');
+    const user = await User.findById(req.session.userId).populate(
+      "joinedEvents"
+    );
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: "User not found" });
     }
 
     const events = await Event.find({
-      $or: [
-        { owner: req.session.userId },
-        { _id: { $in: user.joinedEvents } }
-      ]
+      $or: [{ owner: req.session.userId }, { _id: { $in: user.joinedEvents } }],
     });
 
     res.json(events);
@@ -80,37 +80,36 @@ app.get("/events", async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
-app.get('/api/events/:id', async (req, res) => {
+app.get("/api/events/:id", async (req, res) => {
   try {
-      const event = await Event.findById(req.params.id);
-      if (!event) return res.status(404).send('Event not found');
-      res.send(event);
+    const event = await Event.findById(req.params.id);
+    if (!event) return res.status(404).send("Event not found");
+    res.send(event);
   } catch (error) {
-      res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 });
 
 // Update event by ID
-app.put('/api/events/:id', async (req, res) => {
+app.put("/api/events/:id", async (req, res) => {
   try {
-      const event = await Event.findByIdAndUpdate(
-          req.params.id,
-          req.body,
-          { new: true, runValidators: true }
-      );
-      if (!event) return res.status(404).send('Event not found');
-      res.send(event);
+    const event = await Event.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!event) return res.status(404).send("Event not found");
+    res.send(event);
   } catch (error) {
-      res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 });
-app.delete('/api/events/:id', async (req, res) => {
+app.delete("/api/events/:id", async (req, res) => {
   try {
-      const event = await Event.findByIdAndDelete(req.params.id);
-      if (!event) return res.status(404).send('Event not found');
-      res.send({ message: 'Event deleted successfully' });
+    const event = await Event.findByIdAndDelete(req.params.id);
+    if (!event) return res.status(404).send("Event not found");
+    res.send({ message: "Event deleted successfully" });
   } catch (error) {
-      res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 });
 
@@ -125,6 +124,7 @@ app.use("/api/events", addEventsRoute);
 app.use("/", budgetRouter);
 app.use("/", profileRouter);
 app.use("/", tableRouter);
+app.use("/", chatRouter);
 
 /* For file uploads */
 const fileUpload = require("express-fileupload");
