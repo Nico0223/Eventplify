@@ -12,25 +12,32 @@
     font-family: 'Quicksand';
     src: url(Quicksand-Regular.ttf);
 }
-
+a{
+    text-decoration: none;
+} 
 /* General Body Styles */
 body {
     font-family: 'Quicksand', sans-serif;
     overflow-x: hidden;
-    margin: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 /* Top Navigation */
 #top {
+    margin: 0;
+    overflow:hidden;
     background-color: #F1EFE7;
-    padding: 10px 0;
+    max-height: 17%;
 }
 
 #homelogo {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 50px;
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-bottom: 30px; 
 }
 
 #logo {
@@ -354,4 +361,23 @@ body {
     padding: 15px 20px 15px 20px;
     width: 11%;
     margin-right: 0px;
+}
+
+.btnicon{
+    width:30px;
+    height: 30px;
+    object-fit: cover;
+    margin-bottom: 0;
+}
+.btnlabel{
+    font-family: 'Quicksand';
+    text-align: center;
+    font-size: 15px;
+    align-items: center;
+}
+
+#container{
+    width:70%;
+    margin-left: auto;
+    margin-right:auto;
 }
