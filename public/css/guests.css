@@ -264,3 +264,32 @@ body{
     width:10%;
     float:right;
 }
+.guest-entry {
+    background-color: #F1EFE7;
+    border-radius: 10px;
+    width: 94%;
+    margin: auto;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+#guestname {
+    font-size: 25px;
+    font-family: 'Quicksand';
+    margin: 0;
+}
+
+#guestcategory, #gueststatus {
+    font-size: 15px;
+    font-family: 'Quicksand';
+    margin: 0;
+    color: #BEB1B1;
+}
+
+#gueststatus {
+    font-size: 20px;
+    font-family: 'Quicksand';
+    float: right;
+}
