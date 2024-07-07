@@ -1,91 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event Details</title>
-  <link rel="stylesheet" href="css/events_page_detailed.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <link rel="stylesheet" href="css/events_page_detailed.css">
 </head>
+
 <body style="margin: 0; font-family: Arial, sans-serif;">
 
-  <div id="top">
-    <div id="homelogo">
-      <img src="css/logocropped.png" id="logo">
-      <div id="button2">
-        <a href="profile.html"><button type="button" id="b1">Profile</button></a>
-      </div>
-      <div id="button1">
-        <a href="events.html"><button type="button" id="b1">Events</button></a>
-      </div>
+    <div id="top">
+        <div id="homelogo">
+            <img src="css/logocropped.png" id="logo">
+            <div id="button2">
+                <a href="profile.html"><button type="button" id="b1">Profile</button></a>
+            </div>
+            <div id="button1">
+                <a href="events.html"><button type="button" id="b1">Events</button></a>
+            </div>
+        </div>
     </div>
-  </div>
-  
-  <div id="middle">
-    <div id="head">
-      <p id="header">EVENT DETAILS</p>
-    </div>
-    <div id="event-details">
-      <!-- Event details will be dynamically added here -->
-    </div>
-  </div>
-  <div id="footer">
-    <div id="container">
-        <a href="collaborators.html" id="collaborators-link">
-            <button type="button" class="footerbutton" id="collaborators">
-                <img src="css/collaborators_icon_black.png" class="btnicon">
-                <p class="btnlabel">Collaborators</p>
-            </button>
-        </a>
-        <a href="guests.html" id="guests-link">
-            <button type="button" class="footerbutton" id="guest">
-                <img src="css/guest_icon_black.png" class="btnicon">
-                <p class="btnlabel">Guest</p>
-            </button>
-        </a>
-        <a href="todo.html" id="todo-link">
-            <button type="button" class="footerbutton" id="todo">
-                <img src="css/todo_icon_black.png" class="btnicon">
-                <p class="btnlabel">To-Do</p>
-            </button>
-        </a>
-        <a href="budget.html" id="budget-link">
-            <button type="button" class="footerbutton" id="budget">
-                <img src="css/budget_icon_black.png" class="btnicon">
-                <p class="btnlabel">Budget</p>
-            </button>
-        </a>
-        <a href="chat.html" id="chat-link">
-            <button type="button" class="footerbutton2" id="chat">
-                <img src="css/chat_icon_black.png" class="btnicon">
-                <p class="btnlabel">Chat</p>
-            </button>
-        </a>
-    </div>
-</div>
-  <script>
-    // Function to get query parameter value
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
 
-    // Function to fetch and display event details
-    async function fetchAndDisplayEventDetails() {
-      try {
-          const urlParams = new URLSearchParams(window.location.search);
-          const eventId = urlParams.get('eventId');
-          if (!eventId) {
-              throw new Error('Event ID not found in URL');
-          }
-  
-          const response = await fetch(`/api/events/${eventId}`);
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-  
-          const event = await response.json();
-          const eventDetailsDiv = document.getElementById('event-details');
-          eventDetailsDiv.innerHTML = `
+    <div id="middle">
+        <div id="head">
+            <p id="header">EVENT DETAILS</p>
+        </div>
+        <div id="event-details">
+            <!-- Event details will be dynamically added here -->
+        </div>
+    </div>
+    <div id="footer">
+        <div id="container">
+            <a href="collaborators.html" id="collaborators-link">
+                <button type="button" class="footerbutton" id="collaborators">
+                    <img src="css/collaborators_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Collaborators</p>
+                </button>
+            </a>
+            <a href="guests.html" id="guests-link">
+                <button type="button" class="footerbutton" id="guest">
+                    <img src="css/guest_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Guest</p>
+                </button>
+            </a>
+            <a href="todo.html" id="todo-link">
+                <button type="button" class="footerbutton" id="todo">
+                    <img src="css/todo_icon_black.png" class="btnicon">
+                    <p class="btnlabel">To-Do</p>
+                </button>
+            </a>
+            <a href="budget.html" id="budget-link">
+                <button type="button" class="footerbutton" id="budget">
+                    <img src="css/budget_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Budget</p>
+                </button>
+            </a>
+            <a href="chat.html" id="chat-link">
+                <button type="button" class="footerbutton2" id="chat">
+                    <img src="css/chat_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Chat</p>
+                </button>
+            </a>
+        </div>
+    </div>
+    <script>
+        // Function to get query parameter value
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to fetch and display event details
+        async function fetchAndDisplayEventDetails() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const eventId = urlParams.get('eventId');
+                if (!eventId) {
+                    throw new Error('Event ID not found in URL');
+                }
+
+                const response = await fetch(`/api/events/${eventId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const event = await response.json();
+                const eventDetailsDiv = document.getElementById('event-details');
+                eventDetailsDiv.innerHTML = `
               <div class="event-header">
                   <h1 class="event-name">${event.name}</h1>
                   <div class="event-meta">
@@ -105,60 +107,61 @@
                   <p>${event.description}</p>
               </div>
           `;
-          
-          document.querySelector('.edit-button').addEventListener('click', () => {
-              window.location.href = `editEvent.html?eventId=${eventId}`;
-          });
-          
-          document.querySelector('.delete-button').addEventListener('click', () => {
-              if (confirm('Are you sure you want to delete this event?')) {
-                  deleteEvent(eventId);
-              }
-          });
 
-      } catch (error) {
-          console.error('Error fetching event details:', error);
-      }
-  }
-  
-  async function deleteEvent(eventId) {
-      try {
-          const response = await fetch(`/api/events/${eventId}`, { method: 'DELETE' });
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          alert('Event deleted successfully');
-          window.location.href = 'events.html';
-      } catch (error) {
-          console.error('Error deleting event:', error);
-      }
-  }
-  function getQueryParams() {
-    const params = {};
-    const queryString = window.location.search.substring(1);
-    const queries = queryString.split("&");
-    queries.forEach(query => {
-        const [key, value] = query.split("=");
-        params[key] = decodeURIComponent(value);
-    });
-    return params;
-}
+                document.querySelector('.edit-button').addEventListener('click', () => {
+                    window.location.href = `editEvent.html?eventId=${eventId}`;
+                });
 
-    // Get the eventId from the URL
-    const params = getQueryParams();
-    const eventId = params.eventId;
+                document.querySelector('.delete-button').addEventListener('click', () => {
+                    if (confirm('Are you sure you want to delete this event?')) {
+                        deleteEvent(eventId);
+                    }
+                });
 
-    // Now you can use the eventId to fetch event details and display them
-    document.getElementById("event-details").innerText = `Event ID: ${eventId}`;
-    
-    // Update footer links with eventId
-    document.getElementById('collaborators-link').href = `collaborators.html?eventId=${eventId}`;
-    document.getElementById('guests-link').href = `guests.html?eventId=${eventId}`;
-    document.getElementById('todo-link').href = `todo.html?eventId=${eventId}`;
-    document.getElementById('budget-link').href = `budget.html?eventId=${eventId}`;
-    document.getElementById('chat-link').href = `chat.html?eventId=${eventId}`;
+            } catch (error) {
+                console.error('Error fetching event details:', error);
+            }
+        }
 
-    document.addEventListener('DOMContentLoaded', fetchAndDisplayEventDetails);
-  </script>
+        async function deleteEvent(eventId) {
+            try {
+                const response = await fetch(`/api/events/${eventId}`, { method: 'DELETE' });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                alert('Event deleted successfully');
+                window.location.href = 'events.html';
+            } catch (error) {
+                console.error('Error deleting event:', error);
+            }
+        }
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const queries = queryString.split("&");
+            queries.forEach(query => {
+                const [key, value] = query.split("=");
+                params[key] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        // Get the eventId from the URL
+        const params = getQueryParams();
+        const eventId = params.eventId;
+
+        // Now you can use the eventId to fetch event details and display them
+        document.getElementById("event-details").innerText = `Event ID: ${eventId}`;
+
+        // Update footer links with eventId
+        document.getElementById('collaborators-link').href = `collaborators.html?eventId=${eventId}`;
+        document.getElementById('guests-link').href = `guests.html?eventId=${eventId}`;
+        document.getElementById('todo-link').href = `/todo?id=${eventId}`;
+        document.getElementById('budget-link').href = `/budget?id=${eventId}`;
+        document.getElementById('chat-link').href = `/chat?id=${eventId}`;
+
+        document.addEventListener('DOMContentLoaded', fetchAndDisplayEventDetails);
+    </script>
 </body>
+
 </html>

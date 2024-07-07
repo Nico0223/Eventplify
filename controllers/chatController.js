@@ -4,9 +4,9 @@ const User = require("../models/User");
 
 exports.addMessage = async (req, res) => {
   const chatID = req.body.id || "66851b210012c41e9ad23dfb";
-  const message = req.body.message;
-  const user = "6670e38a9dc29d82305a675f";
-  const name = "pok";
+  const message = req.body.message_input;
+  const user = req.session.userId;
+  const name = req.session.username;
   const newMessage = {
     message: message,
     name: name,
@@ -20,7 +20,7 @@ exports.addMessage = async (req, res) => {
 
     if (!chat) {
       console.log("Chat not found");
-      return;
+      return res.status(404).send("Chat not found");
     }
 
     // Add the new message to the messages array
@@ -30,8 +30,10 @@ exports.addMessage = async (req, res) => {
     await chat.save();
 
     console.log("Message added successfully");
+    return res.status(200).send("Message added successfully");
   } catch (err) {
     console.error("Error adding message:", err);
+    return res.status(500).send("Error adding message");
   }
 };
 
