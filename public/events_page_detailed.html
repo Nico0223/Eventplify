@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Event Details</title>
-  <link rel="stylesheet" href="css/events.css">
+  <link rel="stylesheet" href="css/events_page_detailed.css">
 </head>
 <body style="margin: 0; font-family: Arial, sans-serif;">
 
@@ -30,31 +30,31 @@
   </div>
   <div id="footer">
     <div id="container">
-        <a href="collaborators.html">
+        <a href="collaborators.html" id="collaborators-link">
             <button type="button" class="footerbutton" id="collaborators">
                 <img src="css/collaborators_icon_black.png" class="btnicon">
                 <p class="btnlabel">Collaborators</p>
             </button>
         </a>
-        <a href="guests.html">
+        <a href="guests.html" id="guests-link">
             <button type="button" class="footerbutton" id="guest">
                 <img src="css/guest_icon_black.png" class="btnicon">
                 <p class="btnlabel">Guest</p>
             </button>
         </a>
-        <a href="todo.html">
+        <a href="todo.html" id="todo-link">
             <button type="button" class="footerbutton" id="todo">
                 <img src="css/todo_icon_black.png" class="btnicon">
                 <p class="btnlabel">To-Do</p>
             </button>
         </a>
-        <a href="budget.html">
+        <a href="budget.html" id="budget-link">
             <button type="button" class="footerbutton" id="budget">
                 <img src="css/budget_icon_black.png" class="btnicon">
                 <p class="btnlabel">Budget</p>
             </button>
         </a>
-        <a href="chat.html">
+        <a href="chat.html" id="chat-link">
             <button type="button" class="footerbutton2" id="chat">
                 <img src="css/chat_icon_black.png" class="btnicon">
                 <p class="btnlabel">Chat</p>
@@ -97,6 +97,7 @@
                   <div class="event-actions">
                       <button class="edit-button">Edit</button>
                       <button class="delete-button">Delete</button>
+                      <button class="share-button">Share</button>
                   </div>
               </div>
               <div class="event-description">
@@ -114,6 +115,7 @@
                   deleteEvent(eventId);
               }
           });
+
       } catch (error) {
           console.error('Error fetching event details:', error);
       }
@@ -131,8 +133,32 @@
           console.error('Error deleting event:', error);
       }
   }
-  
-  document.addEventListener('DOMContentLoaded', fetchAndDisplayEventDetails);
+  function getQueryParams() {
+    const params = {};
+    const queryString = window.location.search.substring(1);
+    const queries = queryString.split("&");
+    queries.forEach(query => {
+        const [key, value] = query.split("=");
+        params[key] = decodeURIComponent(value);
+    });
+    return params;
+}
+
+    // Get the eventId from the URL
+    const params = getQueryParams();
+    const eventId = params.eventId;
+
+    // Now you can use the eventId to fetch event details and display them
+    document.getElementById("event-details").innerText = `Event ID: ${eventId}`;
+    
+    // Update footer links with eventId
+    document.getElementById('collaborators-link').href = `collaborators.html?eventId=${eventId}`;
+    document.getElementById('guests-link').href = `guests.html?eventId=${eventId}`;
+    document.getElementById('todo-link').href = `todo.html?eventId=${eventId}`;
+    document.getElementById('budget-link').href = `budget.html?eventId=${eventId}`;
+    document.getElementById('chat-link').href = `chat.html?eventId=${eventId}`;
+
+    document.addEventListener('DOMContentLoaded', fetchAndDisplayEventDetails);
   </script>
 </body>
 </html>

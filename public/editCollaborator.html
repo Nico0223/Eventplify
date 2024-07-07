@@ -21,18 +21,20 @@
 
     <div id="middle">
         <div id="head">
-            <p id="header">COLLABORATORS</p>
+            <p id="header">EDIT COLLABORATOR</p>
         </div>
         <div id="navigate">
             <a href="collaborators.html"><button type="button" id="backbtn">🡨 Collaborators</button></a>
         </div>
         <div id="content">
             <form id="form">
+                <!--previous data should be inputted by system when editing-->
                 <p class="formfont">
                     Name: <input type="text" id="name" name="name">
                 </p>
                 <p class="formfont"><!--if coowner is selected, permissions checklist will disappear since co
                     owner can edit everything-->
+                   
                     Role: 
                     <select id="role" name="role">
                         <option value="Owner">Co-Owner</option>
@@ -51,8 +53,10 @@
                     <input type="checkbox" id="editbudget" name="editbudget" value="3">
                     <label for="editbudget" class="formfont">Edit Budget</label><br>
                 </div>
-                <div id="containerbtn">
+                <div id="containerbtn"><!--co owner can delete everyone except for OWNER-->
+                    <button type="button" id="deletebutton">Delete</button>
                     <button type="button" id="confirmbutton">Confirm</button>
+                    
                 </div>
             </form>
         </div>

@@ -36,6 +36,7 @@ const budgetRouter = require("./routes/budgetRoute.js");
 const profileRouter = require("./routes/profileRoute.js");
 const tableRouter = require("./routes/tableRoute.js");
 const chatRouter = require("./routes/chatRoute.js");
+const guestRoutes = require("./routes/guestRoutes.js");
 
 app.use(
   session({
@@ -125,6 +126,7 @@ app.use("/", budgetRouter);
 app.use("/", profileRouter);
 app.use("/", tableRouter);
 app.use("/", chatRouter);
+app.use("/guests", guestRoutes);
 
 /* For file uploads */
 const fileUpload = require("express-fileupload");
