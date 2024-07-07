@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <title>Chat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/chat_message.css">
+</head>
+
+<body style="margin:0">
+
+    {{> header}}
+
+    <div id="middle">
+        <div id="head">
+            <p id="header">CHAT NAME SAMPLE</p>
+        </div>
+        <div id="navigate">
+            <a href=""><button type="button" id="event">🡨 Chats</button></a>
+
+        </div>
+        <!-- Chat Section -->
+        <div id="chat-container">
+            <div id="chat-window">
+                <!-- Messages will be displayed here -->
+                {{#each chat.messages}}
+                <div class="message {{this.type}}">
+                    <p class="name">{{this.name}}</p>
+                    <p class="message-content">{{this.message}}</p>
+                    <span class="timestamp">{{this.time}}</span>
+                </div>
+                {{/each}}
+
+                <!-- Add more messages here -->
+            </div>
+            <div id="chat-input">
+                <form method="post" action="/postMessage">
+                    <input type="text" id="message-input" name="message-input" placeholder="Type a message...">
+                    <input type="hidden" id="chatID" name="chatID" value="{{chat._id}}">
+                    <button type="submit" id="send-button" value="Confirm">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{> navbar}}
+</body>
+
+</html>
