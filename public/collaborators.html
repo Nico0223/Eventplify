@@ -75,6 +75,29 @@
         </div>
     </div>
 
-    <script src="js/collaborators.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/collaborators')
+                .then(response => response.json())
+                .then(data => {
+                    const entriesDiv = document.getElementById('entries');
+                    data.forEach(collaborator => {
+                        const entry = document.createElement('div');
+                        entry.className = 'entry';
+                        entry.innerHTML = `
+                            <p>Name: ${collaborator.user.name}</p>
+                            <p>Role: ${collaborator.role}</p>
+                            <p>Can Edit Guest: ${collaborator.canEditGuest}</p>
+                            <p>Can Edit To-Do: ${collaborator.canEditTodo}</p>
+                            <p>Can Edit Budget: ${collaborator.canEditBudget}</p>
+                        `;
+                        entriesDiv.appendChild(entry);
+                    });
+                });
+        });
+    </script>
+    
+
+    
 </body>
 </html>

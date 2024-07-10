@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>Collaborators</title>
@@ -10,10 +11,10 @@
     <div id="top">
         <div id="homelogo">
             <img src="css/logocropped.png" id="logo">
-            <div id ="button2">
+            <div id="button2">
                 <button type="button" id="b1">Profile</button>
             </div>
-            <div id ="button1">
+            <div id="button1">
                 <button type="button" id="b1">Events</button>
             </div>
         </div>
@@ -31,8 +32,7 @@
                 <p class="formfont">
                     Name: <input type="text" id="name" name="name">
                 </p>
-                <p class="formfont"><!--if coowner is selected, permissions checklist will disappear since co
-                    owner can edit everything-->
+                <p class="formfont">
                     Role: 
                     <select id="role" name="role">
                         <option value="Owner">Co-Owner</option>
@@ -57,6 +57,7 @@
             </form>
         </div>
     </div>
+
     <div id="footer">
         <div id="container">
             <button type="button" class="footerbutton" id="collaborators">
@@ -81,5 +82,39 @@
             </button> 
         </div>
     </div>
+
+    <script>
+        document.getElementById('role').addEventListener('change', function() {
+            let isCoOwner = this.value === 'Owner';
+            document.getElementById('editguest').disabled = isCoOwner;
+            document.getElementById('edittodo').disabled = isCoOwner;
+            document.getElementById('editbudget').disabled = isCoOwner;
+        });
+        
+        document.getElementById('confirmbutton').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const role = document.getElementById('role').value;
+            const canEditGuest = document.getElementById('editguest').checked;
+            const canEditTodo = document.getElementById('edittodo').checked;
+            const canEditBudget = document.getElementById('editbudget').checked;
+    
+            fetch('/add-collaborator', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, role, canEditGuest, canEditTodo, canEditBudget })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Redirect to collaborators.html after successful addition
+                    window.location.href = 'collaborators.html';
+                } else {
+                    alert('Error adding collaborator');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
