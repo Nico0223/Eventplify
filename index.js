@@ -86,6 +86,7 @@ app.get("/api/events/:id", async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
     if (!event) return res.status(404).send("Event not found");
+    req.session.eventID = event._id;
     res.send(event);
   } catch (error) {
     res.status(500).send("Server error");
