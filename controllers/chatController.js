@@ -6,7 +6,9 @@ exports.addMessage = async (req, res) => {
   const chatID = req.body.id || "66851b210012c41e9ad23dfb";
   const message = req.body.message_input;
   const userID = req.session.userId;
-  const username = req.session.user.username;
+  const user = await User.findById(userID);
+  const username = user.username;
+
   const newMessage = {
     message: message,
     name: username,
@@ -14,7 +16,8 @@ exports.addMessage = async (req, res) => {
     user: userID,
   };
   console.log("chat user:" + user);
-
+  console.log("username: " + username);
+  console.log(newMessage);
   try {
     // Find the chat document by its ID
     const chat = await Chat.findById(chatID);
