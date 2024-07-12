@@ -101,6 +101,13 @@
             console.log(`Event ID: ${eventId}`);
             // Set the eventId to the hidden input field
             document.getElementById('event').value = eventId;
+
+            // Update footer links with eventId
+            const footerLinks = document.querySelectorAll('#footer a');
+            footerLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                link.setAttribute('href', `${href}?eventId=${eventId}`);
+            });
         }
 
         // Add event listener to the form submission
@@ -129,8 +136,8 @@
                 const newGuest = await response.json();
                 console.log('New guest added:', newGuest);
 
-                // Redirect to guests.html after successful submission (optional)
-                window.location.href = 'guests.html';
+                // Redirect to guests.html with eventId
+                window.location.href = `guests.html?eventId=${eventId}`;
 
             } catch (error) {
                 console.error('Error adding guest:', error);
