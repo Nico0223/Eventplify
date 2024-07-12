@@ -5,13 +5,13 @@ const User = require("../models/User");
 exports.addMessage = async (req, res) => {
   const chatID = req.body.id || "66851b210012c41e9ad23dfb";
   const message = req.body.message_input;
-  const user = req.session.userId;
-  const name = req.session.username;
+  const userID = req.session.userId;
+  const username = req.session.user.username;
   const newMessage = {
     message: message,
-    name: name,
+    name: username,
     time: getCurrentTimeFormatted(),
-    user: user,
+    user: userID,
   };
   console.log("chat user:" + user);
 
@@ -24,7 +24,7 @@ exports.addMessage = async (req, res) => {
       return res.status(404).send("Chat not found");
     }
 
-    if (name == null || user == null) {
+    if (username == null || userID == null) {
       return res.redirect("/chat?id=" + chat.event);
     }
 
