@@ -13,6 +13,7 @@ exports.addMessage = async (req, res) => {
     time: getCurrentTimeFormatted(),
     user: user,
   };
+  console.log("chat user:" + user);
 
   try {
     // Find the chat document by its ID
@@ -23,6 +24,10 @@ exports.addMessage = async (req, res) => {
       return res.status(404).send("Chat not found");
     }
 
+    if (name == null || user == null) {
+      return res.redirect("/chat?id=" + chat.event);
+    }
+
     // Add the new message to the messages array
     chat.messages.push(newMessage);
 
@@ -30,10 +35,10 @@ exports.addMessage = async (req, res) => {
     await chat.save();
 
     console.log("Message added successfully");
-    return res.status(200).send("Message added successfully");
+    return res.redirect("/chat?id=" + chat.event);
   } catch (err) {
     console.error("Error adding message:", err);
-    return res.status(500).send("Error adding message");
+    return res.redirect("/chat?id=" + req.session.eventID);
   }
 };
 

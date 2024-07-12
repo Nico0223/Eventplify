@@ -62,6 +62,7 @@ router.get("/budgetEdit", async (req, res) => {
   const id = req.query.id;
   var budget = await Budget.findById(id);
   console.log(budget);
+  id = budget.event;
   res.render("budget_edit", { budget, id });
 });
 
