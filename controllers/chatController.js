@@ -5,15 +5,19 @@ const User = require("../models/User");
 exports.addMessage = async (req, res) => {
   const chatID = req.body.id || "66851b210012c41e9ad23dfb";
   const message = req.body.message_input;
-  const user = req.session.userId;
-  const name = req.session.username;
+  const userID = req.session.userId;
+  const user = await User.findById(userID);
+  const username = user.username;
+
   const newMessage = {
     message: message,
-    name: name,
+    name: username,
     time: getCurrentTimeFormatted(),
-    user: user,
+    user: userID,
   };
-
+  console.log("chat user:" + user);
+  console.log("username: " + username);
+  console.log(newMessage);
   try {
     // Find the chat document by its ID
     const chat = await Chat.findById(chatID);
@@ -23,6 +27,10 @@ exports.addMessage = async (req, res) => {
       return res.status(404).send("Chat not found");
     }
 
+    if (username == null || userID == null) {
+      return res.redirect("/chat?id=" + chat.event);
+    }
+
     // Add the new message to the messages array
     chat.messages.push(newMessage);
 
@@ -30,10 +38,10 @@ exports.addMessage = async (req, res) => {
     await chat.save();
 
     console.log("Message added successfully");
-    return res.status(200).send("Message added successfully");
+    return res.redirect("/chat?id=" + chat.event);
   } catch (err) {
     console.error("Error adding message:", err);
-    return res.status(500).send("Error adding message");
+    return res.redirect("/chat?id=" + req.session.eventID);
   }
 };
 
