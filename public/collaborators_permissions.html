@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Collaborators</title>
     <link rel="stylesheet" href="css/collaborators_permissions.css">
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body style="margin:0">
 
     <div id="top">
         <div id="homelogo">
             <img src="css/logocropped.png" id="logo">
             <div id="button2">
-                <button type="button" id="b1">Profile</button>
+                <a href="/profile"><button type="button" id="b1">Profile</button></a>
             </div>
             <div id="button1">
-                <button type="button" id="b1">Events</button>
+                <a href="events.html"><button type="button" id="b1">Events</button></a>
             </div>
         </div>
     </div>
@@ -33,7 +35,7 @@
                     Name: <input type="text" id="name" name="name">
                 </p>
                 <p class="formfont">
-                    Role: 
+                    Role:
                     <select id="role" name="role">
                         <option value="Owner">Co-Owner</option>
                         <option value="Collaborator">Collaborator</option>
@@ -60,44 +62,54 @@
 
     <div id="footer">
         <div id="container">
-            <button type="button" class="footerbutton" id="collaborators">
-                <img src="css/collaborators_icon_black.png" class="btnicon">
-                <p class="btnlabel">Collaborators</p>
-            </button> 
-            <button type="button" class="footerbutton" id="guestlist">
-                <img src="css/guest_icon_black.png" class="btnicon">
-                <p class="btnlabel">Guest List</p>
-            </button> 
-            <button type="button" class="footerbutton" id="todo">
-                <img src="css/todo_icon_black.png" class="btnicon">
-                <p class="btnlabel">To-Do</p>
-            </button> 
-            <button type="button" class="footerbutton" id="budget">
-                <img src="css/budget_icon_black.png" class="btnicon">
-                <p class="btnlabel">Budget</p>
-            </button> 
-            <button type="button" class="footerbutton2" id="chat">
-                <img src="css/chat_icon_black.png" class="btnicon">
-                <p class="btnlabel">Chat</p>
-            </button> 
+            <a href="collaborators.html">
+                <button type="button" class="footerbutton" id="collaborators">
+                    <img src="css/collaborators_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Collaborators</p>
+                </button>
+            </a>
+            <a href="guests.html">
+                <button type="button" class="footerbutton" id="guest">
+                    <img src="css/guest_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Guest</p>
+                </button>
+            </a>
+            <a href="/todo">
+                <button type="button" class="footerbutton" id="todo">
+                    <img src="css/todo_icon_black.png" class="btnicon">
+                    <p class="btnlabel">To-Do</p>
+                </button>
+            </a>
+            <a href="/budget">
+                <button type="button" class="footerbutton" id="budget">
+                    <img src="css/budget_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Budget</p>
+                </button>
+            </a>
+            <a href="/chat">
+                <button type="button" class="footerbutton2" id="chat">
+                    <img src="css/chat_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Chat</p>
+                </button>
+            </a>
         </div>
     </div>
 
     <script>
-        document.getElementById('role').addEventListener('change', function() {
+        document.getElementById('role').addEventListener('change', function () {
             let isCoOwner = this.value === 'Owner';
             document.getElementById('editguest').disabled = isCoOwner;
             document.getElementById('edittodo').disabled = isCoOwner;
             document.getElementById('editbudget').disabled = isCoOwner;
         });
-        
-        document.getElementById('confirmbutton').addEventListener('click', function() {
+
+        document.getElementById('confirmbutton').addEventListener('click', function () {
             const name = document.getElementById('name').value;
             const role = document.getElementById('role').value;
             const canEditGuest = document.getElementById('editguest').checked;
             const canEditTodo = document.getElementById('edittodo').checked;
             const canEditBudget = document.getElementById('editbudget').checked;
-    
+
             fetch('/add-collaborator', {
                 method: 'POST',
                 headers: {
@@ -105,16 +117,17 @@
                 },
                 body: JSON.stringify({ name, role, canEditGuest, canEditTodo, canEditBudget })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Redirect to collaborators.html after successful addition
-                    window.location.href = 'collaborators.html';
-                } else {
-                    alert('Error adding collaborator');
-                }
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Redirect to collaborators.html after successful addition
+                        window.location.href = 'collaborators.html';
+                    } else {
+                        alert('Error adding collaborator');
+                    }
+                });
         });
     </script>
 </body>
+
 </html>

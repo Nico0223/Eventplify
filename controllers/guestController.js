@@ -18,7 +18,7 @@ exports.addGuest = async (req, res) => {
 
   try {
     await newGuest.save();
-    res.redirect("/guests?id=" + event);
+    res.redirect("/guests.html?id=" + event);
   } catch (error) {
     console.error("Error saving guest:", error);
     res.status(500).send("Internal Server Error");
@@ -27,7 +27,6 @@ exports.addGuest = async (req, res) => {
 };
 // guestController.js
 
-
 exports.getGuestsByEventId = async (req, res) => {
   const eventId = req.params.eventId;
 
@@ -35,7 +34,7 @@ exports.getGuestsByEventId = async (req, res) => {
     const guests = await Guest.find({ event: eventId });
     res.json(guests);
   } catch (error) {
-    console.error('Error fetching guests:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error("Error fetching guests:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
