@@ -7,6 +7,8 @@ dotenv.config();
 const connectionString = process.env.DATABASE_URL;
 const session = require("express-session");
 
+const router = express.Router(); //might remove
+
 try {
   mongoose.connect(connectionString);
   console.log("Connected to MongoDB successfully");
@@ -27,6 +29,7 @@ const Guest = require("./models/Guest");
 const Table = require("./models/Table");
 const Todo = require("./models/Todo");
 const Budget = require("./models/Budget");
+const Collaborator = require("./models/Collaborator");
 
 // Routing Initialization
 const todoRouter = require("./routes/todoRoute.js");
@@ -38,6 +41,40 @@ const tableRouter = require("./routes/tableRoute.js");
 const chatRouter = require("./routes/chatRoute.js");
 const guestRoutes = require("./routes/guestRoutes.js");
 const collaboratorsRoutes = require("./routes/collaboratorRoute.js");
+
+// POST route to add a collaborator mgiht remove
+router.post('/add-collaborator', async (req, res) => {
+  try {
+    const { name, role, canEditGuest, canEditTodo, canEditBudget } = req.body;
+
+    // Find the user by name
+    let user = await User.findOne({ name });
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    // Create a new collaborator
+    const newCollaborator = new Collaborator({
+      user: user._id,
+      role,
+      canEditGuest,
+      canEditTodo,
+      canEditBudget,
+    });
+
+    // Save the collaborator to MongoDB
+    await newCollaborator.save();
+
+    // Redirect to collaborators.html after successful addition
+    res.status(201).json({ success: true, message: 'Collaborator added successfully' });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ success: false, message: 'An error occurred while adding the collaborator' });
+  }
+});
+
+module.exports = router; // might remove
 
 app.use(
   session({
@@ -129,7 +166,6 @@ app.use("/", profileRouter);
 app.use("/", tableRouter);
 app.use("/", chatRouter);
 app.use("/guests", guestRoutes);
-app.use("/api/collaborators", collaboratorsRoutes); // Updated line
 
 /* For file uploads */
 const fileUpload = require("express-fileupload");
