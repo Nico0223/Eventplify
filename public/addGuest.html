@@ -1,151 +1,155 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Add Guest</title>    
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Add Guest</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/addGuest.css">
 </head>
+
 <body style="margin:0">
 
-<div id="top">
-    <div id="homelogo">
-        <img src="css/logocropped.png" id="logo">
-        <div id="button2">
-            <a href="profile.html"><button type="button" id="b1">Profile</button></a>
-        </div>
-        <div id="button1">
-            <a href="events.html"><button type="button" id="b1">Events</button></a>
+    <div id="top">
+        <div id="homelogo">
+            <img src="css/logocropped.png" id="logo">
+            <div id="button2">
+                <a href="profile.html"><button type="button" id="b1">Profile</button></a>
+            </div>
+            <div id="button1">
+                <a href="events.html"><button type="button" id="b1">Events</button></a>
+            </div>
         </div>
     </div>
-</div>
 
-<div id="middle">
-    <div id="head">
-        <p id="header">ADD GUEST</p>
-    </div>
-    <div id="navigate">
-        <a href="guests.html"><button type="button" id="back">🡨 Guests</button></a>
-    </div>
-
-    <form id="addGuestForm">
-        <input type="hidden" id="event" name="event"> <!-- Hidden input for event ID -->
-        <div class="form-group">
-            <label for="guestname" id="guestnamelabel">Name:</label>
-            <input type="text" id="guestname" name="name" placeholder="Guest Name" required>
+    <div id="middle">
+        <div id="head">
+            <p id="header">ADD GUEST</p>
         </div>
-        <div class="form-group">
-            <label for="guestcategory" id="guestcategorylabel">Category:</label>
-            <input type="text" id="guestcategory" name="category" placeholder="Category">
+        <div id="navigate">
+            <a href="guests.html"><button type="button" id="back">🡨 Guests</button></a>
         </div>
-        <div class="form-group">
-            <label for="gueststatus" id="gueststatuslabel">Status:</label>
-            <select id="gueststatus" name="status">
-                <option value="Pending">Pending</option>
-                <option value="Not Going">Not Going</option>
-                <option value="Going">Going</option>
-            </select>
-        </div>
-        <input type="submit" id="confirmbutton" value="Confirm">
-    </form>
-</div>
 
-<div id="footer">
-    <div id="container">
-        <a href="collaborators.html">
-            <button type="button" class="footerbutton" id="collaborators">
-                <img src="css/collaborators_icon_black.png" class="btnicon">
-                <p class="btnlabel">Collaborators</p>
-            </button>
-        </a>
-        <a href="guests.html">
-            <button type="button" class="footerbutton" id="guest">
-                <img src="css/guest_icon_black.png" class="btnicon">
-                <p class="btnlabel">Guest</p>
-            </button>
-        </a>
-        <a href="todo.html">
-            <button type="button" class="footerbutton" id="todo">
-                <img src="css/todo_icon_black.png" class="btnicon">
-                <p class="btnlabel">To-Do</p>
-            </button>
-        </a>
-        <a href="budget.html">
-            <button type="button" class="footerbutton" id="budget">
-                <img src="css/budget_icon_black.png" class="btnicon">
-                <p class="btnlabel">Budget</p>
-            </button>
-        </a>
-        <a href="chat.html">
-            <button type="button" class="footerbutton2" id="chat">
-                <img src="css/chat_icon_black.png" class="btnicon">
-                <p class="btnlabel">Chat</p>
-            </button>
-        </a>
+        <form id="addGuestForm">
+            <input type="hidden" id="event" name="event"> <!-- Hidden input for event ID -->
+            <div class="form-group">
+                <label for="guestname" id="guestnamelabel">Name:</label>
+                <input type="text" id="guestname" name="name" placeholder="Guest Name" required>
+            </div>
+            <div class="form-group">
+                <label for="guestcategory" id="guestcategorylabel">Category:</label>
+                <input type="text" id="guestcategory" name="category" placeholder="Category">
+            </div>
+            <div class="form-group">
+                <label for="gueststatus" id="gueststatuslabel">Status:</label>
+                <select id="gueststatus" name="status">
+                    <option value="Pending">Pending</option>
+                    <option value="Not Going">Not Going</option>
+                    <option value="Going">Going</option>
+                </select>
+            </div>
+            <input type="submit" id="confirmbutton" value="Confirm">
+        </form>
     </div>
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Function to get query parameter value
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
+    <div id="footer">
+        <div id="container">
+            <a href="collaborators.html">
+                <button type="button" class="footerbutton" id="collaborators">
+                    <img src="css/collaborators_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Collaborators</p>
+                </button>
+            </a>
+            <a href="guests.html">
+                <button type="button" class="footerbutton" id="guest">
+                    <img src="css/guest_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Guest</p>
+                </button>
+            </a>
+            <a href="todo.html">
+                <button type="button" class="footerbutton" id="todo">
+                    <img src="css/todo_icon_black.png" class="btnicon">
+                    <p class="btnlabel">To-Do</p>
+                </button>
+            </a>
+            <a href="budget.html">
+                <button type="button" class="footerbutton" id="budget">
+                    <img src="css/budget_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Budget</p>
+                </button>
+            </a>
+            <a href="chat.html">
+                <button type="button" class="footerbutton2" id="chat">
+                    <img src="css/chat_icon_black.png" class="btnicon">
+                    <p class="btnlabel">Chat</p>
+                </button>
+            </a>
+        </div>
+    </div>
 
-        // Retrieve the eventId from the URL
-        const eventId = getQueryParam('eventId');
-        if (!eventId) {
-            console.error('Event ID not found in URL');
-        } else {
-            console.log(`Event ID: ${eventId}`);
-            // Set the eventId to the hidden input field
-            document.getElementById('event').value = eventId;
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Function to get query parameter value
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
 
-            // Update footer links with eventId
-            const footerLinks = document.querySelectorAll('#footer a');
-            footerLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                link.setAttribute('href', `${href}?eventId=${eventId}`);
-            });
-        }
+            // Retrieve the eventId from the URL
+            const eventId = getQueryParam('eventId');
+            if (!eventId) {
+                console.error('Event ID not found in URL');
+            } else {
+                console.log(`Event ID: ${eventId}`);
+                // Set the eventId to the hidden input field
+                document.getElementById('event').value = eventId;
 
-        // Add event listener to the form submission
-        document.getElementById('addGuestForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
+                // Update footer links with eventId
+                const footerLinks = document.querySelectorAll('#footer a');
+                footerLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    link.setAttribute('href', `${href}?eventId=${eventId}`);
+                });
+            }
 
-            const formData = new FormData(document.getElementById('addGuestForm'));
-            const formDataObj = {};
-            formData.forEach((value, key) => {
-                formDataObj[key] = value;
-            });
+            // Add event listener to the form submission
+            document.getElementById('addGuestForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-            try {
-                const response = await fetch('/guests/add', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formDataObj)
+                const formData = new FormData(document.getElementById('addGuestForm'));
+                const formDataObj = {};
+                formData.forEach((value, key) => {
+                    formDataObj[key] = value;
                 });
 
-                if (!response.ok) {
-                    throw new Error('Failed to add guest');
+                try {
+                    const response = await fetch('/guests/add', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formDataObj)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to add guest');
+                    }
+
+                    const newGuest = await response.json();
+                    console.log('New guest added:', newGuest);
+
+                    // Redirect to guests.html with eventId
+                    window.location.href = `guests.html?eventId=${eventId}`;
+
+                } catch (error) {
+                    console.error('Error adding guest:', error);
+                    window.location.href = `guests.html?eventId=${eventId}`;
+                    // Handle error in UI if needed
                 }
-
-                const newGuest = await response.json();
-                console.log('New guest added:', newGuest);
-
-                // Redirect to guests.html with eventId
-                window.location.href = `guests.html?eventId=${eventId}`;
-
-            } catch (error) {
-                console.error('Error adding guest:', error);
-                // Handle error in UI if needed
-            }
+            });
         });
-    });
-</script>
+    </script>
 
 </body>
+
 </html>

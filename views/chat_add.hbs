@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <title>Create Chat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/createchat1.css">
+</head>
+
+<body style="margin:0">
+
+    {{>header}}
+
+
+    <form id="form" method="post" action="/submitAddChat">
+        <div id="middle">
+            <div id="head">
+                <p id="header">CREATE CHAT</p>
+            </div>
+            <div id="navigate">
+                <a href="chat.html"><button type="button" id="event">🡨 Chat</button></a>
+            </div>
+
+            <div id="content">
+                <div id="formcontainer">
+                    <div class="form-group">
+                        <label for="chatname" id="clabel">Chat Name:</label>
+                        <input type="text" id="chatname" name="chatname" required>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <label for="members" id="rlabel">Members: </label>
+                        <select name="members[]" id="members" multiple>
+                            <option value="1">Person 1</option>
+                            <option value="2">Person 2</option>
+                            <option value="3">Person 3</option>
+                            <option value="4">Person 4</option>
+                            <option value="5">Person 5</option>
+                            <option value="6">Person 6</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+        <div id="containeradd">
+            <button type="submit" id="createbutton">Create</button>
+        </div>
+    </form>
+
+    <div id="selectedMembers"></div>
+
+    <script>
+        const membersSelect = document.getElementById('members');
+        const selectedMembersDiv = document.getElementById('selectedMembers');
+
+        membersSelect.addEventListener('select', function () {
+            const selectedOptions = Array.from(membersSelect.selectedOptions);
+            const selectedValues = selectedOptions.map(option => option.text);
+            selectedMembersDiv.textContent = `Selected Members: ${selectedValues.join(', ')}`;
+        });
+    </script>
+
+
+
+
+    {{>navbar}}
+</body>
+
+</html>

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collaborators</title>
     <link rel="stylesheet" href="css/collaborators.css">
 </head>
+
 <body style="margin:0">
 
     <div id="top">
         <div id="homelogo">
             <img src="css/logocropped.png" id="logo">
             <div id="button2">
-                <a href="profile.html"><button type="button" id="b1">Profile</button></a>
+                <a href="/profile"><button type="button" id="b1">Profile</button></a>
             </div>
             <div id="button1">
                 <a href="events.html"><button type="button" id="b1">Events</button></a>
@@ -54,19 +56,19 @@
                     <p class="btnlabel">Guest</p>
                 </button>
             </a>
-            <a href="todo.html">
+            <a href="/todo">
                 <button type="button" class="footerbutton" id="todo">
                     <img src="css/todo_icon_black.png" class="btnicon">
                     <p class="btnlabel">To-Do</p>
                 </button>
             </a>
-            <a href="budget.html">
+            <a href="/budget">
                 <button type="button" class="footerbutton" id="budget">
                     <img src="css/budget_icon_black.png" class="btnicon">
                     <p class="btnlabel">Budget</p>
                 </button>
             </a>
-            <a href="chat.html">
+            <a href="/chat">
                 <button type="button" class="footerbutton2" id="chat">
                     <img src="css/chat_icon_black.png" class="btnicon">
                     <p class="btnlabel">Chat</p>
@@ -76,7 +78,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             fetch('/collaborators')
                 .then(response => response.json())
                 .then(data => {
@@ -96,8 +98,9 @@
                 });
         });
     </script>
-    
 
-    
+
+
 </body>
+
 </html>
