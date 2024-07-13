@@ -96,38 +96,68 @@
     </div>
 
     <script>
-        document.getElementById('role').addEventListener('change', function () {
-            let isCoOwner = this.value === 'Owner';
-            document.getElementById('editguest').disabled = isCoOwner;
-            document.getElementById('edittodo').disabled = isCoOwner;
-            document.getElementById('editbudget').disabled = isCoOwner;
-        });
-
-        document.getElementById('confirmbutton').addEventListener('click', function () {
-            const name = document.getElementById('name').value;
-            const role = document.getElementById('role').value;
-            const canEditGuest = document.getElementById('editguest').checked;
-            const canEditTodo = document.getElementById('edittodo').checked;
-            const canEditBudget = document.getElementById('editbudget').checked;
-
-            fetch('/add-collaborator', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, role, canEditGuest, canEditTodo, canEditBudget })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Redirect to collaborators.html after successful addition
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set initial role and disable checkboxes if role is Co-Owner
+            let roleSelect = document.getElementById('role');
+            let editGuestCheckbox = document.getElementById('editguest');
+            let editTodoCheckbox = document.getElementById('edittodo');
+            let editBudgetCheckbox = document.getElementById('editbudget');
+    
+            function updatePermissions(role) {
+                let isCoOwner = role === 'Owner';
+                editGuestCheckbox.disabled = isCoOwner;
+                editTodoCheckbox.disabled = isCoOwner;
+                editBudgetCheckbox.disabled = isCoOwner;
+    
+                // Uncheck checkboxes when disabling them
+                if (isCoOwner) {
+                    editGuestCheckbox.checked = false;
+                    editTodoCheckbox.checked = false;
+                    editBudgetCheckbox.checked = false;
+                }
+            }
+    
+            // Set initial permissions based on initial role
+            updatePermissions(roleSelect.value);
+    
+            // Add event listener to update permissions when role changes
+            roleSelect.addEventListener('change', function () {
+                updatePermissions(this.value);
+            });
+    
+            // Handle form submission
+            document.getElementById('confirmbutton').addEventListener('click', function () {
+                const name = document.getElementById('name').value;
+                const role = document.getElementById('role').value;
+                const canEditGuest = document.getElementById('editguest').checked;
+                const canEditTodo = document.getElementById('edittodo').checked;
+                const canEditBudget = document.getElementById('editbudget').checked;
+    
+                fetch('/add-collaborator', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, role, canEditGuest, canEditTodo, canEditBudget }),
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Success:', data);
+                        // Redirect to collaborators.html upon successful addition
                         window.location.href = 'collaborators.html';
-                    } else {
-                        alert('Error adding collaborator');
-                    }
-                });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Failed to add collaborator. Please try again.');
+                    });
+            });
         });
-    </script>
+    </script>      
 </body>
 
 </html>
