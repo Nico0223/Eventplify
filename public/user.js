@@ -108,6 +108,7 @@ $(document).ready(function() {
     })
     .then(data => {
       alert('Login successful');
+      window.location.href = 'home.html';
     })
     .catch(error => {
       console.error('Error during login:', error.message);
