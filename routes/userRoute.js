@@ -24,23 +24,23 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
-    if (!user) {
-      return res.status(400).send("Invalid email");
-    }
+      const user = await User.findOne({ email: req.body.email });
+      if (!user) {
+          return res.status(400).json({ error: "Invalid email" });
+      }
 
-    const validPass = await bcrypt.compare(req.body.password, user.password);
-    if (!validPass) {
-      return res.status(400).send("Invalid password");
-    }
+      const validPass = await bcrypt.compare(req.body.password, user.password);
+      if (!validPass) {
+          return res.status(400).json({ error: "Invalid password" });
+      }
   
-    req.session.userId = user._id;
-    return res.redirect('/home.html');
+      req.session.userId = user._id;
+      return res.json({ message: "Login successful" });
   } catch (error) {
-    res.status(500).send("Something went wrong");
+      console.error('Error during login:', error);
+      res.status(500).json({ error: "Something went wrong" });
   }
 });
-
 router.get('/is-authenticated', async (req, res) => {
   if (req.session && req.session.userId) {
     const user = await User.findById(req.session.userId);
