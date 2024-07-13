@@ -1,6 +1,14 @@
 const Event = require("../models/Event");
 const Chat = require("../models/Chat");
 const User = require("../models/User");
+const bodyParser = require("body-parser");
+
+exports.addChat = async (req, res) => {
+  const { chatname, members } = req.body;
+  // `members` will be an array of selected member IDs
+  console.log("Chat Name:", chatname);
+  console.log("Selected Members:", members);
+};
 
 exports.addMessage = async (req, res) => {
   const chatID = req.body.id || "66851b210012c41e9ad23dfb";
