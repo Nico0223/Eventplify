@@ -5,16 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/addNewEvent.css">
+    <style>
+        #map {
+            height: 300px; /* Reduced height */
+            width: 58%; /* Reduced width */
+            margin: 10px auto; /* Centering the map horizontally with margin auto */
+            display: block;
+        }
+    </style>
 </head>
 <body style="margin:0">
 
 <div id="top">
     <div id="homelogo">
         <img src="css/logocropped.png" id="logo">
-        <div id ="button2">
+        <div id="button2">
             <a href="profile.html"><button type="button" id="b1">Profile</button></a>
         </div>
-        <div id ="button1">
+        <div id="button1">
             <a href="events.html"><button type="button" id="b1">Events</button></a>
         </div>
     </div>
@@ -52,12 +60,14 @@
             <label for="eventlocation">Location:</label>
             <input type="text" id="eventlocation" name="eventlocation" placeholder="Location" required>
         </div>
+        <div id="map"></div> <!-- Map moved below and styled with CSS -->
 
         <input type="submit" id="confirmbutton" value="Confirm">
     </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn6SPh3mOJj3iuHCu1njWKcgIY_wACEb0&libraries=places"></script>
 <script src="add_events.js"></script> <!-- Include your JavaScript file -->
 
 </body>
