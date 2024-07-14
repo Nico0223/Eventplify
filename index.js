@@ -43,7 +43,7 @@ const guestRoutes = require("./routes/guestRoutes.js");
 const collaboratorsRoutes = require("./routes/collaboratorRoute.js");
 
 // POST route to add a collaborator mgiht remove
-router.post('/add-collaborator', async (req, res) => {
+router.post("/add-collaborator", async (req, res) => {
   try {
     const { name, role, canEditGuest, canEditTodo, canEditBudget } = req.body;
 
@@ -51,7 +51,9 @@ router.post('/add-collaborator', async (req, res) => {
     let user = await User.findOne({ name });
 
     if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
     }
 
     // Create a new collaborator
@@ -67,10 +69,15 @@ router.post('/add-collaborator', async (req, res) => {
     await newCollaborator.save();
 
     // Redirect to collaborators.html after successful addition
-    res.status(201).json({ success: true, message: 'Collaborator added successfully' });
+    res
+      .status(201)
+      .json({ success: true, message: "Collaborator added successfully" });
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ success: false, message: 'An error occurred while adding the collaborator' });
+    console.error("Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while adding the collaborator",
+    });
   }
 });
 
@@ -173,6 +180,13 @@ app.use(fileUpload()); //initialize file upload middleware
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "home_unlogged.html"));
+});
+
+app.get("/event/preview", async (req, res) => {
+  const eventId = req.query.eventId;
+  const event = await Event.findById(eventId);
+
+  res.render("event_preview", { event });
 });
 
 var server = app.listen(port, "0.0.0.0", function () {
