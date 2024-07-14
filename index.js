@@ -48,29 +48,48 @@ const collaboratorsRoutes = require("./routes/collaboratorRoute.js");
 app.post('/api/auth/google', async (req, res) => {
   const { token } = req.body;
 
-  // Verify the Google ID token (you may need to use a library like google-auth-library)
-  // For simplicity, assume token verification is successful
-
+  // Verify the Google ID token
   try {
-      // Create or find the user in MongoDB
-      let user = await User.findOne({ googleId: token });
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: CLIENT_ID,  // Replace with your actual Google Client ID
+    });
+    const payload = ticket.getPayload();
+    const googleId = payload['sub'];
+    const email = payload['email'];
 
-      if (!user) {
-          // Create a new user if not found
-          user = new User({
-              googleId: token,
-              // Add other fields as needed
-          });
-          await user.save();
-      }
+    // Check if a user with this Google ID already exists
+    let user = await User.findOne({ googleId });
 
-      // Generate a session token (you may use JWT for this)
+    if (user) {
+      // User already exists, generate session token and respond
       const sessionToken = 'generated_session_token'; // Replace with actual session token generation
+      return res.json({ success: true, token: sessionToken });
+    }
 
-      res.json({ success: true, token: sessionToken });
+    // Check if a user with this email already exists
+    user = await User.findOne({ email });
+
+    if (user) {
+      // User with this email already exists, handle accordingly
+      return res.status(400).json({ success: false, error: 'User with this email already exists' });
+    }
+
+    // Create a new user since no user found with this Google ID or email
+    user = new User({
+      googleId,
+      email,
+      // Add other fields as needed
+    });
+    await user.save();
+
+    // Generate a session token (you may use JWT for this)
+    const sessionToken = 'generated_session_token'; // Replace with actual session token generation
+
+    res.json({ success: true, token: sessionToken });
   } catch (err) {
-      console.error(err);
-      res.status(500).json({ success: false, error: 'Server error' });
+    console.error(err);
+    res.status(500).json({ success: false, error: 'Server error' });
   }
 });
 // POST route to add a collaborator mgiht remove
