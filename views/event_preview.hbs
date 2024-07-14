@@ -14,7 +14,8 @@
             margin-bottom: 20px;
         }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn6SPh3mOJj3iuHCu1njWKcgIY_wACEb0&callback=initMap"
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn6SPh3mOJj3iuHCu1njWKcgIY_wACEb0&callback=initializeMap"
         async defer></script>
 </head>
 
@@ -49,7 +50,7 @@
 
     <script>
 
-        function initMap() {
+        function initializeMap() {
             // Initialize Google Map and place marker
             var myLocation = document.querySelector(".location").id;
             console.log(myLocation);
