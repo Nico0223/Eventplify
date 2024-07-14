@@ -81,10 +81,6 @@ $(document).ready(function() {
           return;
       }
 
-      // Get the latitude and longitude of the marker
-      const latitude = marker.getPosition().lat();
-      const longitude = marker.getPosition().lng();
-
       // Prepare data to send in the POST request
       const eventData = {
           name: eventName,
