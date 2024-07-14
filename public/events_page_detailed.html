@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Details</title>
     <link rel="stylesheet" href="css/events_page_detailed.css">
+    <style>
+        /* CSS for map container */
+        #event-location-map {
+            height: 400px; /* Adjust height as needed */
+            width: 100%; /* Full width */
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body style="margin: 0; font-family: Arial, sans-serif;">
@@ -29,7 +37,9 @@
         <div id="event-details">
             <!-- Event details will be dynamically added here -->
         </div>
+        <div id="event-location-map"></div> <!-- Container for Google Maps -->
     </div>
+
     <div id="footer">
         <div id="container">
             <a href="collaborators.html" id="collaborators-link">
@@ -64,6 +74,7 @@
             </a>
         </div>
     </div>
+
     <script>
         // Function to get query parameter value
         function getQueryParam(param) {
@@ -79,56 +90,58 @@
                 if (!eventId) {
                     throw new Error('Event ID not found in URL');
                 }
-
+        
                 const response = await fetch(`/api/events/${eventId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-
+        
                 const event = await response.json();
                 const eventDetailsDiv = document.getElementById('event-details');
                 eventDetailsDiv.innerHTML = `
-              <div class="event-header">
-                  <h1 class="event-name">${event.name}</h1>
-                  <div class="event-meta">
-                      <p><strong>Date:</strong> ${event.date}</p>
-                      <p><strong>Time:</strong> ${event.startTime} - ${event.endTime}</p>
-                      <p><strong>Location:</strong> ${event.location}</p>
-                      <p><strong>Event Code:</strong> ${event.code}</p>
-                  </div>
-                  <div class="event-actions">
-                      <button class="edit-button">Edit</button>
-                      <button class="delete-button">Delete</button>
-                    <button class="share-button">Share</button>
-                    <div id="copyPopup" class="popup">Link copied!</div>
-                  </div>
-              </div>
-              <div class="event-description">
-                  <h2>Description</h2>
-                  <p>${event.description}</p>
-              </div>
-          `;
-
+                    <div class="event-header">
+                        <h1 class="event-name">${event.name}</h1>
+                        <div class="event-meta">
+                            <p><strong>Date:</strong> ${event.date}</p>
+                            <p><strong>Time:</strong> ${event.startTime} - ${event.endTime}</p>
+                            <p><strong>Location:</strong> ${event.location}</p>
+                            <p><strong>Event Code:</strong> ${event.code}</p>
+                        </div>
+                        <div class="event-actions">
+                            <button class="edit-button">Edit</button>
+                            <button class="delete-button">Delete</button>
+                            <button class="share-button">Share</button>
+                        </div>
+                    </div>
+                    <div class="event-description">
+                        <h2>Description</h2>
+                        <p>${event.description}</p>
+                    </div>
+                `;
+        
+                // Initialize Google Map and place marker
+                initMap(event.location);
+        
                 document.querySelector('.edit-button').addEventListener('click', () => {
                     window.location.href = `editEvent.html?eventId=${eventId}`;
                 });
-
+        
                 document.querySelector('.delete-button').addEventListener('click', () => {
                     if (confirm('Are you sure you want to delete this event?')) {
                         deleteEvent(eventId);
                     }
                 });
-
+        
                 document.querySelector('.share-button').addEventListener('click', function () {
                     // Get the current URL
                     const currentUrl = window.location.href;
-
+        
                     // Modify the URL
                     const link = currentUrl.replace('events_page_detailed.html', 'event/preview');
                     navigator.clipboard.writeText(link).then(function () {
                         const popupElement = document.getElementById('copyPopup');
                         popupElement.style.display = 'block';
-
+        
                         setTimeout(function () {
                             popupElement.style.display = 'none';
                         }, 2000);
@@ -136,7 +149,7 @@
                         console.error('Error copying text: ', error);
                     });
                 });
-
+        
             } catch (error) {
                 console.error('Error fetching event details:', error);
             }
@@ -154,32 +167,48 @@
                 console.error('Error deleting event:', error);
             }
         }
-        function getQueryParams() {
-            const params = {};
-            const queryString = window.location.search.substring(1);
-            const queries = queryString.split("&");
-            queries.forEach(query => {
-                const [key, value] = query.split("=");
-                params[key] = decodeURIComponent(value);
+
+        // Function to initialize Google Map and place marker
+        function initMap(eventLocation) {
+            var mapOptions = {
+                zoom: 15, // Adjust zoom level
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+        
+            var map = new google.maps.Map(document.getElementById('event-location-map'), mapOptions);
+        
+            // Initialize geocoder
+            var geocoder = new google.maps.Geocoder();
+        
+            // Geocode the event location
+            geocoder.geocode({ 'address': eventLocation }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK && results[0]) {
+                    map.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    console.error('Geocode was not successful for the following reason: ' + status);
+                }
             });
-            return params;
         }
 
-        // Get the eventId from the URL
-        const params = getQueryParams();
-        const eventId = params.eventId;
+        // Fetch and display event details when the page loads
+        document.addEventListener('DOMContentLoaded', fetchAndDisplayEventDetails);
 
-        // Now you can use the eventId to fetch event details and display them
-        document.getElementById("event-details").innerText = `Event ID: ${eventId}`;
-
-        // Update footer links with eventId
+        // Update footer links with eventId dynamically
+        const eventId = getQueryParam('eventId');
         document.getElementById('collaborators-link').href = `collaborators.html?eventId=${eventId}`;
         document.getElementById('guests-link').href = `guests.html?eventId=${eventId}`;
         document.getElementById('todo-link').href = `/todo?id=${eventId}`;
         document.getElementById('budget-link').href = `/budget?id=${eventId}`;
         document.getElementById('chat-link').href = `/chat?id=${eventId}`;
+    </script>
 
-        document.addEventListener('DOMContentLoaded', fetchAndDisplayEventDetails);
+    <!-- Load Google Maps JavaScript API -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn6SPh3mOJj3iuHCu1njWKcgIY_wACEb0&libraries=places&callback=initMap">
     </script>
 </body>
 
