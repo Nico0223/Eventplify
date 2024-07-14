@@ -48,23 +48,31 @@ const collaboratorsRoutes = require("./routes/collaboratorRoute.js");
 app.post('/api/auth/google', async (req, res) => {
   const { token } = req.body;
 
+  // Verify the Google ID token (you may need to use a library like google-auth-library)
+  // For simplicity, assume token verification is successful
+
   try {
-      const ticket = await client.verifyIdToken({
-          idToken: token,
-          audience: CLIENT_ID
-      });
-      const payload = ticket.getPayload();
+      // Create or find the user in MongoDB
+      let user = await User.findOne({ googleId: token });
 
-      // Check user in the database and create a session or a new user
-      // Example: Check if user exists in the database, if not, create new user
+      if (!user) {
+          // Create a new user if not found
+          user = new User({
+              googleId: token,
+              // Add other fields as needed
+          });
+          await user.save();
+      }
 
-      // Respond with user data or a session token
-      res.json({ success: true, name: payload.name, email: payload.email, picture: payload.picture });
-  } catch (error) {
-      res.status(500).json({ success: false, error: 'Internal server error' });
+      // Generate a session token (you may use JWT for this)
+      const sessionToken = 'generated_session_token'; // Replace with actual session token generation
+
+      res.json({ success: true, token: sessionToken });
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, error: 'Server error' });
   }
 });
-
 // POST route to add a collaborator mgiht remove
 router.post("/add-collaborator", async (req, res) => {
   try {
