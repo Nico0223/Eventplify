@@ -141,8 +141,18 @@ body{
     font-family: 'Quicksand';
 }
 #editbutton{
-    margin-top:0;
+    margin-top:-50px;
+
     padding-top: 12px;
+    background: none;
+    border: none;
+    position:absolute;
+    right:40px;
+}    
+#deletebutton{
+    margin-top:-50px;
+    padding-top: 12px;
+  
     background: none;
     border: none;
     position:absolute;
@@ -150,6 +160,7 @@ body{
 }    
 #editicon,#trashicon{
     width:25px;
+    margin-bottom:10px;
 }
 
 #containeradd{

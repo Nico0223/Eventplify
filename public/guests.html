@@ -27,7 +27,8 @@
             <p id="header">GUESTS</p>
         </div>
         <div id="navigate">
-            <input type="search" id="search" placeholder="Search...">
+            <button type="button" id="event">🡨 Event Name</button>
+            <!-- <input type="search" id="search" placeholder="Search..."> -->
             <button type="button" id="sortbutton">Sort</button>
             <button type="button" id="filterbutton">Filter</button>
         </div>
@@ -99,6 +100,7 @@
                     throw new Error('Failed to fetch guests');
                 }
                 const guests = await response.json();
+                
                 console.log('Guests:', guests);
 
                 // Display guests in the entries div
@@ -110,6 +112,11 @@
                     <h3 id="guestname">${guest.name}</h3>
                     <p id="guestcategory">Category: ${guest.category}</p>
                     <p id="gueststatus">Status: ${guest.status}</p>
+                    <button type="button" id="editbutton">
+                    <img src="css/edit_icon.png" id="editicon"></button> 
+                    <button type="button" id="deletebutton">
+                    <img src="css/trash_icon.png" id="trashicon">
+                </button> 
                 `;
                     entriesDiv.appendChild(guestElement);
                 });
