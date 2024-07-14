@@ -308,7 +308,7 @@ body {
 .edit-button,
 .delete-button,
 .share-button {
-  background-color: #f1efe7;
+  background-color: black;
   color: black;
   border: none;
   border-radius: 10px;
@@ -346,7 +346,7 @@ body {
 
 .share-button {
   background-color: #f3f2ef; /* Beige background for Delete */
-  color: white;
+  color: black;
 }
 
 .share-button:hover {

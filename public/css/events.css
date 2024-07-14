@@ -1,23 +1,22 @@
 @font-face {
     font-family: 'League Spartan Bold';
     src: url(LeagueSpartan-Bold.ttf);
-}
-
+  }
 @font-face {
     font-family: 'League Spartan Regular';
     src: url(LeagueSpartan-Regular.ttf);
-}
+  }
 
-@font-face {
+  @font-face {
     font-family: 'Quicksand';
     src: url(Quicksand-Regular.ttf);
-}
+  }
+
 a{
     text-decoration: none;
 } 
-/* General Body Styles */
-body {
-    font-family: 'Quicksand', sans-serif;
+body{
+    overflow-y: hidden;
     overflow-x: hidden;
     position: fixed;
     top: 0;
@@ -26,45 +25,14 @@ body {
     right: 0;
 }
 
-/* Top Navigation */
-#top {
+#top{
     margin: 0;
     overflow:hidden;
     background-color: #F1EFE7;
     max-height: 17%;
 }
 
-#homelogo {
-    margin-top: 30px;
-    margin-left: 50px;
-    margin-bottom: 30px; 
-}
-
-#logo {
-    width: 200px;
-    max-width: 100%;
-    height: auto;
-}
-
-#button1, #button2 {
-    margin: 0;
-}
-
-#button1 button, #button2 button {
-    background: none;
-    font-size: 30px;
-    border: none;
-    font-family: 'Quicksand';
-    cursor: pointer;
-    color: black;
-}
-
-#button1 button:hover, #button2 button:hover {
-    text-decoration: underline;
-}
-
-/* Middle Section */
-#middle {
+#middle{
     background-color: #fff;
     max-width: 1200px;
     margin: 20px auto;
@@ -73,56 +41,108 @@ body {
     padding: 20px;
 }
 
-#head {
-    border-bottom: 2px solid rgb(206, 206, 206);
-    margin: 0 auto 20px;
-    width: 96%;
+#homelogo{
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-bottom: 30px; 
+    
+}
+#logo{
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+}
+#button1{
+    float: right;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 50px;
+    margin-left: 30px;
 }
 
-#header {
+#button2{
+    float: right;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 70px;
+}
+
+#b1{
+    padding: 0%;
+    background: none;
+    font-size: 30px;
+    border: none;
+    font-family: 'Quicksand';
+}
+#b1:hover{
+    text-decoration: underline;
+}
+
+#head{
+    border-bottom: 2px solid rgb(206, 206, 206);
+    margin: auto;
+    width: 96%;
+}
+#header{
     text-align: center;
     font-size: 35px;
     font-family: 'League Spartan Bold';
-    margin: 10px 0 0;
-}
-
-#navigate {
-    overflow: hidden;
-    padding: 5px 30px;
+    margin-bottom: 0;
     margin-top: 10px;
 }
 
-#search {
+#navigate{
+    overflow: hidden;
+    padding: 5px 30px 5px 30px;
+    margin-top: 10px;
+}
+
+#search{
     font-size: 20px;
+    font-family: 'Quicksand';
     border-radius: 10px;
     border: 2px solid black;
     float: left;
-    padding: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-#filterbutton, #sortbutton {
-    background-color: #F1EFE7;
-    color: black;
-    border: none;
-    border-radius: 10px;
+#filterbutton{
+    margin-left: 10px;
     font-size: 20px;
     font-family: 'Quicksand';
-    padding: 10px 20px;
-    cursor: pointer;
-    float: right;
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: #F1EFE7;
+    font-size: 20px;
+    font-family: 'Quicksand';
+    padding: 10px;
+    width:10%;
+    float:right;
+}
+
+#sortbutton{
     margin-left: 10px;
+    font-size: 20px;
+    font-family: 'Quicksand';
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: #F1EFE7;
+    font-size: 20px;
+    font-family: 'Quicksand';
+    padding: 10px;
+    width:10%;
+    float:right;
 }
 
-#filterbutton:hover, #sortbutton:hover {
-    background-color: #ddd;
-}
 
-/* Event Entries */
-#entries {
+
+#entries{
     max-height: 350px;
     overflow-y: auto;
 }
-
 .entry {
     background-color: #F1EFE7;
     border-radius: 10px;
@@ -133,6 +153,7 @@ body {
 }
 
 .entry h3 {
+    text-decoration: none;
     font-size: 25px;
     margin: 0;
     font-family: 'Quicksand';
@@ -153,50 +174,57 @@ body {
     border-top: 1px solid #ddd;
 }
 
-#editbutton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+
+#name{
+    font-size: 25px;
+    margin:0;
+    font-family: 'Quicksand';
+}
+#role,#date,#location{
+    font-size: 15px;
+    margin:0;
+    color: #BEB1B1;
+    font-family: 'Quicksand';
+}
+#editbutton{
+    margin-top:0;
+    padding-top: 12px;
     background: none;
     border: none;
-    cursor: pointer;
-}
-
-#editicon, #trashicon {
-    width: 25px;
+    position:absolute;
+    right:40px;
+}    
+#trashbutton{
+    margin-top:0;
+    padding-top: 12px;
+    background: none;
+    border: none;
+    position:absolute;
+    right:10px;
+}       
+#editicon,#trashicon{
+    width:25px;
     margin-left: 10px;
 }
 
-/* Container Add Buttons */
-#containeradd {
-    text-align: center;
-    margin-top: 20px;
-}
-#button1{
-    float: right;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 50px;
-    margin-left: 30px;
-}
 
-#button2{
-    float: right;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 70px;
+#containeradd{
+    height: 7vh;
+    margin: 0;
+    text-align: center;
 }
-#addbutton, #joinbutton {
-    background-color: #F1EFE7;
-    color: black;
+#addbutton,#joinbutton{
     border: none;
     border-radius: 10px;
+    color: black;
+    background-color: #F1EFE7;
     font-size: 20px;
     font-family: 'Quicksand', sans-serif;
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-    display: inline-flex;
+    padding: 5px 15px 5px 15px;
+    margin: 10px 30px 10px 20px;
+    float: right;
+    display: inline-flex; 
+    justify-content: center;
     align-items: center;
 }
 
@@ -204,37 +232,26 @@ body {
     width: 30px;
     height: 30px;
     object-fit: cover;
-    margin-right: 10px;
+    margin-right: 10px; 
 }
-
-.btnlabel {
-    font-size: 15px;
+.btnlabel{
     font-family: 'Quicksand';
-    margin: 0;
+    text-align: center;
+    font-size: 15px;
+    align-items: center;
+    margin:0;
 }
 
-#addbutton:hover, #joinbutton:hover {
-    background-color: #ddd;
+#eventname {
+    background: none;
+    font-size: 20px;
+    border: none;
+    font-family: 'Quicksand';
+}
+#eventname:hover {
+    text-decoration: underline;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    #homelogo {
-        margin: 20px;
-    }
-    #button1 {
-        margin-right: 20px;
-    }
-    #button2 {
-        margin-right: 20px;
-    }
-    #middle {
-        padding: 10px;
-    }
-    #entries {
-        max-height: 250px;
-    }
-}
 .event-link {
     color: inherit; /* Inherit color from parent */
     text-decoration: none; /* Remove underline */
@@ -293,91 +310,4 @@ body {
     flex-direction: column;
     align-items: flex-end;
     margin-left: 20px;
-}
-
-.edit-button, .delete-button {
-    background-color: #F1EFE7;
-    color: black;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-family: 'Quicksand', sans-serif;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin: 5px 0;
-    transition: background-color 0.3s ease;
-}
-
-.edit-button:hover, .delete-button:hover {
-    background-color: #ddd;
-}
-
-.edit-button {
-    background-color: green; /* Gray background for Edit */
-    color: white;
-}
-
-.edit-button:hover {
-    background-color: #5a6268; /* Darker gray on hover */
-}
-
-.delete-button {
-    background-color: #dc3545; /* Red background for Delete */
-    color: white;
-}
-
-.delete-button:hover {
-    background-color: #c82333; /* Darker red on hover */
-}
-#footer{
-    position:absolute;
-    bottom: 0;
-    background-color: #F3F2EF;
-    height:12%;
-    width:100%;
-    padding-left: auto;
-    padding-right: auto;
-    margin:0;
-}
-
-.footerbutton{
-    border: none;
-    background: none;
-    padding: 15px 20px 15px 20px;
-    width: 11%;
-    margin-right: 10%;
-    margin-left:0px;
-    flex-direction: column;
-}
-.footerbutton:hover, .footerbutton2:hover{
-    /*background-color: #eae8e1;*/
-    .btnlabel{
-        text-decoration: underline;
-    }
-}
-.footerbutton2{
-    border: none;
-    background: none;
-    padding: 15px 20px 15px 20px;
-    width: 11%;
-    margin-right: 0px;
-}
-
-.btnicon{
-    width:30px;
-    height: 30px;
-    object-fit: cover;
-    margin-bottom: 0;
-}
-.btnlabel{
-    font-family: 'Quicksand';
-    text-align: center;
-    font-size: 15px;
-    align-items: center;
-}
-
-#container{
-    width:70%;
-    margin-left: auto;
-    margin-right:auto;
 }
