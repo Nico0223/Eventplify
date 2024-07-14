@@ -1,12 +1,24 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <title>Event Details</title>
     <link rel="stylesheet" href="/css/events_page_detailed.css">
+    <style>
+        /* CSS for map container */
+        #event-location-map {
+            height: 400px;
+            /* Adjust height as needed */
+            width: 100%;
+            /* Full width */
+            margin-bottom: 20px;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn6SPh3mOJj3iuHCu1njWKcgIY_wACEb0&callback=initMap"
+        async defer></script>
 </head>
 
 <body style="margin: 0; font-family: Arial, sans-serif;">
-
     <div id="top">
         <div id="homelogo">
             <img src="/css/logocropped.png" id="logo">
@@ -21,18 +33,50 @@
             <div class="event-header">
                 <h1 class="event-name">{{event.name}}</h1>
                 <div class="event-meta">
-                    <p><strong>Date:</strong> {{event.date}} </p>
-                    <p><strong>Time:</strong> {{event.startTime}} - {{event.endTime}} </p>
-                    <p><strong>Location:</strong> {{event.location}} </p>
-                    <p><strong>Event Code:</strong> {{event.code}} </p>
+                    <p><strong>Date:</strong> {{event.date}}</p>
+                    <p><strong>Time:</strong> {{event.startTime}} - {{event.endTime}}</p>
+                    <p class="location" id="{{event.location}}"><strong>Location:</strong> {{event.location}}</p>
+                    <p><strong>Event Code:</strong> {{event.code}}</p>
                 </div>
             </div>
             <div class="event-description">
                 <h2>Description</h2>
-                <p> {{event.description}} </p>
+                <p>{{event.description}}</p>
             </div>
         </div>
+        <div id="event-location-map"></div> <!-- Container for Google Maps -->
     </div>
+
+    <script>
+
+        function initMap() {
+            // Initialize Google Map and place marker
+            var myLocation = document.querySelector(".location").id;
+            console.log(myLocation);
+            var mapOptions = {
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById('event-location-map'), mapOptions);
+
+            // Initialize geocoder
+            var geocoder = new google.maps.Geocoder();
+
+            // Geocode the event location
+            geocoder.geocode({ 'address': myLocation }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK && results[0]) {
+                    map.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    console.error('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
