@@ -9,15 +9,16 @@
 
 <body style="margin:0">
     {{> header}}
+   
 
     <div id="head">
-        <p id="header">BUDGET</p>
+        <p id="header">BUDGET - {{event.name}} </p>
+        
     </div>
     <div id="navigate">
-        <button type="button" id="event">🡨 Sample Event</button>
-        <input type="search" id="search" placeholder="Search...">
-        <button type="button" id="filterbutton">Filter</button>
-        <button type="button" id="sortbutton">Sort</button>
+        <a href="events_page_detailed.html?eventId={{id}}"><button type="button" id="event">🡨 {{event.name}}</button></a>
+        {{!-- <input type="search" id="search" placeholder="Search..."> --}}
+
         <div id="budget-container">
             <p id="budget_amount">BUDGET: ₱{{budgetLimit}}</p>
             <button type="button" id="editbudgetbutton" class="{{event._id}}" onclick="sendToEditBudget()">Edit</button>
