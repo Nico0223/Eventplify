@@ -1,32 +1,68 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+<head>
     <title>Login</title>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/login.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="user.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleCredentialResponse(response) {
+            console.log('Encoded JWT ID token: ' + response.credential);
+            const userToken = response.credential;
+
+            fetch('/api/auth/google', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token: userToken })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Handle server response (e.g., save session token, redirect user)
+                if (data.success) {
+                    window.location.href = '/home.html'; // Redirect to the user's dashboard or appropriate page
+                } else {
+                    alert('Login failed. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: '743407666242-8l65qg29hsccfd70hee5kb361e2vs0d8.apps.googleusercontent.com', // Replace with your actual Google Client ID
+                callback: handleCredentialResponse
+            });
+            google.accounts.id.renderButton(
+                document.getElementById('google_login'),
+                { theme: 'outline', size: 'large' }
+            );
+        };
+    </script>
 </head>
-        <body style = "margin:0">
-            <div id="left_sidebar">
-                <img src="css/logo.png" id="logo">
-            </div>
-        <div id="main_content">
+<body style="margin:0">
+    <div id="left_sidebar">
+        <img src="css/logo.png" id="logo">
+    </div>
+    <div id="main_content">
         <h1 id="header">LOG IN</h1>
-        <form id="login_form" action="/api/users/login" method = "POST">
-            <input type="email" id="email" name="email" placeholder="Email"required><br>
-            <input type="password" id="password" name="password" placeholder="Password"required><br>
+        <form id="login_form" action="/api/users/login" method="POST">
+            <input type="email" id="email" name="email" placeholder="Email" required><br>
+            <input type="password" id="password" name="password" placeholder="Password" required><br>
             <a href="forgotpassword1.html" id="forgot_password">Forgot Password?</a><br>
-            
             <input type="submit" id="login" value="Log In">
         </form>
         <div id="social_login">
-            <a href="#"><center><img src="css/facebook_button.png" id="facebooklogin" alt="Facebook Login"></center></a>
+            <div id="google_login"></div> <!-- Container for Google Login button -->
         </div>
         <p>Don’t have an account? <a href="signup.html">Sign Up</a></p>
-        </div>
-        </body>
-
-
+    </div>
+</body>
 </html>
