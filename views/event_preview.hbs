@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <title>Event Details</title>
+    <link rel="stylesheet" href="/css/events_page_detailed.css">
+</head>
+
+<body style="margin: 0; font-family: Arial, sans-serif;">
+
+    <div id="top">
+        <div id="homelogo">
+            <img src="/css/logocropped.png" id="logo">
+        </div>
+    </div>
+
+    <div id="middle">
+        <div id="head">
+            <p id="header">EVENT PREVIEW</p>
+        </div>
+        <div id="event-details">
+            <div class="event-header">
+                <h1 class="event-name">{{event.name}}</h1>
+                <div class="event-meta">
+                    <p><strong>Date:</strong> {{event.date}} </p>
+                    <p><strong>Time:</strong> {{event.startTime}} - {{event.endTime}} </p>
+                    <p><strong>Location:</strong> {{event.location}} </p>
+                    <p><strong>Event Code:</strong> {{event.code}} </p>
+                </div>
+            </div>
+            <div class="event-description">
+                <h2>Description</h2>
+                <p> {{event.description}} </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

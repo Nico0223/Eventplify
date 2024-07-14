@@ -99,7 +99,8 @@
                   <div class="event-actions">
                       <button class="edit-button">Edit</button>
                       <button class="delete-button">Delete</button>
-                      <button class="share-button">Share</button>
+                    <button class="share-button">Share</button>
+                    <div id="copyPopup" class="popup">Link copied!</div>
                   </div>
               </div>
               <div class="event-description">
@@ -116,6 +117,24 @@
                     if (confirm('Are you sure you want to delete this event?')) {
                         deleteEvent(eventId);
                     }
+                });
+
+                document.querySelector('.share-button').addEventListener('click', function () {
+                    // Get the current URL
+                    const currentUrl = window.location.href;
+
+                    // Modify the URL
+                    const link = currentUrl.replace('events_page_detailed.html', 'event/preview');
+                    navigator.clipboard.writeText(link).then(function () {
+                        const popupElement = document.getElementById('copyPopup');
+                        popupElement.style.display = 'block';
+
+                        setTimeout(function () {
+                            popupElement.style.display = 'none';
+                        }, 2000);
+                    }).catch(function (error) {
+                        console.error('Error copying text: ', error);
+                    });
                 });
 
             } catch (error) {
