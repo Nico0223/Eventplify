@@ -25,7 +25,7 @@
             <p id="header">EVENTS</p>
         </div>
         <div id="navigate">
-            <input type="search" id="search" placeholder="Search...">
+            <input type="search" id="search" placeholder="Search..." oninput="searchEvents()">
         </div>
         <div id="entries">
             <!-- Event entries will be dynamically added here -->
@@ -71,8 +71,22 @@
                 console.error('Error fetching events:', error);
             }
         }
-    
+     // Function to filter events based on search input
+     function searchEvents() {
+            const searchValue = document.getElementById('search').value.toLowerCase();
+            const entries = document.getElementsByClassName('entry');
+
+            Array.from(entries).forEach(entry => {
+                const eventName = entry.querySelector('.event-link').textContent.toLowerCase();
+                if (eventName.includes(searchValue)) {
+                    entry.style.display = 'block';
+                } else {
+                    entry.style.display = 'none';
+                }
+            });
+        }
         document.addEventListener('DOMContentLoaded', fetchAndDisplayEvents);
+        
     </script>
       
 </body>
