@@ -4,8 +4,11 @@ var express = require("express");
 var app = new express();
 const dotenv = require("dotenv");
 dotenv.config();
+const { OAuth2Client } = require('google-auth-library');
 const connectionString = process.env.DATABASE_URL;
 const session = require("express-session");
+const CLIENT_ID = '743407666242-8l65qg29hsccfd70hee5kb361e2vs0d8.apps.googleusercontent.com';
+const client = new OAuth2Client(CLIENT_ID);
 
 const router = express.Router(); //might remove
 
@@ -41,6 +44,26 @@ const tableRouter = require("./routes/tableRoute.js");
 const chatRouter = require("./routes/chatRoute.js");
 const guestRoutes = require("./routes/guestRoutes.js");
 const collaboratorsRoutes = require("./routes/collaboratorRoute.js");
+
+app.post('/api/auth/google', async (req, res) => {
+  const { token } = req.body;
+
+  try {
+      const ticket = await client.verifyIdToken({
+          idToken: token,
+          audience: CLIENT_ID
+      });
+      const payload = ticket.getPayload();
+
+      // Check user in the database and create a session or a new user
+      // Example: Check if user exists in the database, if not, create new user
+
+      // Respond with user data or a session token
+      res.json({ success: true, name: payload.name, email: payload.email, picture: payload.picture });
+  } catch (error) {
+      res.status(500).json({ success: false, error: 'Internal server error' });
+  }
+});
 
 // POST route to add a collaborator mgiht remove
 router.post("/add-collaborator", async (req, res) => {
