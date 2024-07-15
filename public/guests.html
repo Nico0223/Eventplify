@@ -27,8 +27,8 @@
             <p id="header">GUESTS</p>
         </div>
         <div id="navigate">
-            <a id= "back-link" href="events_page_detailed.html"><button type="button" id="back">🡨 Back</button></a>
-            <!-- <input type="search" id="search" placeholder="Search..."> -->
+            <a id="back-link" href="events_page_detailed.html"><button type="button" id="back">🡨 Back</button></a>
+            <input type="search" id="search" placeholder="Search...">
             <!-- <button type="button" id="sortbutton">Sort</button>
             <button type="button" id="filterbutton">Filter</button> -->
         </div>
@@ -105,50 +105,66 @@
     
                 // Display guests in the entries div
                 const entriesDiv = document.getElementById('entries');
-                guests.forEach(guest => {
-                    const guestElement = document.createElement('div');
-                    guestElement.classList.add('guest-entry');
-                    guestElement.innerHTML = `
-                    <h3 id="guestname">${guest.name}</h3>
-                    <p id="guestcategory">Category: ${guest.category}</p>
-                    <p id="gueststatus">Status: ${guest.status}</p>
-                    <a href="editGuest.html?guestId=${guest._id}&eventId=${eventId}" class="edit-link">
-                        <button type="button" class="edit-button">
-                            <img src="css/edit_icon.png" id="editicon">
+                const displayGuests = (guestsToDisplay) => {
+                    entriesDiv.innerHTML = ''; // Clear existing entries
+                    guestsToDisplay.forEach(guest => {
+                        const guestElement = document.createElement('div');
+                        guestElement.classList.add('guest-entry');
+                        guestElement.innerHTML = `
+                        <h3 id="guestname" class="guestname">${guest.name}</h3>
+                        <p id="guestcategory">Category: ${guest.category}</p>
+                        <p id="gueststatus">Status: ${guest.status}</p>
+                        <a href="editGuest.html?guestId=${guest._id}&eventId=${eventId}" class="edit-link">
+                            <button type="button" class="edit-button">
+                                <img src="css/edit_icon.png" id="editicon">
+                            </button>
+                        </a>
+                        <button type="button" class="delete-button" data-guest-id="${guest._id}" id="delete-button">
+                            <img src="css/trash_icon.png" id="trashicon">
                         </button>
-                    </a>
-                    <button type="button" class="delete-button" data-guest-id="${guest._id}" id="delete-button">
-                        <img src="css/trash_icon.png" id="trashicon">
-                    </button>
-                    `;
-                    entriesDiv.appendChild(guestElement);
-    
-                    // Add event listener for delete button
-                    const deleteButton = guestElement.querySelector('.delete-button');
-                    deleteButton.addEventListener('click', async () => {
-                        try {
-                            const deleteResponse = await fetch(`/guests/${guest._id}`, {
-                                method: 'DELETE',
-                                headers: {
-                                    'Content-Type': 'application/json'
+                        `;
+                        entriesDiv.appendChild(guestElement);
+        
+                        // Add event listener for delete button
+                        const deleteButton = guestElement.querySelector('.delete-button');
+                        deleteButton.addEventListener('click', async () => {
+                            try {
+                                const deleteResponse = await fetch(`/guests/${guest._id}`, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                });
+                                if (!deleteResponse.ok) {
+                                    throw new Error('Failed to delete guest');
                                 }
-                            });
-                            if (!deleteResponse.ok) {
-                                throw new Error('Failed to delete guest');
+                                // Remove the guest element from the DOM
+                                guestElement.remove();
+                                console.log(`Guest ${guest.name} deleted successfully.`);
+                            } catch (error) {
+                                console.error('Error deleting guest:', error);
+                                // Handle error in UI if needed
                             }
-                            // Remove the guest element from the DOM
-                            guestElement.remove();
-                            console.log(`Guest ${guest.name} deleted successfully.`);
-                        } catch (error) {
-                            console.error('Error deleting guest:', error);
-                            // Handle error in UI if needed
-                        }
+                        });
                     });
-                });
+                };
+    
+                displayGuests(guests);
     
                 // Update Add Guest button href
                 document.getElementById('add-guest-link').href = `addGuest.html?eventId=${eventId}`;
                 document.getElementById('back-link').href = `events_page_detailed.html?eventId=${eventId}`;
+    
+                // Add event listener to search input
+                document.getElementById('search').addEventListener('input', (event) => {
+                    const query = event.target.value.toLowerCase();
+                    const filteredGuests = guests.filter(guest => 
+                        guest.name.toLowerCase().includes(query) ||
+                        guest.category.toLowerCase().includes(query) ||
+                        guest.status.toLowerCase().includes(query)
+                    );
+                    displayGuests(filteredGuests);
+                });
             } catch (error) {
                 console.error('Error fetching guests:', error);
                 // Handle error in UI if needed
