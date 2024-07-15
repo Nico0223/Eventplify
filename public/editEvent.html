@@ -24,7 +24,7 @@
         <p id="header">EDIT EVENT</p>
     </div>
     <div id="navigate">
-        <a href="events_page_detailed.html"><button type="button" id="back">🡨 Back</button></a>
+        <a id= "back-link" href="events_page_detailed.html"><button type="button" id="back">🡨 Back</button></a>
     </div>
 
     <div id="middle">
@@ -126,7 +126,7 @@
             if (eventId) {
                 populateForm(eventId);
             }
-
+            document.getElementById('back-link').href = `events_page_detailed.html?eventId=${eventId}`;
             document.getElementById('edit-event-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 // Update the event with the new details

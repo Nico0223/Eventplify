@@ -27,10 +27,10 @@
             <p id="header">GUESTS</p>
         </div>
         <div id="navigate">
-            <button type="button" id="event">🡨 Event Name</button>
+            <a id= "back-link" href="events_page_detailed.html"><button type="button" id="back">🡨 Back</button></a>
             <!-- <input type="search" id="search" placeholder="Search..."> -->
-            <button type="button" id="sortbutton">Sort</button>
-            <button type="button" id="filterbutton">Filter</button>
+            <!-- <button type="button" id="sortbutton">Sort</button>
+            <button type="button" id="filterbutton">Filter</button> -->
         </div>
         <div id="entries">
             <!-- Guest entries will be dynamically added here -->
@@ -123,6 +123,8 @@
 
                 // Update Add Guest button href
                 document.getElementById('add-guest-link').href = `addGuest.html?eventId=${eventId}`;
+                document.getElementById('back-link').href = `events_page_detailed.html?eventId=${eventId}`;
+
 
             } catch (error) {
                 console.error('Error fetching guests:', error);
