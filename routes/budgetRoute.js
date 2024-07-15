@@ -50,7 +50,6 @@ router.get("/budget", async (req, res) => {
     amountLeft,
     budgetLimit,
     id: eventID,
-    event: budget.event
   });
 });
 
