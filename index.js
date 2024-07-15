@@ -209,7 +209,39 @@ app.delete("/api/events/:id", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+app.get('/guests/:guestId', async (req, res) => {
+  try {
+      const guestId = req.params.guestId;
+      const guest = await Guest.findById(guestId); // Example using Mongoose
 
+      if (!guest) {
+          return res.status(404).json({ error: 'Guest not found' });
+      }
+
+      res.json(guest);
+  } catch (error) {
+      console.error('Error fetching guest:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+app.put('/guests/:guestId', async (req, res) => {
+  const guestId = req.params.guestId;
+  const { name, category, status, eventId } = req.body;
+
+  try {
+      // Update guest details in MongoDB using Mongoose
+      const updatedGuest = await Guest.findByIdAndUpdate(guestId, { name, category, status, eventId }, { new: true });
+
+      if (!updatedGuest) {
+          return res.status(404).json({ error: 'Guest not found' });
+      }
+
+      res.json(updatedGuest); // Send updated guest details as JSON response
+  } catch (error) {
+      console.error('Error updating guest:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 // Initializing handlebars
 var hbs = require("hbs");
 app.set("view engine", "hbs");
