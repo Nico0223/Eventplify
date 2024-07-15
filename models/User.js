@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  email: String,
+  email: { type: String, unique: true },
   username: String,
   password: String,
   googleId: String, // Add Google ID field for OAuth login
