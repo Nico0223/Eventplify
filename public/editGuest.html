@@ -25,7 +25,7 @@
         <p id="header">EDIT GUEST</p>
     </div>
     <div id="navigate">
-        <a href="guests.html"><button type="button" id="back">🡨 Guests</button></a>
+        <a id= "back-link" href="guests.html"><button type="button" id="back">🡨 Guests</button></a>
     </div>
     <form id="editGuestForm">
         <div class="form-group">
@@ -87,7 +87,7 @@
     document.addEventListener('DOMContentLoaded', async () => {
         const guestId = getQueryParam('guestId');
         const eventId = getQueryParam('eventId'); // Retrieve eventId from URL
-
+        document.getElementById('back-link').href = `guests.html?eventId=${eventId}`;
         if (!guestId || !eventId) {
             console.error('Guest ID or Event ID not found in URL');
             return;
@@ -111,7 +111,7 @@
             // Handle error in UI if needed
         }
     });
-
+    
     function getQueryParam(param) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(param);

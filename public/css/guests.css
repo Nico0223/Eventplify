@@ -14,6 +14,7 @@
   
   a{
     text-decoration: none;
+    
 } 
 body{
     overflow-y: hidden;
@@ -140,16 +141,26 @@ body{
     color: #BEB1B1;
     font-family: 'Quicksand';
 }
-#editbutton{
-    margin-top:-50px;
+.edit-link, .edit-link:link, .edit-link:visited, .edit-link:hover, .edit-link:active {
+    text-decoration: none;
+}
 
-    padding-top: 12px;
+.edit-button {
     background: none;
     border: none;
-    position:absolute;
-    right:40px;
-}    
-#deletebutton{
+    padding: 0;
+    margin-top: -50px;
+    padding-top: 12px;
+    position: absolute;
+    right: 40px;
+}
+
+.edit-button img {
+    width: 25px;
+    margin-bottom: 10px;
+}
+
+#delete-button{
     margin-top:-50px;
     padding-top: 12px;
   
