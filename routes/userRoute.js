@@ -12,6 +12,10 @@ router.post('/signup', async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ error: 'Email is already registered' });
     }
+    const existingUsernameUser = await User.findOne({ username });
+    if (existingUsernameUser) {
+      return res.status(400).json({ error: 'Username is already taken' });
+    }
 
     // Hash the password before saving to the database
     const hashedPassword = await bcrypt.hash(password, 10);
