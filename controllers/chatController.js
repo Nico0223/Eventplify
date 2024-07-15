@@ -1,10 +1,7 @@
-
 const Event = require("../models/Event");
 const Chat = require("../models/Chat");
 const User = require("../models/User");
 const bodyParser = require("body-parser");
-
-
 
 exports.addChat = async (req, res) => {
   const { chatname, members } = req.body;
