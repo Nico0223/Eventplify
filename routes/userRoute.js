@@ -5,20 +5,31 @@ const User = require('../models/User.js');
 
 router.post('/signup', async (req, res) => {
   try {
-    const { email, username, password  } = req.body;
+    const { email, username, password } = req.body;
 
-    const existingUser = await User.findOne({ username });
+    // Check if the email already exists
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(409).json({ error: 'Username already exists. Please choose a different username.' });
+      return res.status(400).json({ error: 'Email is already registered' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10); 
-    const newUser = new User({ email, username, password: hashedPassword });
-    
+    // Hash the password before saving to the database
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      email,
+      username,
+      password: hashedPassword,
+      googleId: null, // Initialize as null if not using Google OAuth
+      joinedEvents: []
+    });
+
     await newUser.save();
-    return res.redirect('/login.html');
+
+    res.status(201).send('User registered successfully');
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred during user registration' });
+    console.error('Error registering user:', error);
+    res.status(500).send('Internal Server Error');
   }
 });
 
