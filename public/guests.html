@@ -112,8 +112,11 @@
                     <h3 id="guestname">${guest.name}</h3>
                     <p id="guestcategory">Category: ${guest.category}</p>
                     <p id="gueststatus">Status: ${guest.status}</p>
-                    <button type="button" id="editbutton">
-                    <img src="css/edit_icon.png" id="editicon"></button> 
+                 <a href="editGuest.html?guestId=${guest._id}&eventId=${eventId}" class="edit-link">
+                 <button type="button" class="edit-button">
+                 <img src="css/edit_icon.png" id="editicon">
+                 </button>
+                 </a>
                     <button type="button" id="deletebutton">
                     <img src="css/trash_icon.png" id="trashicon">
                 </button> 
