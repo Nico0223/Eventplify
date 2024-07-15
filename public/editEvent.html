@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Event</title>
     <link rel="stylesheet" href="css/editEvent.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn6SPh3mOJj3iuHCu1njWKcgIY_wACEb0&libraries=places"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #map {
+            height: 300px; /* Reduced height */
+            width: 58%; /* Reduced width */
+            margin: 10px auto; /* Centering the map horizontally with margin auto */
+            display: block;
+        }
+    </style>
 </head>
 <body style="margin:0">
 
@@ -24,7 +34,7 @@
         <p id="header">EDIT EVENT</p>
     </div>
     <div id="navigate">
-        <a id= "back-link" href="events_page_detailed.html"><button type="button" id="back">🡨 Back</button></a>
+        <a id="back-link" href="events_page_detailed.html"><button type="button" id="back">🡨 Back</button></a>
     </div>
 
     <div id="middle">
@@ -54,6 +64,7 @@
                 <label for="eventlocation" id="eventlocationlabel">Location:</label>
                 <input type="text" id="eventlocation" name="eventlocation" placeholder="Location" required>
             </div>
+            <div id="map"></div>
 
             <input type="submit" id="confirmbutton" value="Confirm">
         </form>
@@ -117,7 +128,76 @@
                 document.getElementById('starttime').value = event.startTime;
                 document.getElementById('endtime').value = event.endTime;
                 document.getElementById('eventlocation').value = event.location;
+                initMap(event.location);
             }
+        }
+
+        function initMap(location) {
+            var initialLocation = { lat: 0, lng: 0 }; // Default location
+            var mapOptions = {
+                center: initialLocation,
+                zoom: 15 // Adjust zoom level as needed
+            };
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            // Autocomplete for event location input
+            var input = document.getElementById('eventlocation');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+
+            // Set initial marker
+            var marker = new google.maps.Marker({
+                map: map,
+                position: initialLocation,
+                draggable: true // Allow marker to be draggable
+            });
+
+            // Update marker position on map when location changes
+            autocomplete.addListener('place_changed', function () {
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    return;
+                }
+
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(15); // Adjust zoom level
+                }
+
+                marker.setPosition(place.geometry.location);
+            });
+
+            // Allow marker to be draggable and update location
+            google.maps.event.addListener(marker, 'dragend', function () {
+                geocodePosition(marker.getPosition());
+            });
+
+            if (location) {
+                // Set initial location if available
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ 'address': location }, function (results, status) {
+                    if (status === 'OK') {
+                        map.setCenter(results[0].geometry.location);
+                        marker.setPosition(results[0].geometry.location);
+                    }
+                });
+            }
+        }
+
+        // Geocode function to convert LatLng to formatted address
+        function geocodePosition(pos) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                latLng: pos
+            }, function (responses) {
+                if (responses && responses.length > 0) {
+                    $('#eventlocation').val(responses[0].formatted_address);
+                } else {
+                    console.error('Geocoder failed due to: ' + status);
+                }
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -154,10 +234,11 @@
                     window.location.href = `events_page_detailed.html?eventId=${eventId}`;
                 } catch (error) {
                     console.error('Error updating event:', error);
-                    alert('Failed to update the event');
+                    alert('Failed to update event');
                 }
             });
         });
     </script>
+
 </body>
 </html>
