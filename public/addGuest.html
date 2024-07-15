@@ -27,7 +27,7 @@
             <p id="header">ADD GUEST</p>
         </div>
         <div id="navigate">
-            <a href="guests.html"><button type="button" id="back">🡨 Guests</button></a>
+            <a id= "back-link" href="guests.html"><button type="button" id="back">🡨 Guests</button></a>
         </div>
 
         <form id="addGuestForm">
@@ -103,7 +103,8 @@
                 console.log(`Event ID: ${eventId}`);
                 // Set the eventId to the hidden input field
                 document.getElementById('event').value = eventId;
-
+                document.getElementById('back-link').href = `guests.html?eventId=${eventId}`;
+                
                 // Update footer links with eventId
                 const footerLinks = document.querySelectorAll('#footer a');
                 footerLinks.forEach(link => {
