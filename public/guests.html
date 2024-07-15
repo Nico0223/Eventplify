@@ -93,16 +93,16 @@
                 console.error('Event ID not found in URL');
                 return;
             }
-
+    
             try {
                 const response = await fetch(`/guests/events/${eventId}/guests`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch guests');
                 }
                 const guests = await response.json();
-                
+    
                 console.log('Guests:', guests);
-
+    
                 // Display guests in the entries div
                 const entriesDiv = document.getElementById('entries');
                 guests.forEach(guest => {
@@ -112,35 +112,54 @@
                     <h3 id="guestname">${guest.name}</h3>
                     <p id="guestcategory">Category: ${guest.category}</p>
                     <p id="gueststatus">Status: ${guest.status}</p>
-                 <a href="editGuest.html?guestId=${guest._id}&eventId=${eventId}" class="edit-link">
-                 <button type="button" class="edit-button">
-                 <img src="css/edit_icon.png" id="editicon">
-                 </button>
-                 </a>
-                    <button type="button" id="deletebutton">
-                    <img src="css/trash_icon.png" id="trashicon">
-                </button> 
-                `;
+                    <a href="editGuest.html?guestId=${guest._id}&eventId=${eventId}" class="edit-link">
+                        <button type="button" class="edit-button">
+                            <img src="css/edit_icon.png" id="editicon">
+                        </button>
+                    </a>
+                    <button type="button" class="delete-button" data-guest-id="${guest._id}">
+                        <img src="css/trash_icon.png" id="trashicon">
+                    </button>
+                    `;
                     entriesDiv.appendChild(guestElement);
+    
+                    // Add event listener for delete button
+                    const deleteButton = guestElement.querySelector('.delete-button');
+                    deleteButton.addEventListener('click', async () => {
+                        try {
+                            const deleteResponse = await fetch(`/guests/${guest._id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+                            if (!deleteResponse.ok) {
+                                throw new Error('Failed to delete guest');
+                            }
+                            // Remove the guest element from the DOM
+                            guestElement.remove();
+                            console.log(`Guest ${guest.name} deleted successfully.`);
+                        } catch (error) {
+                            console.error('Error deleting guest:', error);
+                            // Handle error in UI if needed
+                        }
+                    });
                 });
-
+    
                 // Update Add Guest button href
                 document.getElementById('add-guest-link').href = `addGuest.html?eventId=${eventId}`;
                 document.getElementById('back-link').href = `events_page_detailed.html?eventId=${eventId}`;
-
-
             } catch (error) {
                 console.error('Error fetching guests:', error);
                 // Handle error in UI if needed
             }
         });
-
+    
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
     </script>
-
 </body>
 
 </html>

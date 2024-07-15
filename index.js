@@ -242,6 +242,23 @@ app.put('/guests/:guestId', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+async function deleteGuest(guestId) {
+  const result = await Guest.findByIdAndDelete(guestId);
+  return result;
+}
+app.delete('/guests/:guestId', async (req, res) => {
+  try {
+      const guestId = req.params.guestId;
+      
+      // Call the deleteGuest function to delete the guest
+      await deleteGuest(guestId);
+      
+      res.status(204).end(); // Successfully deleted
+  } catch (error) {
+      console.error('Error deleting guest:', error);
+      res.status(500).json({ error: 'Failed to delete guest' });
+  }
+});
 // Initializing handlebars
 var hbs = require("hbs");
 app.set("view engine", "hbs");
