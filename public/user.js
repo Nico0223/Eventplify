@@ -64,7 +64,7 @@ $(document).ready(function() {
     })
       .then(response => {
         if (response.ok) {
-          window.location.href = '/home.html';
+          //window.location.href = '/home.html';
           alert('Registration successful');
         } else {
           response.json().then(data => {
