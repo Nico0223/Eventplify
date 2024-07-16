@@ -4,7 +4,6 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   username:  { type: String, unique: true },
   password: String,
-  googleId: String, // Add Google ID field for OAuth login
   joinedEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
 });
 
