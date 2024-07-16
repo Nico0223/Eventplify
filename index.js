@@ -4,11 +4,8 @@ var express = require("express");
 var app = new express();
 const dotenv = require("dotenv");
 dotenv.config();
-const { OAuth2Client } = require('google-auth-library');
 const connectionString = process.env.DATABASE_URL;
 const session = require("express-session");
-const CLIENT_ID = '743407666242-8l65qg29hsccfd70hee5kb361e2vs0d8.apps.googleusercontent.com';
-const client = new OAuth2Client(CLIENT_ID);
 
 const router = express.Router(); //might remove
 
@@ -45,53 +42,6 @@ const chatRouter = require("./routes/chatRoute.js");
 const guestRoutes = require("./routes/guestRoutes.js");
 const collaboratorsRoutes = require("./routes/collaboratorRoute.js");
 
-app.post('/api/auth/google', async (req, res) => {
-  const { token } = req.body;
-
-  // Verify the Google ID token
-  try {
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: CLIENT_ID,  // Replace with your actual Google Client ID
-    });
-    const payload = ticket.getPayload();
-    const googleId = payload['sub'];
-    const email = payload['email'];
-
-    // Check if a user with this Google ID already exists
-    let user = await User.findOne({ googleId });
-
-    if (user) {
-      // User already exists, generate session token and respond
-      const sessionToken = 'generated_session_token'; // Replace with actual session token generation
-      return res.json({ success: true, token: sessionToken });
-    }
-
-    // Check if a user with this email already exists
-    user = await User.findOne({ email });
-
-    if (user) {
-      // User with this email already exists, handle accordingly
-      return res.status(400).json({ success: false, error: 'User with this email already exists' });
-    }
-
-    // Create a new user since no user found with this Google ID or email
-    user = new User({
-      googleId,
-      email,
-      // Add other fields as needed
-    });
-    await user.save();
-
-    // Generate a session token (you may use JWT for this)
-    const sessionToken = 'generated_session_token'; // Replace with actual session token generation
-
-    res.json({ success: true, token: sessionToken });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, error: 'Server error' });
-  }
-});
 // POST route to add a collaborator mgiht remove
 router.post("/add-collaborator", async (req, res) => {
   try {
