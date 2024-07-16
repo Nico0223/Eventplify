@@ -85,43 +85,53 @@ exports.joinEvent = async (req, res) => {
     const { name, code } = req.body;
 
     if (!name || !code) {
+      console.error("Name or code missing in request body");
       return res.status(400).json({ error: "Name and code are required" });
     }
 
     const event = await Event.findOne({ code });
-
     if (!event) {
+      console.error("Event not found with code:", code);
       return res.status(404).json({ error: "Event not found" });
     }
 
     const user = await User.findById(req.session.userId);
     if (!user) {
+      console.error("User not found with ID:", req.session.userId);
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Check if the user is already a participant
-    const isParticipant = event.participants.some((participant) =>
-      participant.userId.equals(user._id)
-    );
+    const isParticipant = event.participants.some((participant) => {
+      if (!participant.userId) {
+        console.error("Participant without userId found in event:", event._id, participant);
+        return false;
+      }
+      return participant.userId.equals(user._id);
+    });
+
     if (!isParticipant) {
+      console.log("User is not a participant, adding to event:", event._id);
       event.participants.push({ userId: user._id, name });
       await event.save();
+      console.log("User added to event participants:", event.participants);
+    } else {
+      console.log("User is already a participant in the event:", event._id);
     }
 
     if (!user.joinedEvents.includes(event._id)) {
+      console.log("Event not in user's joinedEvents, adding event:", event._id);
       user.joinedEvents.push(event._id);
       await user.save();
+      console.log("Event added to user's joinedEvents:", user.joinedEvents);
+    } else {
+      console.log("Event already in user's joinedEvents:", event._id);
     }
 
-    return res
-      .status(200)
-      .json({ message: "Joined event successfully", event });
+    return res.status(200).json({ message: "Joined event successfully", event });
   } catch (error) {
     console.error("Error joining event:", error);
-    return res
-      .status(500)
-      .json({
-        error: "An error occurred while joining the event. Please try again.",
-      });
+    return res.status(500).json({ error: "An error occurred while joining the event. Please try again." });
   }
 };
+
+
