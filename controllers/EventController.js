@@ -2,6 +2,8 @@
 
 const Event = require("../models/Event");
 const User = require("../models/User"); // Ensure this line is at the top of the file
+const Collaborator = require('../models/Collaborator.js'); // Adjust the path to your models
+
 
 // Function to generate a unique 5-digit code
 const generateUniqueCode = async () => {
@@ -127,11 +129,23 @@ exports.joinEvent = async (req, res) => {
       console.log("Event already in user's joinedEvents:", event._id);
     }
 
+    // Add the user to the Collaborator database
+    const existingCollaborator = await Collaborator.findOne({ user: user._id, event: event._id });
+    if (!existingCollaborator) {
+      const collaborator = new Collaborator({
+        user: user._id,
+        event: event._id,
+        role: 'Collaborator'
+      });
+      await collaborator.save();
+      console.log("User added to Collaborators with role 'Collaborator':", collaborator);
+    } else {
+      console.log("User is already a collaborator for the event:", event._id);
+    }
+
     return res.status(200).json({ message: "Joined event successfully", event });
   } catch (error) {
     console.error("Error joining event:", error);
     return res.status(500).json({ error: "An error occurred while joining the event. Please try again." });
   }
 };
-
-
