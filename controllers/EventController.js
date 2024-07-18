@@ -141,7 +141,6 @@ exports.joinEvent = async (req, res) => {
       const collaborator = new Collaborator({
         user: user._id,
         event: event._id,
-        username: user.username, // Include the username
         name: name,
         role: 'Collaborator'
       });
