@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>Join Event</title>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/joinEvent.css">
 </head>
 <body style="margin:0">
@@ -11,10 +11,10 @@
     <div id="top">
         <div id="homelogo">
             <img src="css/logocropped.png" id="logo">
-            <div id ="button2">
+            <div id="button2">
                 <a href="/profile"><button type="button" id="b1">Profile</button></a>
             </div>
-            <div id ="button1">
+            <div id="button1">
                 <a href="events.html"><button type="button" id="b1">Events</button></a>
             </div>
         </div>
@@ -46,16 +46,16 @@
             e.preventDefault();
             const name = document.getElementById('yourname').value;
             const code = document.getElementById('eventcode').value;
-    
+
             try {
                 const response = await fetch('/api/events/join', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, code })
                 });
-    
+
                 const data = await response.json();
-    
+
                 if (response.ok) {
                     alert('Successfully joined event!');
                     fetchAndDisplayEvents(); // Refresh events list after joining
@@ -68,15 +68,16 @@
                 alert('An error occurred. Please try again.');
             }
         });
+
         async function fetchAndDisplayEvents() {
             try {
-                const response = await fetch('/events'); 
+                const response = await fetch('/events');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const events = await response.json();
                 const entriesDiv = document.getElementById('entries');
-                entriesDiv.innerHTML = ''; 
+                entriesDiv.innerHTML = '';
 
                 events.forEach(event => {
                     const entryDiv = document.createElement('div');

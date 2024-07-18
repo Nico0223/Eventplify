@@ -1,39 +1,39 @@
 const express = require('express');
 const router = express.Router();
-const Collaborator = require('../models/Collaborator');
-const User = require('../models/User');
+const Event = require('../models/Event.js'); // Adjust the path to your models
+const Collaborator = require('../models/Collaborator.js'); // Adjust the path to your models
 
-// POST route to add a new collaborator
-router.post('/add-collaborator', async (req, res) => {
-  try {
-    const { name, role, canEditGuest, canEditTodo, canEditBudget } = req.body;
+router.post('/api/events/join', async (req, res) => {
+    const { name, code } = req.body;
+    const userId = req.session.userId; // Assume userId is stored in the session
 
-    // Find the user by name (assuming this is how you identify users)
-    let user = await User.findOne({ name });
-
-    if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found' });
+    if (!userId) {
+        return res.status(401).json({ error: 'User not authenticated' });
     }
 
-    // Create a new collaborator instance
-    const newCollaborator = new Collaborator({
-      user: user._id,
-      role,
-      canEditGuest,
-      canEditTodo,
-      canEditBudget,
-    });
+    try {
+        const event = await Event.findOne({ code });
+        if (!event) {
+            return res.status(404).json({ error: 'Event not found' });
+        }
 
-    // Save the collaborator to the database
-    await newCollaborator.save();
+        const collaborator = new Collaborator({
+            user: userId,
+            event: event._id,
+            role: 'Collaborator' // Automatically assign the role of Collaborator
+        });
 
-    // Respond with success message
-    res.status(201).json({ success: true, message: 'Collaborator added successfully' });
-  } catch (error) {
-    console.error('Error:', error);
-    // Handle errors and respond with an error message
-    res.status(500).json({ success: false, message: 'Failed to add collaborator. Please try again.' });
-  }
+        await collaborator.save();
+
+        // Add the collaborator to the event's collaborators list (if needed)
+        event.collaborators.push(collaborator._id);
+        await event.save();
+
+        return res.json({ message: 'Successfully joined event' });
+    } catch (error) {
+        console.error('Error joining event:', error);
+        res.status(500).json({ error: 'Something went wrong' });
+    }
 });
 
 module.exports = router;
