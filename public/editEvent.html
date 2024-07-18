@@ -22,7 +22,7 @@
         <div id="homelogo">
             <img src="css/logocropped.png" id="logo">
             <div id="button2">
-                <a href="profile.html"><button type="button" id="b1">Profile</button></a>
+                <a href="/profile"><button type="button" id="b1">Profile</button></a>
             </div>
             <div id="button1">
                 <a href="events.html"><button type="button" id="b1">Events</button></a>
@@ -72,31 +72,31 @@
 
     <div id="footer">
         <div id="container">
-            <a href="collaborators.html">
+            <a  id="collaborators-link">
                 <button type="button" class="footerbutton" id="collaborators">
                     <img src="css/collaborators_icon_black.png" class="btnicon">
                     <p class="btnlabel">Collaborators</p>
                 </button>
             </a>
-            <a href="guests.html">
+            <a  id="guests-link">
                 <button type="button" class="footerbutton" id="guest">
                     <img src="css/guest_icon_black.png" class="btnicon">
                     <p class="btnlabel">Guest</p>
                 </button>
             </a>
-            <a href="todo.html">
+            <a id="todo-link">
                 <button type="button" class="footerbutton" id="todo">
                     <img src="css/todo_icon_black.png" class="btnicon">
                     <p class="btnlabel">To-Do</p>
                 </button>
             </a>
-            <a href="budget.html">
+            <a id="budget-link">
                 <button type="button" class="footerbutton" id="budget">
                     <img src="css/budget_icon_black.png" class="btnicon">
                     <p class="btnlabel">Budget</p>
                 </button>
             </a>
-            <a href="chat.html">
+            <a  id="chat-link">
                 <button type="button" class="footerbutton2" id="chat">
                     <img src="css/chat_icon_black.png" class="btnicon">
                     <p class="btnlabel">Chat</p>
@@ -104,7 +104,6 @@
             </a>
         </div>
     </div>
-
     <script>
         async function fetchEventDetails(eventId) {
             try {
@@ -118,6 +117,7 @@
                 return null;
             }
         }
+        
 
         async function populateForm(eventId) {
             const event = await fetchEventDetails(eventId);
@@ -205,8 +205,15 @@
             const eventId = urlParams.get('eventId');
             if (eventId) {
                 populateForm(eventId);
+                document.getElementById('collaborators-link').href = `collaborators.html?eventId=${eventId}`;
+        document.getElementById('guests-link').href = `guests.html?eventId=${eventId}`;
+        document.getElementById('todo-link').href = `/todo?id=${eventId}`;
+        document.getElementById('budget-link').href = `/budget?id=${eventId}`;
+        document.getElementById('chat-link').href = `/chat?id=${eventId}`;
             }
-            document.getElementById('back-link').href = `events_page_detailed.html?eventId=${eventId}`;
+                document.getElementById('back-link').href = `events_page_detailed.html?eventId=${eventId}`;
+                
+
             document.getElementById('edit-event-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 // Update the event with the new details
