@@ -87,9 +87,9 @@
                 // Generate HTML for each collaborator entry
                 collaborators.forEach(collaborator => {
                     const entryHTML = `
-                        <div class="entry">
-                            <p class="name">${collaborator.name}</p>
-                            <p class="role">${collaborator.role}</p>
+                        <div class="entry" id="entry">
+                            <p class="name" id="name">${collaborator.name}</p>
+                            <p class="role" id="role">${collaborator.role}</p>
                         </div>
                     `;
                     entriesContainer.innerHTML += entryHTML;
