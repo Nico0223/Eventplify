@@ -17,7 +17,7 @@
                 <a href="/profile"><button type="button" id="b1">Profile</button></a>
             </div>
             <div id="button1">
-                <a href="events.html"><button type="button" id="b1">Events</button></a>
+                <a id="events-link"><button type="button" id="b1">Events</button></a>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
             <p id="header">COLLABORATORS</p>
         </div>
         <div id="navigate">
-            <a id="back-link" href="events_page_detailed.html"><button type="button" id="event">🡨 Back</button></a>
+            <a id="back-link"><button type="button" id="event">🡨 Back</button></a>
             <input type="search" id="search" placeholder="Search...">
         </div>
         <div id="entries">
@@ -37,31 +37,31 @@
 
     <div id="footer">
         <div id="container">
-            <a href="collaborators.html">
+            <a id="collaborators-link">
                 <button type="button" class="footerbutton" id="collaborators">
                     <img src="css/collaborators_icon_black.png" class="btnicon">
                     <p class="btnlabel">Collaborators</p>
                 </button>
             </a>
-            <a href="guests.html">
+            <a id="guest-link">
                 <button type="button" class="footerbutton" id="guest">
                     <img src="css/guest_icon_black.png" class="btnicon">
                     <p class="btnlabel">Guest</p>
                 </button>
             </a>
-            <a href="/todo">
+            <a id="todo-link">
                 <button type="button" class="footerbutton" id="todo">
                     <img src="css/todo_icon_black.png" class="btnicon">
                     <p class="btnlabel">To-Do</p>
                 </button>
             </a>
-            <a href="/budget">
+            <a id="budget-link">
                 <button type="button" class="footerbutton" id="budget">
                     <img src="css/budget_icon_black.png" class="btnicon">
                     <p class="btnlabel">Budget</p>
                 </button>
             </a>
-            <a href="/chat">
+            <a id="chat-link">
                 <button type="button" class="footerbutton2" id="chat">
                     <img src="css/chat_icon_black.png" class="btnicon">
                     <p class="btnlabel">Chat</p>
@@ -69,12 +69,18 @@
             </a>
         </div>
     </div>
+
     <script>
         // Function to fetch collaborators based on event ID from URL parameter
         async function fetchCollaborators() {
             try {
                 const urlParams = new URLSearchParams(window.location.search);
                 const eventId = urlParams.get('eventId'); // Get eventId from URL parameter
+
+                if (!eventId) {
+                    console.error('Event ID not found in URL');
+                    return;
+                }
 
                 // Fetch collaborators data from backend
                 const response = await fetch(`/api/collaborators?eventId=${eventId}`);
@@ -83,7 +89,7 @@
                 // Clear previous entries
                 const entriesContainer = document.getElementById('entries');
                 entriesContainer.innerHTML = '';
-                document.getElementById('back-link').href = `events_page_detailed.html?eventId=${eventId}`;
+
                 // Generate HTML for each collaborator entry
                 collaborators.forEach(collaborator => {
                     const entryHTML = `
@@ -93,9 +99,17 @@
                         </div>
                     `;
                     entriesContainer.innerHTML += entryHTML;
-                }
-            
-            );
+                });
+
+                // Update links with event ID
+                document.getElementById('back-link').href = `events_page_detailed.html?eventId=${eventId}`;
+                document.getElementById('collaborators-link').href = `collaborators.html?eventId=${eventId}`;
+                document.getElementById('guest-link').href = `guests.html?eventId=${eventId}`;
+                document.getElementById('todo-link').href = `/todo?id=${eventId}`;
+                document.getElementById('budget-link').href = `/budget?id=${eventId}`;
+                document.getElementById('chat-link').href = `/chat?id=${eventId}`;
+                document.getElementById('events-link').href = `events.html?eventId=${eventId}`;
+
             } catch (error) {
                 console.error('Error fetching collaborators:', error);
             }
@@ -103,7 +117,6 @@
 
         // Call fetchCollaborators when the page loads
         document.addEventListener('DOMContentLoaded', fetchCollaborators);
-
     </script>
 </body>
 
