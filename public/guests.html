@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guests</title>
     <link rel="stylesheet" href="css/guests.css">
 </head>
-
 <body style="margin: 0">
-
     <div id="top">
         <div id="homelogo">
             <img src="css/logocropped.png" id="logo">
@@ -17,7 +14,7 @@
                 <a href="/profile"><button type="button" id="b1">Profile</button></a>
             </div>
             <div id="button1">
-                <a href="events.html"><button type="button" id="b1">Events</button></a>
+                <a id="events-link"><button type="button" id="b1">Events</button></a>
             </div>
         </div>
     </div>
@@ -27,57 +24,54 @@
             <p id="header">GUESTS</p>
         </div>
         <div id="navigate">
-            <a id="back-link" href="events_page_detailed.html"><button type="button" id="back">🡨 Back</button></a>
+            <a id="back-link"><button type="button" id="back">🡨 Back</button></a>
             <input type="search" id="search" placeholder="Search...">
-            <!-- <button type="button" id="sortbutton">Sort</button>
-            <button type="button" id="filterbutton">Filter</button> -->
         </div>
         <div id="entries">
             <!-- Guest entries will be dynamically added here -->
         </div>
 
         <div id="containeradd">
-            <a href="/tables" id="tables-link">
+            <a id="tables-link">
                 <button type="button" id="tablesbutton">
                     <span class="btnlabel">Tables</span>
                 </button>
             </a>
-            <a id="add-guest-link" href="addGuest.html">
+            <a id="add-guest-link">
                 <button type="button" id="addguestbutton">
                     <span class="btnlabel">Add Guest</span>
                 </button>
             </a>
         </div>
-
     </div>
 
     <div id="footer">
         <div id="container">
-            <a href="collaborators.html">
+            <a id="collaborators-link">
                 <button type="button" class="footerbutton" id="collaborators">
                     <img src="css/collaborators_icon_black.png" class="btnicon">
                     <p class="btnlabel">Collaborators</p>
                 </button>
             </a>
-            <a href="guests.html">
+            <a id="guest-link">
                 <button type="button" class="footerbutton" id="guest">
                     <img src="css/guest_icon_black.png" class="btnicon">
                     <p class="btnlabel">Guest</p>
                 </button>
             </a>
-            <a href="/todo">
+            <a id="todo-link">
                 <button type="button" class="footerbutton" id="todo">
                     <img src="css/todo_icon_black.png" class="btnicon">
                     <p class="btnlabel">To-Do</p>
                 </button>
             </a>
-            <a href="/budget">
+            <a id="budget-link">
                 <button type="button" class="footerbutton" id="budget">
                     <img src="css/budget_icon_black.png" class="btnicon">
                     <p class="btnlabel">Budget</p>
                 </button>
             </a>
-            <a href="/chat">
+            <a id="chat-link">
                 <button type="button" class="footerbutton2" id="chat">
                     <img src="css/chat_icon_black.png" class="btnicon">
                     <p class="btnlabel">Chat</p>
@@ -93,16 +87,16 @@
                 console.error('Event ID not found in URL');
                 return;
             }
-    
+
             try {
                 const response = await fetch(`/guests/events/${eventId}/guests`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch guests');
                 }
+
                 const guests = await response.json();
-    
                 console.log('Guests:', guests);
-    
+
                 // Display guests in the entries div
                 const entriesDiv = document.getElementById('entries');
                 const displayGuests = (guestsToDisplay) => {
@@ -124,7 +118,7 @@
                         </button>
                         `;
                         entriesDiv.appendChild(guestElement);
-        
+
                         // Add event listener for delete button
                         const deleteButton = guestElement.querySelector('.delete-button');
                         deleteButton.addEventListener('click', async () => {
@@ -148,13 +142,20 @@
                         });
                     });
                 };
-    
+
                 displayGuests(guests);
-    
+
                 // Update Add Guest button href
                 document.getElementById('add-guest-link').href = `addGuest.html?eventId=${eventId}`;
                 document.getElementById('back-link').href = `events_page_detailed.html?eventId=${eventId}`;
-    
+                document.getElementById('collaborators-link').href = `collaborators.html?eventId=${eventId}`;
+                document.getElementById('guest-link').href = `guests.html?eventId=${eventId}`;
+                document.getElementById('todo-link').href = `/todo?id=${eventId}`;
+                document.getElementById('budget-link').href = `/budget?id=${eventId}`;
+                document.getElementById('chat-link').href = `/chat?id=${eventId}`;
+                document.getElementById('events-link').href = `events.html?eventId=${eventId}`;
+                document.getElementById('tables-link').href = `/tables?eventId=${eventId}`;
+
                 // Add event listener to search input
                 document.getElementById('search').addEventListener('input', (event) => {
                     const query = event.target.value.toLowerCase();
@@ -170,12 +171,11 @@
                 // Handle error in UI if needed
             }
         });
-    
+
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
     </script>
 </body>
-
 </html>
