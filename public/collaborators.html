@@ -69,29 +69,39 @@
             </a>
         </div>
     </div>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch('/collaborators')
-                .then(response => response.json())
-                .then(data => {
-                    const entriesDiv = document.getElementById('entries');
-                    data.forEach(collaborator => {
-                        const entry = document.createElement('div');
-                        entry.className = 'entry';
-                        entry.innerHTML = `
-                            <p>Name: ${collaborator.user.name}</p>
-                            <p>Role: ${collaborator.role}</p>
-                            <p>Can Edit Guest: ${collaborator.canEditGuest}</p>
-                            <p>Can Edit To-Do: ${collaborator.canEditTodo}</p>
-                            <p>Can Edit Budget: ${collaborator.canEditBudget}</p>
-                        `;
-                        entriesDiv.appendChild(entry);
-                    });
-                });
-        });
-    </script>
+        // Function to fetch collaborators based on event ID from URL parameter
+        async function fetchCollaborators() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const eventId = urlParams.get('eventId'); // Get eventId from URL parameter
 
+                // Fetch collaborators data from backend
+                const response = await fetch(`/api/collaborators?eventId=${eventId}`);
+                const collaborators = await response.json();
+
+                // Clear previous entries
+                const entriesContainer = document.getElementById('entries');
+                entriesContainer.innerHTML = '';
+
+                // Generate HTML for each collaborator entry
+                collaborators.forEach(collaborator => {
+                    const entryHTML = `
+                        <div class="entry">
+                            <p class="name">${collaborator.name}</p>
+                            <p class="role">${collaborator.role}</p>
+                        </div>
+                    `;
+                    entriesContainer.innerHTML += entryHTML;
+                });
+            } catch (error) {
+                console.error('Error fetching collaborators:', error);
+            }
+        }
+
+        // Call fetchCollaborators when the page loads
+        document.addEventListener('DOMContentLoaded', fetchCollaborators);
+    </script>
 </body>
 
 </html>

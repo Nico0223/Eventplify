@@ -51,7 +51,13 @@ exports.addEvent = async (req, res) => {
     });
 
     await newEvent.save();
-
+    const collaborator = new Collaborator({
+      user: req.session.userId,
+      event: newEvent._id,
+      name: name, 
+      role: 'Owner'
+    });
+    await collaborator.save();
     return res
       .status(200)
       .json({ message: "Event added successfully", event: newEvent });
@@ -135,6 +141,8 @@ exports.joinEvent = async (req, res) => {
       const collaborator = new Collaborator({
         user: user._id,
         event: event._id,
+        username: user.username, // Include the username
+        name: name,
         role: 'Collaborator'
       });
       await collaborator.save();
@@ -149,3 +157,4 @@ exports.joinEvent = async (req, res) => {
     return res.status(500).json({ error: "An error occurred while joining the event. Please try again." });
   }
 };
+
