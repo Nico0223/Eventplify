@@ -42,47 +42,6 @@ const chatRouter = require("./routes/chatRoute.js");
 const guestRoutes = require("./routes/guestRoutes.js");
 const collaboratorsRoutes = require("./routes/collaboratorRoute.js");
 
-// POST route to add a collaborator mgiht remove
-router.post("/add-collaborator", async (req, res) => {
-  try {
-    const { name, role, canEditGuest, canEditTodo, canEditBudget } = req.body;
-
-    // Find the user by name
-    let user = await User.findOne({ name });
-
-    if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
-    }
-
-    // Create a new collaborator
-    const newCollaborator = new Collaborator({
-      user: user._id,
-      role,
-      canEditGuest,
-      canEditTodo,
-      canEditBudget,
-    });
-
-    // Save the collaborator to MongoDB
-    await newCollaborator.save();
-
-    // Redirect to collaborators.html after successful addition
-    res
-      .status(201)
-      .json({ success: true, message: "Collaborator added successfully" });
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({
-      success: false,
-      message: "An error occurred while adding the collaborator",
-    });
-  }
-});
-
-module.exports = router; // might remove
-
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -207,6 +166,18 @@ app.delete('/guests/:guestId', async (req, res) => {
   } catch (error) {
       console.error('Error deleting guest:', error);
       res.status(500).json({ error: 'Failed to delete guest' });
+  }
+});
+app.get('/api/collaborators', async (req, res) => {
+  const { eventId } = req.query; // Get eventId from query parameters
+
+  try {
+      // Find collaborators for the specified event ID
+      const collaborators = await Collaborator.find({ event: eventId }).populate('user', 'name');
+      res.json(collaborators); // Send JSON response with collaborators data
+  } catch (error) {
+      console.error('Error fetching collaborators:', error);
+      res.status(500).json({ error: 'Server error' }); // Handle server error
   }
 });
 // Initializing handlebars
