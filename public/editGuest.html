@@ -12,7 +12,7 @@
     <div id="homelogo">
         <img src="css/logocropped.png" id="logo">
         <div id="button2">
-            <a href="profile.html"><button type="button" id="b1">Profile</button></a>
+            <a href="/profile"><button type="button" id="b1">Profile</button></a>
         </div>
         <div id="button1">
             <a href="events.html"><button type="button" id="b1">Events</button></a>
@@ -50,31 +50,31 @@
 
 <div id="footer">
     <div id="container">
-        <a href="collaborators.html">
+        <a  id="collaborators-link">
             <button type="button" class="footerbutton" id="collaborators">
                 <img src="css/collaborators_icon_black.png" class="btnicon">
                 <p class="btnlabel">Collaborators</p>
             </button>
         </a>
-        <a href="guests.html">
+        <a  id="guests-link">
             <button type="button" class="footerbutton" id="guest">
                 <img src="css/guest_icon_black.png" class="btnicon">
                 <p class="btnlabel">Guest</p>
             </button>
         </a>
-        <a href="todo.html">
+        <a id="todo-link">
             <button type="button" class="footerbutton" id="todo">
                 <img src="css/todo_icon_black.png" class="btnicon">
                 <p class="btnlabel">To-Do</p>
             </button>
         </a>
-        <a href="budget.html">
+        <a id="budget-link">
             <button type="button" class="footerbutton" id="budget">
                 <img src="css/budget_icon_black.png" class="btnicon">
                 <p class="btnlabel">Budget</p>
             </button>
         </a>
-        <a href="chat.html">
+        <a  id="chat-link">
             <button type="button" class="footerbutton2" id="chat">
                 <img src="css/chat_icon_black.png" class="btnicon">
                 <p class="btnlabel">Chat</p>
@@ -88,6 +88,11 @@
         const guestId = getQueryParam('guestId');
         const eventId = getQueryParam('eventId'); // Retrieve eventId from URL
         document.getElementById('back-link').href = `guests.html?eventId=${eventId}`;
+        document.getElementById('collaborators-link').href = `collaborators.html?eventId=${eventId}`;
+        document.getElementById('guests-link').href = `guests.html?eventId=${eventId}`;
+        document.getElementById('todo-link').href = `/todo?id=${eventId}`;
+        document.getElementById('budget-link').href = `/budget?id=${eventId}`;
+        document.getElementById('chat-link').href = `/chat?id=${eventId}`;
         if (!guestId || !eventId) {
             console.error('Guest ID or Event ID not found in URL');
             return;
