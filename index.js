@@ -7,8 +7,6 @@ dotenv.config();
 const connectionString = process.env.DATABASE_URL;
 const session = require("express-session");
 
-const router = express.Router(); //might remove
-
 try {
   mongoose.connect(connectionString);
   console.log("Connected to MongoDB successfully");
