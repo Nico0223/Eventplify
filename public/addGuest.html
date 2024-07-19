@@ -27,7 +27,7 @@
             <p id="header">ADD GUEST</p>
         </div>
         <div id="navigate">
-            <a id= "back-link" href="guests.html"><button type="button" id="back">🡨 Guests</button></a>
+            <a id="back-link" href="guests.html"><button type="button" id="back">🡨 Guests</button></a>
         </div>
 
         <form id="addGuestForm">
@@ -54,31 +54,31 @@
 
     <div id="footer">
         <div id="container">
-            <a href="collaborators.html">
+            <a id="collaborators-link" href="#">
                 <button type="button" class="footerbutton" id="collaborators">
                     <img src="css/collaborators_icon_black.png" class="btnicon">
                     <p class="btnlabel">Collaborators</p>
                 </button>
             </a>
-            <a href="guests.html">
+            <a id="guests-link" href="#">
                 <button type="button" class="footerbutton" id="guest">
                     <img src="css/guest_icon_black.png" class="btnicon">
                     <p class="btnlabel">Guest</p>
                 </button>
             </a>
-            <a href="todo.html">
+            <a id="todo-link" href="#">
                 <button type="button" class="footerbutton" id="todo">
                     <img src="css/todo_icon_black.png" class="btnicon">
                     <p class="btnlabel">To-Do</p>
                 </button>
             </a>
-            <a href="budget.html">
+            <a id="budget-link" href="#">
                 <button type="button" class="footerbutton" id="budget">
                     <img src="css/budget_icon_black.png" class="btnicon">
                     <p class="btnlabel">Budget</p>
                 </button>
             </a>
-            <a href="chat.html">
+            <a id="chat-link" href="#">
                 <button type="button" class="footerbutton2" id="chat">
                     <img src="css/chat_icon_black.png" class="btnicon">
                     <p class="btnlabel">Chat</p>
@@ -97,20 +97,19 @@
 
             // Retrieve the eventId from the URL
             const eventId = getQueryParam('eventId');
-            if (!eventId) {
-                console.error('Event ID not found in URL');
-            } else {
-                console.log(`Event ID: ${eventId}`);
+            if (eventId) {
                 // Set the eventId to the hidden input field
                 document.getElementById('event').value = eventId;
-                document.getElementById('back-link').href = `guests.html?eventId=${eventId}`;
-                
+
                 // Update footer links with eventId
-                const footerLinks = document.querySelectorAll('#footer a');
-                footerLinks.forEach(link => {
-                    const href = link.getAttribute('href');
-                    link.setAttribute('href', `${href}?eventId=${eventId}`);
-                });
+                document.getElementById('back-link').href = `guests.html?eventId=${eventId}`;
+                document.getElementById('collaborators-link').href = `collaborators.html?eventId=${eventId}`;
+                document.getElementById('guests-link').href = `guests.html?eventId=${eventId}`;
+                document.getElementById('todo-link').href = `/todo?id=${eventId}`;
+                document.getElementById('budget-link').href = `/budget?id=${eventId}`;
+                document.getElementById('chat-link').href = `/chat?id=${eventId}`;
+            } else {
+                console.error('Event ID not found in URL');
             }
 
             // Add event listener to the form submission
