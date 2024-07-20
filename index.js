@@ -60,6 +60,12 @@ app.use(async function (req, res, next) {
     next();
   }
 });
+app.get("/api/current_user", (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  res.json({ userId: req.session.userId });
+});
 app.get("/events", async (req, res) => {
   try {
     if (!req.session.userId) {
