@@ -42,7 +42,7 @@ router.post("/join", async (req, res) => {
 router.get("/:eventId", async (req, res) => {
   try {
     const eventId = req.params.eventId;
-    const event = await Event.findById(eventId);
+    const event = await Event.findById(eventId).populate('owner', '_id');
 
     if (!event) {
       return res.status(404).json({ error: "Event not found" });
@@ -51,10 +51,9 @@ router.get("/:eventId", async (req, res) => {
     res.json(event);
   } catch (error) {
     console.error("Error fetching event details:", error);
-    res
-      .status(500)
-      .json({ error: "An error occurred while fetching the event details." });
+    res.status(500).json({ error: "An error occurred while fetching the event details." });
   }
 });
+
 
 module.exports = router;
