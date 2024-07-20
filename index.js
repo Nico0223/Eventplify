@@ -60,11 +60,19 @@ app.use(async function (req, res, next) {
     next();
   }
 });
-app.get("/api/current_user", (req, res) => {
+app.get("/api/current_user", async (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: "Unauthorized" });
   }
-  res.json({ userId: req.session.userId });
+  try {
+    const user = await User.findById(req.session.userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json({ userId: user._id, username: user.username });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 app.get("/events", async (req, res) => {
   try {
