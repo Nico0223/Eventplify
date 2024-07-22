@@ -35,5 +35,56 @@ router.post('/api/events/join', async (req, res) => {
         res.status(500).json({ error: 'Something went wrong' });
     }
 });
+router.delete('/api/collaborators/:collaboratorId', async (req, res) => {
+    try {
+        const { collaboratorId } = req.params;
+        const { eventId } = req.query;
+
+        if (!eventId) {
+            return res.status(400).json({ error: 'eventId query parameter is required' });
+        }
+
+        // Ensure IDs are ObjectId types
+        const collaboratorObjectId = mongoose.Types.ObjectId(collaboratorId);
+        const eventObjectId = mongoose.Types.ObjectId(eventId);
+
+        // Find and delete the collaborator
+        const collaborator = await Collaborator.findById(collaboratorObjectId);
+
+        if (!collaborator) {
+            return res.status(404).json({ error: 'Collaborator not found' });
+        }
+
+        // Remove the collaborator from the event's participants list by name
+        const eventUpdateResult = await Event.updateOne(
+            { _id: eventObjectId },
+            { $pull: { participants: { name: collaborator.name } } }
+        );
+
+        if (eventUpdateResult.modifiedCount === 0) {
+            return res.status(404).json({ error: 'Event not found or collaborator not in event\'s participants list' });
+        }
+
+        // Optionally, remove the collaborator document
+        await Collaborator.findByIdAndDelete(collaboratorObjectId);
+
+        // Check if the user being removed is the logged-in user
+        const loggedInUserId = req.user ? req.user._id : null; // Adjust based on your auth setup
+
+        if (collaborator.user.toString() === loggedInUserId?.toString()) {
+            // Optionally: Remove the logged-in user from the event's participants list
+            await Event.updateOne(
+                { _id: eventObjectId },
+                { $pull: { participants: { name: collaborator.name } } }
+            );
+        }
+
+        res.status(204).end(); // Successfully deleted
+    } catch (error) {
+        console.error('Error deleting collaborator:', error);
+        res.status(500).json({ error: 'Failed to delete collaborator' });
+    }
+});
+
 
 module.exports = router;
