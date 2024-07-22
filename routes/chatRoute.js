@@ -100,7 +100,7 @@ router.get("/chat", async (req, res) => {
     }
   }
 
-  if (chat.messages?.length > 0) {
+  if (chat.messages != null) {
     chat.messages.forEach((message) => {
       var messageOwner = message.user.toString();
       if (messageOwner == req.session.userId.toString()) {
