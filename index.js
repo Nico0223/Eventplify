@@ -192,6 +192,26 @@ app.get('/api/collaborators', async (req, res) => {
       res.status(500).json({ error: 'Server error' }); // Handle server error
   }
 });
+app.delete('/api/collaborators/:collaboratorId', async (req, res) => {
+  try {
+    const { collaboratorId } = req.params;
+    const { eventId } = req.query;
+
+    if (!eventId) {
+      return res.status(400).json({ error: 'eventId query parameter is required' });
+    }
+
+    const result = await Collaborator.findOneAndDelete({ _id: collaboratorId, event: eventId });
+    if (!result) {
+      return res.status(404).json({ error: 'Collaborator not found' });
+    }
+
+    res.status(204).end(); // Successfully deleted
+  } catch (error) {
+    console.error('Error deleting collaborator:', error);
+    res.status(500).json({ error: 'Failed to delete collaborator' });
+  }
+});
 // Initializing handlebars
 var hbs = require("hbs");
 app.set("view engine", "hbs");

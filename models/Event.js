@@ -16,7 +16,7 @@ const EventSchema = new mongoose.Schema({
     type: String, 
     required: true
   },
-  participants: [{ name: String }],
+  participants: [{ id: mongoose.Schema.Types.ObjectId, name: String }],
 });
 
 const Event = mongoose.model("Event", EventSchema);

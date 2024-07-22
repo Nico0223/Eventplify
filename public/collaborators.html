@@ -28,7 +28,6 @@
         </div>
         <div id="navigate">
             <a id="back-link"><button type="button" id="event">🡨 Back</button></a>
-            <!-- <input type="search" id="search" placeholder="Search..."> -->
         </div>
         <div id="entries">
             <!-- Dynamic entries will be generated here -->
@@ -82,6 +81,16 @@
                     return;
                 }
 
+                // Fetch current user data
+                const userResponse = await fetch('/api/current_user');
+                const currentUser = await userResponse.json();
+                const currentUserId = currentUser.userId;
+
+                // Fetch event details
+                const eventResponse = await fetch(`/api/events/${eventId}`);
+                const event = await eventResponse.json();
+                const eventOwnerId = event.owner;
+
                 // Fetch collaborators data from backend
                 const response = await fetch(`/api/collaborators?eventId=${eventId}`);
                 const collaborators = await response.json();
@@ -92,8 +101,14 @@
 
                 // Generate HTML for each collaborator entry
                 collaborators.forEach(collaborator => {
+                    const deleteButtonHTML = (currentUserId === eventOwnerId && collaborator.user._id !== eventOwnerId) ? `
+                        <button type="button" class="delete-button" id="deletebutton" onclick="deleteCollaborator('${eventId}', '${collaborator._id}')">
+                            <img src="css/trash_icon.png" class="trashicon" id="trashicon">
+                        </button>` : '';
+
                     const entryHTML = `
                         <div class="entry" id="entry">
+                            ${deleteButtonHTML}
                             <p class="name" id="name">${collaborator.name}</p>
                             <p class="role" id="role">${collaborator.role}</p>
                         </div>
@@ -115,6 +130,29 @@
             }
         }
 
+        async function deleteCollaborator(eventId, collaboratorId) {
+            try {
+                const response = await fetch(`/api/collaborators/${collaboratorId}?eventId=${eventId}`, {
+                    method: 'DELETE'
+                });
+        
+                if (!response.ok) {
+                    throw new Error('Failed to delete collaborator');
+                }
+        
+                // Remove the deleted collaborator entry from the DOM
+                const entryElements = document.getElementsByClassName('entry');
+                for (const entryElement of entryElements) {
+                    const deleteButton = entryElement.querySelector('.delete-button');
+                    if (deleteButton && deleteButton.getAttribute('onclick').includes(collaboratorId)) {
+                        entryElement.remove();
+                        break;
+                    }
+                }
+            } catch (error) {
+                console.error('Error deleting collaborator:', error);
+            }
+        }
         // Call fetchCollaborators when the page loads
         document.addEventListener('DOMContentLoaded', fetchCollaborators);
     </script>

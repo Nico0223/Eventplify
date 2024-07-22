@@ -23,7 +23,14 @@ body{
     left: 0;
     right: 0;
 }
-
+#deletebutton{
+    margin-top:0;
+    padding-top: 12px;
+    background: none;
+    border: none;
+    position:absolute;
+    right:10px;
+}
 #top{
     margin: 0;
     overflow:hidden;
