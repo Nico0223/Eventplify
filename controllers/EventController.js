@@ -157,3 +157,31 @@ exports.joinEvent = async (req, res) => {
   }
 };
 
+exports.leaveEvent = async (req, res) => {
+  const userId = req.session.userId;
+  const eventId = req.params.eventId; // Extract eventId from URL parameter
+
+  if (!userId || !eventId) {
+    return res.status(400).json({ error: 'User ID or Event ID is missing' });
+  }
+
+  try {
+    // Remove event from user's joined events
+    await User.findByIdAndUpdate(userId, {
+      $pull: { joinedEvents: eventId }
+    });
+
+    // Remove user from event's participants
+    await Event.findByIdAndUpdate(eventId, {
+      $pull: { participants: { userId: userId } }
+    });
+
+    // Optionally, remove the user from Collaborators if needed
+    await Collaborator.findOneAndDelete({ user: userId, event: eventId });
+
+    res.json({ message: 'Successfully left the event' });
+  } catch (error) {
+    console.error('Error leaving event:', error);
+    res.status(500).json({ error: 'Failed to leave the event' });
+  }
+};

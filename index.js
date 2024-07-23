@@ -231,6 +231,40 @@ app.delete('/api/collaborators/:collaboratorId', async (req, res) => {
     res.status(500).json({ error: 'Failed to delete collaborator' });
   }
 });
+app.delete('/api/events/leave/:eventId', async (req, res) => {
+  const eventId = req.params.eventId;
+  const userId = req.session.userId;
+
+  try {
+      console.log(`Leaving event ${eventId} for user ${userId}`);
+
+      // Find the event
+      const event = await Event.findById(eventId);
+      if (!event) {
+          console.error('Event not found');
+          return res.status(404).json({ message: 'Event not found' });
+      }
+
+      // Remove the event from the user's joined events array
+      const result = await User.updateOne(
+          { _id: userId },
+          { $pull: { joinedEvents: eventId } }
+      );
+      
+      console.log('Update result:', result);
+
+      if (result.modifiedCount === 0) {
+          console.error('Failed to remove event from joined events');
+          return res.status(400).json({ message: 'Failed to leave event' });
+      }
+
+      res.status(200).json({ message: 'Successfully left the event' });
+  } catch (error) {
+      console.error('Error leaving event:', error);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // Initializing handlebars
 var hbs = require("hbs");
 app.set("view engine", "hbs");
