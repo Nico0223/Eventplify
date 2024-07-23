@@ -120,6 +120,7 @@
                     <div class="event-actions">
                     <button class="edit-button">Edit</button>
                     ${event.owner === currentUserId ? '<button class="delete-button">Delete</button>' : ''}
+                    ${event.owner !== currentUserId ? '<button class="leave-button">Leave Event</button>' : ''}
                     <button class="share-button">Share</button>
                     <div id="copyPopup" class="popup">Link copied!</div>
                     </div>
@@ -145,6 +146,14 @@
                 });
                 }
 
+                if (event.owner !== currentUserId) {
+                document.querySelector('.leave-button').addEventListener('click', () => {
+                    if (confirm('Are you sure you want to leave this event?')) {
+                    leaveEvent(eventId);
+                    }
+                });
+                }
+
                 document.querySelector('.share-button').addEventListener('click', function () {
                 const currentUrl = window.location.href;
                 const link = currentUrl.replace('events_page_detailed.html', 'event/preview');
@@ -162,8 +171,7 @@
             } catch (error) {
                 console.error('Error fetching event details:', error);
             }
-            }
-
+        }
 
         async function deleteEvent(eventId) {
             try {
@@ -175,6 +183,22 @@
                 window.location.href = 'events.html';
             } catch (error) {
                 console.error('Error deleting event:', error);
+            }
+        }
+
+        async function leaveEvent(eventId) {
+            try {
+                const response = await fetch(`/api/events/leave/${eventId}`, { method: 'DELETE' });
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Network response was not ok. Status: ${response.status}, Error: ${errorText}`);
+                }
+                const data = await response.json();
+                alert(data.message); // Notify user about the success
+                window.location.href = 'events.html';
+            } catch (error) {
+                console.error('Error leaving event:', error.message); // Detailed error message for debugging
+                alert(`Failed to leave event: ${error.message}`); // Notify user about the failure
             }
         }
 
