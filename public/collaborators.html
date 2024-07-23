@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collaborators</title>
     <link rel="stylesheet" href="css/collaborators.css">
 </head>
-
 <body style="margin:0">
-
     <div id="top">
         <div id="homelogo">
             <img src="css/logocropped.png" id="logo">
@@ -21,7 +18,6 @@
             </div>
         </div>
     </div>
-
     <div id="middle">
         <div id="head">
             <p id="header">COLLABORATORS</p>
@@ -33,7 +29,6 @@
             <!-- Dynamic entries will be generated here -->
         </div>
     </div>
-
     <div id="footer">
         <div id="container">
             <a id="collaborators-link">
@@ -70,36 +65,30 @@
     </div>
 
     <script>
-        // Function to fetch collaborators based on event ID from URL parameter
         async function fetchCollaborators() {
             try {
                 const urlParams = new URLSearchParams(window.location.search);
-                const eventId = urlParams.get('eventId'); // Get eventId from URL parameter
+                const eventId = urlParams.get('eventId');
 
                 if (!eventId) {
                     console.error('Event ID not found in URL');
                     return;
                 }
 
-                // Fetch current user data
                 const userResponse = await fetch('/api/current_user');
                 const currentUser = await userResponse.json();
                 const currentUserId = currentUser.userId;
 
-                // Fetch event details
                 const eventResponse = await fetch(`/api/events/${eventId}`);
                 const event = await eventResponse.json();
                 const eventOwnerId = event.owner;
 
-                // Fetch collaborators data from backend
                 const response = await fetch(`/api/collaborators?eventId=${eventId}`);
                 const collaborators = await response.json();
 
-                // Clear previous entries
                 const entriesContainer = document.getElementById('entries');
                 entriesContainer.innerHTML = '';
 
-                // Generate HTML for each collaborator entry
                 collaborators.forEach(collaborator => {
                     const deleteButtonHTML = (currentUserId === eventOwnerId && collaborator.user._id !== eventOwnerId) ? `
                         <button type="button" class="delete-button" id="deletebutton" onclick="deleteCollaborator('${eventId}', '${collaborator._id}')">
@@ -116,7 +105,6 @@
                     entriesContainer.innerHTML += entryHTML;
                 });
 
-                // Update links with event ID
                 document.getElementById('back-link').href = `events_page_detailed.html?eventId=${eventId}`;
                 document.getElementById('collaborators-link').href = `collaborators.html?eventId=${eventId}`;
                 document.getElementById('guest-link').href = `guests.html?eventId=${eventId}`;
@@ -135,12 +123,13 @@
                 const response = await fetch(`/api/collaborators/${collaboratorId}?eventId=${eventId}`, {
                     method: 'DELETE'
                 });
-        
+
                 if (!response.ok) {
                     throw new Error('Failed to delete collaborator');
                 }
-        
-                // Remove the deleted collaborator entry from the DOM
+
+                console.log('Collaborator deleted:', collaboratorId);
+
                 const entryElements = document.getElementsByClassName('entry');
                 for (const entryElement of entryElements) {
                     const deleteButton = entryElement.querySelector('.delete-button');
@@ -149,13 +138,14 @@
                         break;
                     }
                 }
+
+                console.log('DOM updated');
             } catch (error) {
                 console.error('Error deleting collaborator:', error);
             }
         }
-        // Call fetchCollaborators when the page loads
+
         document.addEventListener('DOMContentLoaded', fetchCollaborators);
     </script>
 </body>
-
 </html>
