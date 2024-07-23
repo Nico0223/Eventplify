@@ -201,12 +201,31 @@ app.delete('/api/collaborators/:collaboratorId', async (req, res) => {
       return res.status(400).json({ error: 'eventId query parameter is required' });
     }
 
-    const result = await Collaborator.findOneAndDelete({ _id: collaboratorId, event: eventId });
-    if (!result) {
+    //for debug lang
+    console.log('Event ID:', eventId);
+    console.log('Collaborator ID:', collaboratorId);
+
+    const collaborator = await Collaborator.findOneAndDelete({ _id: collaboratorId, event: eventId });
+    if (!collaborator) {
       return res.status(404).json({ error: 'Collaborator not found' });
     }
 
-    res.status(204).end(); // Successfully deleted
+    //debug also
+    console.log('Collaborator found:', collaborator);
+
+    await Event.findByIdAndUpdate(eventId, {
+      $pull: { participants: collaborator.user }
+    });
+
+    console.log('Event updated:', eventId);
+
+    await User.findByIdAndUpdate(collaborator.user, {
+      $pull: { joinedEvents: eventId }
+    });
+
+    console.log('User updated:', collaborator.user);
+
+    res.status(204).end();
   } catch (error) {
     console.error('Error deleting collaborator:', error);
     res.status(500).json({ error: 'Failed to delete collaborator' });
