@@ -93,14 +93,14 @@ router.get("/chat", async (req, res) => {
     });
 
     try {
-      await newChat.save();
+      chat = await newChat.save();
     } catch (error) {
       console.error("Error saving chat:", error);
-      res.status(500).send("Internal Server Error");
+      return res.status(500).send("Internal Server Error");
     }
   }
 
-  if (chat.messages != null) {
+  if (chat && chat.messages) {
     chat.messages.forEach((message) => {
       var messageOwner = message.user.toString();
       if (messageOwner == req.session.userId.toString()) {
@@ -112,9 +112,10 @@ router.get("/chat", async (req, res) => {
     });
   }
 
-  console.log(chat.messages);
+  console.log(chat?.messages);
   res.render("chat_message", { chat, id: eventID });
 });
+
 
 router.post("/submitAddChat", chatController.addChat);
 router.post("/postMessage", chatController.addMessage);
