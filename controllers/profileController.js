@@ -5,20 +5,20 @@ exports.editProfile = async (req, res) => {
   const userId = req.body.id;
   const newUsername = req.body.username;
 
-  updatedData = {
+  const updatedData = {
     username: newUsername,
   };
 
   try {
     const result = await User.updateOne({ _id: userId }, updatedData);
     console.log("Update Result:", result);
-    res.redirect("/profile");
-    res.json({ message: "Profile updated successfully" });
+    res.redirect("/profile"); 
   } catch (error) {
     console.error("Error updating todo:", error);
     res.status(500).send("Internal Server Error");
   }
 };
+
 
 exports.changePassword = async (req, res) => {
   const userId = req.body.id;
