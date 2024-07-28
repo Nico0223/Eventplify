@@ -2,8 +2,7 @@
 
 const Event = require("../models/Event");
 const User = require("../models/User"); // Ensure this line is at the top of the file
-const Collaborator = require('../models/Collaborator.js'); // Adjust the path to your models
-
+const Collaborator = require("../models/Collaborator.js"); // Adjust the path to your models
 
 // Function to generate a unique 5-digit code
 const generateUniqueCode = async () => {
@@ -51,11 +50,19 @@ exports.addEvent = async (req, res) => {
     });
 
     await newEvent.save();
+
+    const owner = await User.findById(req.session.userId);
+    if (!owner) {
+      throw new Error("Owner not found");
+    }
+
+    console.log("Owner Username: ", owner.username);
+
     const collaborator = new Collaborator({
       user: req.session.userId,
       event: newEvent._id,
-      name: name, 
-      role: 'Owner'
+      name: owner.username,
+      role: "Owner",
     });
     await collaborator.save();
     return res
@@ -63,11 +70,9 @@ exports.addEvent = async (req, res) => {
       .json({ message: "Event added successfully", event: newEvent });
   } catch (error) {
     console.error("Error adding event:", error);
-    return res
-      .status(500)
-      .json({
-        error: "An error occurred while adding the event. Please try again.",
-      });
+    return res.status(500).json({
+      error: "An error occurred while adding the event. Please try again.",
+    });
   }
 };
 
@@ -111,7 +116,11 @@ exports.joinEvent = async (req, res) => {
 
     const isParticipant = event.participants.some((participant) => {
       if (!participant.userId) {
-        console.error("Participant without userId found in event:", event._id, participant);
+        console.error(
+          "Participant without userId found in event:",
+          event._id,
+          participant
+        );
         return false;
       }
       return participant.userId.equals(user._id);
@@ -136,24 +145,34 @@ exports.joinEvent = async (req, res) => {
     }
 
     // Add the user to the Collaborator database
-    const existingCollaborator = await Collaborator.findOne({ user: user._id, event: event._id });
+    const existingCollaborator = await Collaborator.findOne({
+      user: user._id,
+      event: event._id,
+    });
     if (!existingCollaborator) {
       const collaborator = new Collaborator({
         user: user._id,
         event: event._id,
         name: name,
-        role: 'Collaborator'
+        role: "Collaborator",
       });
       await collaborator.save();
-      console.log("User added to Collaborators with role 'Collaborator':", collaborator);
+      console.log(
+        "User added to Collaborators with role 'Collaborator':",
+        collaborator
+      );
     } else {
       console.log("User is already a collaborator for the event:", event._id);
     }
 
-    return res.status(200).json({ message: "Joined event successfully", event });
+    return res
+      .status(200)
+      .json({ message: "Joined event successfully", event });
   } catch (error) {
     console.error("Error joining event:", error);
-    return res.status(500).json({ error: "An error occurred while joining the event. Please try again." });
+    return res.status(500).json({
+      error: "An error occurred while joining the event. Please try again.",
+    });
   }
 };
 
@@ -162,26 +181,26 @@ exports.leaveEvent = async (req, res) => {
   const eventId = req.params.eventId; // Extract eventId from URL parameter
 
   if (!userId || !eventId) {
-    return res.status(400).json({ error: 'User ID or Event ID is missing' });
+    return res.status(400).json({ error: "User ID or Event ID is missing" });
   }
 
   try {
     // Remove event from user's joined events
     await User.findByIdAndUpdate(userId, {
-      $pull: { joinedEvents: eventId }
+      $pull: { joinedEvents: eventId },
     });
 
     // Remove user from event's participants
     await Event.findByIdAndUpdate(eventId, {
-      $pull: { participants: { userId: userId } }
+      $pull: { participants: { userId: userId } },
     });
 
     // Optionally, remove the user from Collaborators if needed
     await Collaborator.findOneAndDelete({ user: userId, event: eventId });
 
-    res.json({ message: 'Successfully left the event' });
+    res.json({ message: "Successfully left the event" });
   } catch (error) {
-    console.error('Error leaving event:', error);
-    res.status(500).json({ error: 'Failed to leave the event' });
+    console.error("Error leaving event:", error);
+    res.status(500).json({ error: "Failed to leave the event" });
   }
 };
