@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const connectionString = process.env.DATABASE_URL;
 const session = require("express-session");
-
+//test
 try {
   mongoose.connect(connectionString);
   console.log("Connected to MongoDB successfully");
